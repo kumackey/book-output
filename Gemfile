@@ -48,6 +48,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'binding_of_caller'
+  gem 'faker'
 end
 
 group :development do
