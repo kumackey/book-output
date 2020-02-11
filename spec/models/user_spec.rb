@@ -29,4 +29,21 @@ RSpec.describe User, type: :model do
       user.valid?
       expect(user.errors.messages[:username]).to include("を入力してください")
     end
+
+    describe "名前の最大文字数が20文字であること" do
+      context "名前が20文字のときに" do
+        let(:user) { build(:user, username: 'a' * 20) }
+        it "有効なこと" do
+          expect(user).to be_valid
+        end
+      end
+      context "名前が21文字のときに" do
+        let(:user) { build(:user, username: 'a' * 21) }
+        it "無効なこと" do
+          user.valid?
+          expect(user.errors[:username]).to include("は20文字以内で入力してください")
+        end
+      end
+
+    end
 end
