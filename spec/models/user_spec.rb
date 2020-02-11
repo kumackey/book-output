@@ -45,11 +45,23 @@ RSpec.describe User, type: :model do
         end
       end
 
-      it "重複したメールアドレスなら無効な状態であること" do
+      it "重複したメールアドレスなら無効なこと" do
         create(:user, email:"duP@example.com")
         user2 = build(:user, email:"Dup@example.com")
         user2.valid?
         expect(user2.errors[:email]).to include("はすでに存在します")
       end
+
+      it "不正な値のメールアドレスは無効なこと" do
+        invalid_addresses = %w[user@example,com 
+                              user_at_foo.org user.name@example.
+                              foo@bar_baz.com foo@bar+baz.com foo@bar..com]
+        invalid_addresses.each do |invalid_address|
+          user.email = invalid_address
+          user.valid?
+          expect(user.errors[:email]).to include("は不正な値です")
+        end
+      end
+
     end
 end
