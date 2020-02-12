@@ -3,7 +3,7 @@ html
   head
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
     title
-      | BookOutput
+      = "#{yield :title} | BookOutput"
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all'
@@ -12,6 +12,6 @@ html
     = render 'layouts/before_login_header'
     .container
       main
-      = yield
+        = yield
     = render 'layouts/footer'
     = debug(params) if Rails.env.development?
