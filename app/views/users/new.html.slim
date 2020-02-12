@@ -1,5 +1,5 @@
-- provide :title, "ユーザ登録"
-h1 ユーザ登録
+- provide :title, "ユーザー登録"
+h1 ユーザー登録
 = form_with model: @user, url: signup_path, local: true do |f|
   = render 'layouts/error_messages', object: @user
   .form-group
