@@ -8,8 +8,11 @@ html
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
-  body
-    = render 'layouts/before_login_header'
+  body.black-skin
+    - if logged_in?
+      = render 'layouts/after_login_header'
+    - else
+      = render 'layouts/before_login_header'
     = render 'layouts/flash_messages'
     .container
       main
