@@ -1,0 +1,15 @@
+header
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+    = link_to '#', class: 'navbar-brand' do
+      strong
+        | BookOutPut
+    button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"]
+      span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      / ul.navbar-nav.mr-auto
+      /   li.nav-item
+      /     = link_to signup_path, class: 'nav-link'
+      /       | Sing up 
+      /   li.nav-item
+      /     = link_to login_path, class: 'nav-link'
+      /       | Sing in
