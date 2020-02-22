@@ -1,0 +1,5 @@
+= form_with url: search_by_isbn_path, remote: true do |f|
+  .form-group
+    = f.label :isbn, 'isbnキー'
+    = f.text_field :isbn, class: 'form-control'
+  = f.submit '検索する', class: 'btn btn-raised btn-primary'
