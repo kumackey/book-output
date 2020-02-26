@@ -27,9 +27,12 @@
 
 FactoryBot.define do
   factory :book do
-    username  { "name" }
-    email { "email@example.com" }
-    password  {"password" }
-    password_confirmation { "password" }
+    author  { "ダニエル カーネマン" }
+    detail { "我々の直感は間違ってばかり？　意識はさほど我々の意思決定に影響をおよぼしていない？　心理学者ながらノーベル経済学賞受賞の離れ業を成し遂げ、行動経済学を世界にしらしめた、伝統的人間観を覆す、カーネマンの代表的著作。2012年度最高のノンフィクション。待望の邦訳。" }
+    image  { "" } #carriorwave導入予定
+    isbn { "9784150504113" }
+    published_at { "20121122" }
+    title { "ファスト＆スロー　（下）" }
+    association :user
   end
 end
