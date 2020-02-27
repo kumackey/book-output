@@ -5,7 +5,8 @@ class BooksController < ApplicationController
 
   def search_by_isbn
     json = get_json_by_params
-    @book = build_book_by(json)
+    @book = build_book_by(json) if json[0]
+    @book ||= Book.new
     render :new
   end
 
@@ -18,16 +19,14 @@ class BooksController < ApplicationController
   end
 
   def build_book_by(json)
-    if json
-      @book = current_user.books.build(
-        author: json[0]["summary"]["author"],
-        detail: json[0]["onix"]["DescriptiveDetail"]["TitleDetail"]["TitleElement"]["Subtitle"]["content"],
-        image: "", #あとでcarrierwaveでの処理に変更する
-        isbn: json[0]["summary"]["isbn"].to_i,
-        published_at: json[0]["summary"]["pubdate"], # 例: "20190101"
-        title: json[0]["summary"]["title"],
-      )
-    end
+    @book = current_user.books.build(
+      author: json[0]["summary"]["author"],
+      detail: json[0]["onix"]["DescriptiveDetail"]["TitleDetail"]["TitleElement"]["Subtitle"]["content"],
+      image: "", #あとでcarrierwaveでの処理に変更する
+      isbn: json[0]["summary"]["isbn"].to_i,
+      published_at: json[0]["summary"]["pubdate"], # 例: "20190101"
+      title: json[0]["summary"]["title"],
+    )
   end
 
   def book_params
