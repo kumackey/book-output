@@ -5,6 +5,19 @@ class BooksController < ApplicationController
 
   def search_by_isbn
     json = get_json_by_params
+    @book = build_book_by(json)
+    render :new
+  end
+
+  private
+
+  def get_json_by_params
+    JSON.parse(Net::HTTP.get(URI.parse(
+      "https://api.openbd.jp/v1/get?isbn=#{book_params["isbn"]}"
+    )))
+  end
+
+  def build_book_by(json)
     if json
       @book = current_user.books.build(
         author: json[0]["summary"]["author"],
@@ -14,18 +27,7 @@ class BooksController < ApplicationController
         published_at: json[0]["summary"]["pubdate"], # 例: "20190101"
         title: json[0]["summary"]["title"],
       )
-      render :new
-    else
-      render :new
     end
-  end
-
-  private
-
-  def get_json_by_params
-    JSON.parse(Net::HTTP.get(URI.parse(
-      "https://api.openbd.jp/v1/get?isbn=#{book_params["isbn"]}"
-    )))
   end
 
   def book_params
