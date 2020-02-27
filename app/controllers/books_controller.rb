@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   def create
-    hash= get_json_by_params
-    @book = build_book_record_from(hash) if hash[0]
+    json = get_json_by_params
+    @book = build_active_record_from_json(json) if json[0]
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
     else
@@ -15,9 +15,9 @@ class BooksController < ApplicationController
   end
 
   def search
-    hash = get_json_by_params
-    @book = build_book_model_from(hash) if hash[0]
-    @book ||= SearchBooksForm.new
+    json = get_json_by_params
+    @book = build_active_model_from_json(json) if json[0]
+    @book ||= SearchBooksForm.new(book_params)
   end
 
   private
@@ -28,26 +28,23 @@ class BooksController < ApplicationController
     )))
   end
 
-  def build_book_record_from(hash)
-    @book = current_user.books.build(
-      author: hash[0]["summary"]["author"],
-      detail: hash[0]["onix"]["DescriptiveDetail"]["TitleDetail"]["TitleElement"]["Subtitle"]["content"],
+  def convert_json_into_hash(json)
+    {
+      author: json[0]["summary"]["author"],
+      detail: json[0]["onix"]["DescriptiveDetail"]["TitleDetail"]["TitleElement"]["Subtitle"]["content"],
       image: "", #あとでcarrierwaveでの処理に変更する
-      isbn: hash[0]["summary"]["isbn"].to_i,
-      published_at: hash[0]["summary"]["pubdate"], # 例: "20190101"
-      title: hash[0]["summary"]["title"],
-    )
+      isbn: json[0]["summary"]["isbn"].to_i,
+      published_at: json[0]["summary"]["pubdate"], # 例: "20190101"
+      title: json[0]["summary"]["title"],
+    }
   end
 
-  def build_book_model_from(hash)
-    @book = SearchBooksForm.new(
-      author: hash[0]["summary"]["author"],
-      detail: hash[0]["onix"]["DescriptiveDetail"]["TitleDetail"]["TitleElement"]["Subtitle"]["content"],
-      image: "", #あとでcarrierwaveでの処理に変更する
-      isbn: hash[0]["summary"]["isbn"].to_i,
-      published_at: hash[0]["summary"]["pubdate"], # 例: "20190101"
-      title: hash[0]["summary"]["title"],
-    )
+  def build_active_record_from_json(json)
+    @book = current_user.books.build(convert_json_into_hash(json))
+  end
+
+  def build_active_model_from_json(json)
+    @book = SearchBooksForm.new(convert_json_into_hash(json))
   end
 
   def book_params
