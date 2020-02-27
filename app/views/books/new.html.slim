@@ -1,8 +1,4 @@
 = render 'search_by_isbn_form', book: @book
 ul
-  li author: #{@book.author if @book}
-  li detail: #{@book.detail if @book}
-  li image: #{@book.image if @book}
-  li isbn: #{@book.isbn if @book}
-  li published_at: #{@book.published_at if @book}
-  li title: #{@book.title if @book}
+- @book.attributes.each do |key, value|
+  li #{key}: #{value if @book}
