@@ -4,9 +4,7 @@ class BooksController < ApplicationController
   end
 
   def search_by_isbn
-    json = JSON.parse(Net::HTTP.get(URI.parse(
-      "https://api.openbd.jp/v1/get?isbn=#{book_params["isbn"]}"
-    )))
+    json = get_json_by_params
     if json
       @book = current_user.books.build(
         author: json[0]["summary"]["author"],
@@ -23,6 +21,12 @@ class BooksController < ApplicationController
   end
 
   private
+
+  def get_json_by_params
+    JSON.parse(Net::HTTP.get(URI.parse(
+      "https://api.openbd.jp/v1/get?isbn=#{book_params["isbn"]}"
+    )))
+  end
 
   def book_params
     params.require(:book).permit(:isbn)
