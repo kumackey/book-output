@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   def create
-    json = get_json_by_params
-    @book = build_book_by(json) if json[0]
+    hash= get_json_by_params
+    @book = build_book_record_from(hash) if hash[0]
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
     else
@@ -11,14 +11,13 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book ||= SearchBooksForm.new
+    @book = SearchBooksForm.new(book_params)
   end
 
-  def search_by_isbn
+  def search
     hash = get_json_by_params
     @book = build_book_model_from(hash) if hash[0]
-    @book ||= Book.new
-    render :new
+    @book ||= SearchBooksForm.new
   end
 
   private
@@ -29,7 +28,7 @@ class BooksController < ApplicationController
     )))
   end
 
-  def build_book_record_by(hash)
+  def build_book_record_from(hash)
     @book = current_user.books.build(
       author: hash[0]["summary"]["author"],
       detail: hash[0]["onix"]["DescriptiveDetail"]["TitleDetail"]["TitleElement"]["Subtitle"]["content"],
@@ -52,6 +51,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:isbn)
+    params.fetch(:q, {}).permit(:isbn)
   end
 end

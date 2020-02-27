@@ -1,6 +1,6 @@
 - @book.attributes.each do |key, value|
   li #{key}: #{value if @book}
 - if @book
-  = link_to new_book_path, method: :post do
+  = link_to books_path(@book), method: :post do
     button.btn.btn-raised.btn-primary
       | 本を登録する
