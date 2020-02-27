@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   def new
-    @book = Book.new
+    @book ||= Book.new
   end
 
   def search_by_isbn
@@ -16,9 +16,9 @@ class BooksController < ApplicationController
         published_at: json[0]["summary"]["pubdate"], # 例: "20190101"
         title: json[0]["summary"]["title"],
       )
-      #成功時の処理
+      render :new
     else
-      #失敗時の処理
+      render :new
     end
   end
 
