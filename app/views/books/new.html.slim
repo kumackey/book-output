@@ -1,8 +1,8 @@
 = render 'search_by_isbn_form', book: @book
-- if @book.isbn.present?
-  | author: #{@book.author}
-  | detail: #{@book.detail}
-  | image: #{@book.image}
-  | isbn: #{@book.isbn}
-  | published_at: #{@book.published_at}
-  | title: #{@book.title}
+ul
+  li author: #{@book.author if @book}
+  li detail: #{@book.detail if @book}
+  li image: #{@book.image if @book}
+  li isbn: #{@book.isbn if @book}
+  li published_at: #{@book.published_at if @book}
+  li title: #{@book.title if @book}
