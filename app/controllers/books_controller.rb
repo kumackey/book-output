@@ -1,11 +1,22 @@
 class BooksController < ApplicationController
+  def create
+    json = get_json_by_params
+    @book = build_book_by(json) if json[0]
+    if @book.save
+      redirect_back_or_to books_path, success: '本を登録しました'
+    else
+      flash.now[:danger] = '本の登録に失敗しました'
+      render :new
+    end
+  end
+
   def new
-    @book ||= Book.new
+    @book ||= SearchBooksForm.new
   end
 
   def search_by_isbn
-    json = get_json_by_params
-    @book = build_book_by(json) if json[0]
+    hash = get_json_by_params
+    @book = build_book_model_from(hash) if hash[0]
     @book ||= Book.new
     render :new
   end
@@ -18,14 +29,25 @@ class BooksController < ApplicationController
     )))
   end
 
-  def build_book_by(json)
+  def build_book_record_by(hash)
     @book = current_user.books.build(
-      author: json[0]["summary"]["author"],
-      detail: json[0]["onix"]["DescriptiveDetail"]["TitleDetail"]["TitleElement"]["Subtitle"]["content"],
+      author: hash[0]["summary"]["author"],
+      detail: hash[0]["onix"]["DescriptiveDetail"]["TitleDetail"]["TitleElement"]["Subtitle"]["content"],
       image: "", #あとでcarrierwaveでの処理に変更する
-      isbn: json[0]["summary"]["isbn"].to_i,
-      published_at: json[0]["summary"]["pubdate"], # 例: "20190101"
-      title: json[0]["summary"]["title"],
+      isbn: hash[0]["summary"]["isbn"].to_i,
+      published_at: hash[0]["summary"]["pubdate"], # 例: "20190101"
+      title: hash[0]["summary"]["title"],
+    )
+  end
+
+  def build_book_model_from(hash)
+    @book = SearchBooksForm.new(
+      author: hash[0]["summary"]["author"],
+      detail: hash[0]["onix"]["DescriptiveDetail"]["TitleDetail"]["TitleElement"]["Subtitle"]["content"],
+      image: "", #あとでcarrierwaveでの処理に変更する
+      isbn: hash[0]["summary"]["isbn"].to_i,
+      published_at: hash[0]["summary"]["pubdate"], # 例: "20190101"
+      title: hash[0]["summary"]["title"],
     )
   end
 
