@@ -1,11 +1,11 @@
 class BooksController < ApplicationController
   def new
-    @url = "hogehoge"
+    @book = Book.new
   end
 
   def search_by_isbn
     json = JSON.parse(Net::HTTP.get(URI.parse(
-      "https://api.openbd.jp/v1/get?isbn=#{params[:isbn]}"
+      "https://api.openbd.jp/v1/get?isbn=#{book_params["isbn"]}"
     )))
     if json
       @book = current_user.books.build(
@@ -16,9 +16,15 @@ class BooksController < ApplicationController
         published_at: json[0]["summary"]["pubdate"], # 例: "20190101"
         title: json[0]["summary"]["title"],
       )
-      #@bookの値を渡す
+      #成功時の処理
     else
-      #エラーを返す処理を作る
+      #失敗時の処理
     end
+  end
+
+  private
+
+  def book_params
+    params.require(:book).permit(:isbn)
   end
 end
