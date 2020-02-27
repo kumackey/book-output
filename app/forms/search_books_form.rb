@@ -5,7 +5,7 @@ class SearchBooksForm
   attribute :author, :string
   attribute :detail, :string
   attribute :image, :string
-  attribute :isbn, :integer
+  attribute :isbn, :integer, :limit => 8   # bigint
   attribute :title, :string
   attribute :published_at, :datetime
 
