@@ -1,5 +1,0 @@
-= form_with model: book, url: search_by_isbn_path, local: true do |f|
-  .form-group
-    = f.label :isbn, 'isbnキー'
-    = f.text_field :isbn, class: 'form-control'
-  = f.submit '検索する', class: 'btn btn-raised btn-primary'

@@ -1,5 +1,13 @@
 - provide :title, "本の登録"
-= render 'search_by_isbn_form', book: @book
+= form_with model: @book, url: search_by_isbn_path, scope: :q, local: true, method: :get do |f|
+  .form-group
+    = f.label :isbn, 'isbnキー'
+    = f.text_field :isbn, class: 'form-control'
+  = f.submit '検索する', class: 'btn btn-raised btn-primary'
 ul
 - @book.attributes.each do |key, value|
   li #{key}: #{value if @book}
+- if @book.isbn.present?
+  = link_to new_book_path, method: :post do
+    button.btn.btn-raised.btn-primary
+      | 本を登録する
