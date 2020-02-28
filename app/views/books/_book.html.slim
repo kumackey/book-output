@@ -4,4 +4,8 @@
 = link_to book_path(book) do
   / = image_tag book.image.url, class: 'card-img-top'
   = book.title
+- if current_user&.own?(book)
+  .ml-auto
+    = link_to book_path(book), class: 'mr-3', method: :delete, data: { confirm: '本当に削除しますか？' } do
+      = icon 'far', 'trash-alt', class: 'fa-lg'
 hr
