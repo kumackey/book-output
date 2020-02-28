@@ -6,10 +6,16 @@ header
     button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"]
       span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
-      ul.navbar-nav.mr-auto
-        li.nav-item
-          = link_to signup_path, class: 'nav-link'
-            | アカウント登録 
-        li.nav-item
-          = link_to login_path, class: 'nav-link'
-            | ログイン
+      - if logged_in?
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            = link_to '#', class: 'nav-link'
+              | ログアウト 
+      - else
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            = link_to signup_path, class: 'nav-link'
+              | アカウント登録 
+          li.nav-item
+            = link_to login_path, class: 'nav-link'
+              | ログイン
