@@ -17,6 +17,8 @@
 
 class User < ApplicationRecord
   authenticates_with_sorcery!
+  has_many :books
+
   validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
@@ -26,6 +28,4 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 },
                     uniqueness: { case_sensitive: false },
                     format: { with: VALID_EMAIL_REGEX }
-  
-  has_many :books
 end
