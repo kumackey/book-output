@@ -44,10 +44,11 @@ class BooksController < ApplicationController
 
   def make_hash_of_googlebooksapi
     json = get_json_by_params
+    image_url = json["items"][0]["volumeInfo"]["imageLinks"]["smallThumbnail"]
     {
       author: json["items"][0]["volumeInfo"]["authors"][0],
       description: json["items"][0]["volumeInfo"]["description"],
-      image: "", #あとでcarrierwaveでの処理に変更する
+      image: image_url,
       isbn: book_params['isbn'].to_i,
       googlebooksapi_id: json["items"][0]["id"],
       published_at: json["items"][0]["volumeInfo"]["publishedDate"],

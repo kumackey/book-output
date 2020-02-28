@@ -4,7 +4,3 @@
     = f.label :isbn, 'isbnキー'
     = f.text_field :isbn, class: 'form-control'
   = f.submit '検索する', class: 'btn btn-raised btn-primary'
-ul
-- @book.attributes.each do |key, value|
-  li #{key}: #{value if @book}
-  
