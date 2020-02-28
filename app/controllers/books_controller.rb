@@ -20,6 +20,10 @@ class BooksController < ApplicationController
     @book = SearchBooksForm.new(book_params)
   end
 
+  def show
+    @book = Book.find(params[:id])
+  end
+
   def search
     json = get_json_by_params
     @book = build_active_model_from_json(json) if json[0]
