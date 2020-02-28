@@ -56,8 +56,22 @@ class BooksController < ApplicationController
     }
   end
 
+  def make_hash_of_googlebooksapi_and_upload
+    json = get_json_by_params
+    image_url = json["items"][0]["volumeInfo"]["imageLinks"]["smallThumbnail"]
+    {
+      author: json["items"][0]["volumeInfo"]["authors"][0],
+      description: json["items"][0]["volumeInfo"]["description"],
+      remote_image_url: image_url, #ここが異なる箇所
+      isbn: book_params['isbn'].to_i,
+      googlebooksapi_id: json["items"][0]["id"],
+      published_at: json["items"][0]["volumeInfo"]["publishedDate"],
+      title: json["items"][0]["volumeInfo"]["title"],
+    }
+  end
+
   def build_active_record
-    @book = current_user.books.build(make_hash_of_googlebooksapi)
+    @book = current_user.books.build(make_hash_of_googlebooksapi_and_upload)
   end
 
   def build_active_model
