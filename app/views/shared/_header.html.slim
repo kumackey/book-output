@@ -13,13 +13,16 @@ header
               = icon 'fas', 'book', class: 'fa-lg'
               | 本を登録
           li.nav-item
-            = link_to 'logout', class: 'nav-link', method: :delete
+            = link_to logout_path, class: 'nav-link', method: :delete
+              = icon 'fas', 'sign-out-alt', class: 'fa-lg'
               | ログアウト
       - else
         ul.navbar-nav.mr-auto
           li.nav-item
             = link_to signup_path, class: 'nav-link'
-              | アカウント登録 
+              = icon 'fas', 'user-plus', class: 'fa-lg'
+              | ユーザー登録 
           li.nav-item
             = link_to login_path, class: 'nav-link'
+              = icon 'fas', 'sign-in-alt', class: 'fa-lg'
               | ログイン
