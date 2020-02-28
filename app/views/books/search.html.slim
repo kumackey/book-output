@@ -6,6 +6,6 @@
     = link_to books_path(q: {isbn: @book.isbn}), method: :post do
       button.btn.btn-raised.btn-primary
         | 本を登録する
-else
+- else
   | 本を登録するためにはアカウントが必要です。
-  = link_to 'Sign in', sign_in_path
+  = link_to 'ログインする', login_path
