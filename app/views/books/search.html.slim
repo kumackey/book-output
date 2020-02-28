@@ -1,11 +1,7 @@
 - provide :title, @book.title
 - @book.attributes.each do |key, value|
   li #{key}: #{value if @book}
-- if logged_in?
-  - if @book
-    = link_to books_path(q: {isbn: @book.isbn}), method: :post do
-      button.btn.btn-raised.btn-primary
-        | 本を登録する
-- else
-  | 本を登録するためにはアカウントが必要です。
-  = link_to 'ログインする', login_path
+- if @book
+  = link_to books_path(q: {isbn: @book.isbn}), method: :post do
+    button.btn.btn-raised.btn-primary
+      | 本を登録する
