@@ -39,6 +39,7 @@ gem 'rails-i18n', '~> 5.1'
 gem 'redis-rails'
 gem 'sorcery'
 gem 'font-awesome-sass', '~> 5.4.1'
+gem 'carrierwave', '~>1.1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
