@@ -24,6 +24,12 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
+  def destroy
+    @book = current_user.books.find(params[:id])
+    @book.destroy!
+    redirect_to books_path, success: '投稿を削除しました'
+  end
+
   def search
     json = get_json_by_params
     @book = build_active_model_from_json(json) if json[0]
