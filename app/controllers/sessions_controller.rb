@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
-  def new; end
+  before_action :require_login, only: %i[destroy]
+
+  def new
+    @user = User.new
+  end
 
   def create
     @user = login(params[:email], params[:password])
@@ -9,5 +13,10 @@ class SessionsController < ApplicationController
       flash.now[:danger] = 'ログインに失敗しました'
       render :new
     end
+  end
+
+  def destroy
+    logout
+    redirect_to root_path, success: 'ログアウトしました'
   end
 end

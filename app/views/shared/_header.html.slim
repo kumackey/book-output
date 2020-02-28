@@ -9,8 +9,8 @@ header
       - if logged_in?
         ul.navbar-nav.mr-auto
           li.nav-item
-            = link_to '#', class: 'nav-link'
-              | ログアウト 
+            = link_to 'logout', class: 'nav-link', method: :delete
+              | ログアウト
       - else
         ul.navbar-nav.mr-auto
           li.nav-item
