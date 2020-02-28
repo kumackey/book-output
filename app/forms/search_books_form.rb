@@ -7,7 +7,7 @@ class SearchBooksForm
   attribute :image, :string
   attribute :isbn, :integer, :limit => 8   # bigint
   attribute :title, :string
-  attribute :published_at, :datetime
+  attribute :published_at, :date
 
   #isbnのvalidateを追加する
 end
