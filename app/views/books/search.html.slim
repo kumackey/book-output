@@ -1,5 +1,5 @@
 - provide :title, @book.title
-= image_tag @book.image if @book.image.present?
+= image_tag @book.remote_image_url if @book.remote_image_url.present?
 - @book.attributes.each do |key, value|
   li #{key}: #{value if @book}
 - if @book
