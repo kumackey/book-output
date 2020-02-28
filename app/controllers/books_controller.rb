@@ -6,8 +6,7 @@ class BooksController < ApplicationController
   end
 
   def create
-    json = get_json_by_params
-    @book = build_active_record_from_json(json) if json[0]
+    @book = build_active_record #失敗した場合の処理を追加
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
     else
@@ -31,8 +30,7 @@ class BooksController < ApplicationController
   end
 
   def search
-    json = get_json_by_params
-    @book = build_active_model_from_json(json) if json[0]
+    @book = build_active_model #失敗したときの処理を追加
     @book ||= SearchBooksForm.new(book_params)
   end
 
@@ -40,27 +38,29 @@ class BooksController < ApplicationController
 
   def get_json_by_params
     JSON.parse(Net::HTTP.get(URI.parse(
-      "https://api.openbd.jp/v1/get?isbn=#{book_params["isbn"]}"
+      "https://www.googleapis.com/books/v1/volumes?q=isbn:#{book_params['isbn']}"
     )))
   end
 
-  def convert_json_into_hash(json)
+  def make_hash_of_googlebooksapi
+    json = get_json_by_params
     {
-      author: json[0]["summary"]["author"],
-      detail: json[0]["onix"]["DescriptiveDetail"]["TitleDetail"]["TitleElement"]["Subtitle"]["content"],
+      author: json["items"][0]["volumeInfo"]["authors"][0],
+      description: json["items"][0]["volumeInfo"]["description"],
       image: "", #あとでcarrierwaveでの処理に変更する
-      isbn: json[0]["summary"]["isbn"].to_i,
-      published_at: json[0]["summary"]["pubdate"], # 例: "20190101"
-      title: json[0]["summary"]["title"],
+      isbn: book_params['isbn'].to_i,
+      googlebooksapi_id: json["items"][0]["id"],
+      published_at: json["items"][0]["volumeInfo"]["publishedDate"],
+      title: json["items"][0]["volumeInfo"]["title"],
     }
   end
 
-  def build_active_record_from_json(json)
-    @book = current_user.books.build(convert_json_into_hash(json))
+  def build_active_record
+    @book = current_user.books.build(make_hash_of_googlebooksapi)
   end
 
-  def build_active_model_from_json(json)
-    @book = SearchBooksForm.new(convert_json_into_hash(json))
+  def build_active_model
+    @book = SearchBooksForm.new(make_hash_of_googlebooksapi)
   end
 
   def book_params
