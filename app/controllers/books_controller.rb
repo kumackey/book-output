@@ -1,6 +1,10 @@
 class BooksController < ApplicationController
   before_action :require_login, only: %i[create]
 
+  def index
+    @books = Book.all.includes(:user)
+  end
+
   def create
     json = get_json_by_params
     @book = build_active_record_from_json(json) if json[0]

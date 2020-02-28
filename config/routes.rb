@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post 'signup', to: 'users#create'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
+  resources :users
   resources :books, shallow: true do
     collection do
       get :search
