@@ -53,6 +53,7 @@ class BooksController < ApplicationController
       googlebooksapi_id: json["items"][0]["id"],
       published_at: json["items"][0]["volumeInfo"]["publishedDate"],
       title: json["items"][0]["volumeInfo"]["title"],
+      buyLink: json["items"][0]["saleInfo"]["buyLink"]
     }
   end
 

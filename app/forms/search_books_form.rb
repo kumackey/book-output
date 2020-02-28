@@ -9,6 +9,7 @@ class SearchBooksForm
   attribute :googlebooksapi_id, :string
   attribute :published_at, :date
   attribute :description, :string #textに修正したい
+  attribute :buyLink, :string
 
   #isbnのvalidateを追加する
 end
