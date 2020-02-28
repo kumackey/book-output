@@ -63,5 +63,14 @@ RSpec.describe User, type: :model do
         end
       end
 
+      it "ユーザがオブジェクトを持っているかを確認する機能own?が有効なこと" do
+        user = create(:user)
+        other_user = create(:user)
+        book = build(:book, user_id: other_user.id)
+        expect(user.own?(book)).not_to be_truthy
+
+        book = build(:book, user_id: user.id)
+        expect(user.own?(book)).to be_truthy
+      end
     end
 end
