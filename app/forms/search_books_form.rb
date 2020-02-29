@@ -4,11 +4,12 @@ class SearchBooksForm
 
   attribute :author, :string
   attribute :remote_image_url, :string
-  attribute :isbn, :integer, :limit => 8   # bigint
+  attribute :isbn, :integer, limit: 8 # bigint
   attribute :title, :string
   attribute :googlebooksapi_id, :string
   attribute :published_at, :date
-  attribute :description, :string #textに修正したい
+  attribute :description, :string # textに修正したい
+  attribute :buyLink, :string
 
-  #isbnのvalidateを追加する
+  # isbnのvalidateを追加する
 end
