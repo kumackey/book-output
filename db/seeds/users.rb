@@ -11,8 +11,8 @@ end
 
 guest_user = User.create(
   username: 'guest',
-  email: 'guest@guest',
-  password: "guest",
-  password_confirmation: "guest",
+  email: 'guest@guest.guest',
+  password: "guestguest",
+  password_confirmation: "guestguest",
 )
 puts "\"#{guest_user.username}\" has created!"
