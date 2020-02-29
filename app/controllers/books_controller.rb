@@ -16,7 +16,7 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = SearchBooksForm.new(book_params)
+    @book = Book.new
   end
 
   def show
