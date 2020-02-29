@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :require_login, only: %i[create]
+  before_action :require_login, only: %i[create destroy]
 
   def index
     @books = Book.all.includes(:user)
