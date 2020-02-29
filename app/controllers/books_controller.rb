@@ -30,8 +30,7 @@ class BooksController < ApplicationController
   end
 
   def search
-    @book = SearchBooksForm.new(make_hash_of_googlebooksapi) ||
-            SearchBooksForm.new(book_params)
+    @book = SearchBooksForm.new(make_hash_of_googlebooksapi)
   end
 
   private
