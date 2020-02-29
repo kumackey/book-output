@@ -1,0 +1,11 @@
+- provide :title, "ログイン"
+.container
+  h1 ログイン
+  = form_with url: login_path, local: true do |f|
+    .form-group
+      = f.label :email, 'Eメール'
+      = f.email_field :email, class: 'form-control'
+    .form-group
+      = f.label :password, 'パスワード'
+      = f.password_field :password, class: 'form-control'
+    = f.submit 'ログインする', class: 'btn btn-raised btn-primary'

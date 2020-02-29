@@ -1,0 +1,18 @@
+- provide :title, "ユーザー登録"
+.container
+  h1 ユーザー登録
+  = form_with model: @user, url: signup_path, local: true do |f|
+    = render 'shared/error_messages', object: @user
+    .form-group
+      = f.label :username
+      = f.text_field :username, class: 'form-control'
+    .form-group
+      = f.label :email
+      = f.email_field :email, class: 'form-control'
+    .form-group
+      = f.label :password
+      = f.password_field :password, class: 'form-control'
+    .form-group
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, class: 'form-control'
+    = f.submit '登録する', class: 'btn btn-raised btn-primary'

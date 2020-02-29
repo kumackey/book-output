@@ -1,0 +1,9 @@
+- provide :title, @book.title
+.container
+  = image_tag @book.remote_image_url if @book.remote_image_url.present?
+  - @book.attributes.each do |key, value|
+    li #{key}: #{value if @book}
+  - if @book
+    = link_to books_path(q: {isbn: @book.isbn}), method: :post do
+      button.btn.btn-raised.btn-primary
+        | 本を登録する

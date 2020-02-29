@@ -12,4 +12,7 @@
 //
 //= require rails-ujs
 //= require activestorage
+//= require jquery/dist/jquery
+//= require popper.js/dist/umd/popper.min.js
+//= require bootstrap-material-design/dist/js/bootstrap-material-design.js
 //= require_tree .

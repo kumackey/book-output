@@ -1,0 +1,11 @@
+= link_to user_path(book.user) do
+  = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+  = book.user.username
+= link_to book_path(book) do
+  / = image_tag book.image.url, class: 'card-img-top'
+  = book.title
+- if current_user&.own?(book)
+  = link_to book_path(book), class: 'mr-3', method: :delete, data: { confirm: '本当に削除しますか？' } do
+    = image_tag book.image.url if book.image?
+    = icon 'far', 'trash-alt', class: 'fa-lg'
+hr
