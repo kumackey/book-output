@@ -6,9 +6,7 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   resources :users
-  resources :books, shallow: true do
-    collection do
-      get :search
-    end
+  resources :books do
+    get :search, on: :new
   end
 end
