@@ -36,23 +36,24 @@ class BooksController < ApplicationController
 
   private
 
-  def get_json_by_params
+  def get_json_from_isbn(isbn)
     JSON.parse(Net::HTTP.get(URI.parse(
-      "https://www.googleapis.com/books/v1/volumes?q=isbn:#{book_params['isbn']}"
-    )))
+                               "https://www.googleapis.com/books/v1/volumes?q=isbn:#{isbn}"
+                             )))
   end
 
   def make_hash_of_googlebooksapi
-    json = get_json_by_params
-    image_url = json["items"][0]["volumeInfo"]["imageLinks"]["smallThumbnail"]
+    json = get_json_from_isbn(book_params['isbn'])
+    image_url = json['items'][0]['volumeInfo']['imageLinks']['smallThumbnail']
     {
-      author: json["items"][0]["volumeInfo"]["authors"][0],
-      description: json["items"][0]["volumeInfo"]["description"],
+      author: json['items'][0]['volumeInfo']['authors'][0],
+      description: json['items'][0]['volumeInfo']['description'],
       isbn: book_params['isbn'].to_i,
       remote_image_url: image_url,
-      googlebooksapi_id: json["items"][0]["id"],
-      published_at: json["items"][0]["volumeInfo"]["publishedDate"],
-      title: json["items"][0]["volumeInfo"]["title"],
+      googlebooksapi_id: json['items'][0]['id'],
+      published_at: json['items'][0]['volumeInfo']['publishedDate'],
+      title: json['items'][0]['volumeInfo']['title'],
+      buyLink: json['items'][0]['saleInfo']['buyLink']
     }
   end
 
