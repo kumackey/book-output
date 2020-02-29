@@ -30,8 +30,15 @@
 require 'rails_helper'
 
 RSpec.describe Book, type: :model do
+  let(:book) { build(:book) }
+
   it "有効なファクトリを持つこと" do
-    book = build(:book)
     expect(book).to be_valid
+  end
+
+  it "著者が空白であるときに無効なこと" do
+    book.author = ''
+    book.valid?
+    expect(book.errors.messages[:author]).to include("を入力してください")
   end
 end
