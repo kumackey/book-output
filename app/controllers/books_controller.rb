@@ -30,7 +30,7 @@ class BooksController < ApplicationController
   end
 
   def search
-    @search_form = SearchBooksForm.new
+    @search_form = SearchBooksForm.new(search_books_params)
     if params[:q].present?
       json = get_json_from_keyword(search_books_params[:keyword])
       objs = json['items']
