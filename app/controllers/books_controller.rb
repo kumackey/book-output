@@ -6,7 +6,8 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = current_user.books.build(make_hash_of_googlebooksapi)
+    get_objects_from_keyword(book_create_params)
+    @book = current_user.books.build(ここに情報入れる)
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
     else
@@ -31,7 +32,7 @@ class BooksController < ApplicationController
 
   def search
     @books = []
-    json = get_jsons_from_keyword(book_params['keyword'])
+    json = get_json_from_keyword(search_books_params['keyword'])
     objs = json['items']
     objs.each do |obj|
       @books << Book.new(
@@ -44,14 +45,14 @@ class BooksController < ApplicationController
         buyLink: obj['saleInfo']['buyLink']
       )
     end
-    @books = Kaminari.paginate_array(@books).page(params[:page]).per(5)
+    @books = Kaminari.paginate_array(@books).page(params[:page]).per(5) #N+1問題を起こしうるので修正予定
   end
 
   private
 
-  def get_jsons_from_keyword(keyword)
+  def get_json_from_keyword(keyword)
     JSON.parse(Net::HTTP.get(URI.parse(URI.escape(
-                                         "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP"
+                                         "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP&maxResults=20"
                                        ))))
   end
 
@@ -68,7 +69,11 @@ class BooksController < ApplicationController
     # publisherとauthorsの2種がある
   end
 
-  def book_params
+  def search_books_params
     params.fetch(:q, {}).permit(:keyword)
+  end
+
+  def book_create_params
+    params.require(:book).permit(:googlebooksapi_id)
   end
 end
