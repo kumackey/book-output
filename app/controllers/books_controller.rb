@@ -53,7 +53,7 @@ class BooksController < ApplicationController
 
   def get_json_from_id(googlebooksapi_id)
     JSON.parse(Net::HTTP.get(URI.parse(URI.escape(
-                                         "https://www.googleapis.com/books/v1/volumes?q=id:#{googlebooksapi_id}&country=JP&maxResults=1"
+                                         "https://www.googleapis.com/books/v1/volumes/#{googlebooksapi_id}"
                                        ))))
   end
 
@@ -66,25 +66,33 @@ class BooksController < ApplicationController
   end
 
   def author(obj)
-    if !obj['volumeInfo']
+    if obj['volumeInfo']['authors']
       obj['volumeInfo']['authors'][0]
     else
-      obj['volumeInfo']['publisher'] || "-"
+      obj['volumeInfo']['publisher'] || '-'
     end
+  end
+
+  def nil_guard_volumeInfo_key(obj, volumeInfo_key)
+    obj['volumeInfo'][volumeInfo_key] || ''
   end
 
   def hash_when_create_book
     json = get_json_from_id(create_book_params[:googlebooksapi_id])
-    obj = json['items'][0]
-    {
-      author: author(obj),
-      description: obj['volumeInfo']['description'],
-      remote_image_url: image_url(obj),
-      googlebooksapi_id: obj['id'],
-      published_at: obj['volumeInfo']['publishedDate'],
-      title: obj['volumeInfo']['title'],
-      buyLink: obj['saleInfo']['buyLink']
-    }
+    if json
+      obj = json
+      {
+        author: author(obj),
+        description: nil_guard_volumeInfo_key(obj, 'descriptin'),
+        remote_image_url: image_url(obj),
+        googlebooksapi_id: obj['id'],
+        published_at: nil_guard_volumeInfo_key(obj, 'publishedDate'),
+        title: obj['volumeInfo']['title'],
+        buyLink: obj['saleInfo']['buyLink']
+      }
+    else
+      {} # エラーメッセージを返す
+    end
   end
 
   def hash_when_search_book(obj)
