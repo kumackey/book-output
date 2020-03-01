@@ -9,7 +9,7 @@
       = image_tag book.remote_image_url if book.remote_image_url.present?
       = book.title
     = book.author
-    = link_to books_path(book: {googlebooksapi_id: book.googlebooksapi_id} ), method: :post do
+    = link_to books_path(googlebooksapi_id: book.googlebooksapi_id), method: :post do
       button.btn.btn-raised.btn-primary
         | 本を登録する
     hr

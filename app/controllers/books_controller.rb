@@ -91,6 +91,6 @@ class BooksController < ApplicationController
   end
 
   def create_book_params
-    params.require(:book).permit(:googlebooksapi_id)
+    params.permit(:googlebooksapi_id)
   end
 end
