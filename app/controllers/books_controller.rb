@@ -31,22 +31,24 @@ class BooksController < ApplicationController
 
   def search
     @search_form = SearchBooksForm.new
-    @books = []
-    json = get_json_from_keyword(search_books_params[:keyword])
-    objs = json['items']
-    objs.each do |obj|
-      @books << Book.new(
-        author: author(obj),
-        remote_image_url: image_url(obj),
-        googlebooksapi_id: obj['id'],
-        title: obj['volumeInfo']['title'],
-        buyLink: obj['saleInfo']['buyLink']
-      )
+    if params[:q]
+      json = get_json_from_keyword(search_books_params[:keyword])
+      objs = json['items']
+      @books = Array.new
+      objs.each do |obj|
+        @books << SearchBooksForm.new(
+          author: author(obj),
+          remote_image_url: image_url(obj),
+          googlebooksapi_id: obj['id'],
+          title: obj['volumeInfo']['title'],
+          buyLink: obj['saleInfo']['buyLink']
+        )
+      end
+      @books = Kaminari.paginate_array(@books).page(params[:page]).per(5) # N+1問題を起こしうるので修正予定
+    else
+      @books = Book.order(created_at: :desc).includes(:user).page(params[:page])
     end
-    @books = Kaminari.paginate_array(@books).page(params[:page]).per(5) # N+1問題を起こしうるので修正予定
   end
-
-  private
 
   def get_json_from_keyword(keyword)
     JSON.parse(Net::HTTP.get(URI.parse(URI.escape(
@@ -87,8 +89,10 @@ class BooksController < ApplicationController
     }
   end
 
+  private
+
   def search_books_params
-    params.fetch(:q, keyword: 'ファストアンドスロー').permit(:keyword) # keywordを修正したい
+    params.fetch(:q, keyword: '').permit(:keyword) # keywordを修正したい
   end
 
   def create_book_params
