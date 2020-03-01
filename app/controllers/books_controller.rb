@@ -15,7 +15,9 @@ class BooksController < ApplicationController
     end
   end
 
-  def new; end
+  def new
+    @book = Book.new(hash_when_create_book)
+  end
 
   def show
     @book = Book.find(params[:id])
