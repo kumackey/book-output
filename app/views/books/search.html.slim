@@ -1,5 +1,11 @@
-- provide :title, "本を検索" #検索キーワードにしたい
+- provide :title, "本を検索する" #検索キーワードにしたい
 .container
+  = form_with model: @search_form, url: search_books_path, scope: :q, local: true, method: :get do |f|
+    .form-group
+      = f.label :keyword, 'キーワード'
+      = f.text_field :keyword, class: 'form-control'
+    = f.submit '検索する', class: 'btn btn-raised btn-primary'
+
   - @books.each do |book|
     - if book.buyLink.present?
       = link_to book.buyLink

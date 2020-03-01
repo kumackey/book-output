@@ -15,9 +15,7 @@ class BooksController < ApplicationController
     end
   end
 
-  def new
-    @book = SearchBooksForm.new
-  end
+  def new; end
 
   def show
     @book = Book.find(params[:id])
@@ -30,6 +28,7 @@ class BooksController < ApplicationController
   end
 
   def search
+    @search_form = SearchBooksForm.new
     @books = []
     json = get_json_from_keyword(search_books_params[:keyword])
     objs = json['items']
@@ -87,7 +86,7 @@ class BooksController < ApplicationController
   end
 
   def search_books_params
-    params.fetch(:q, {}).permit(:keyword)
+    params.fetch(:q, keyword: 'ファストアンドスロー').permit(:keyword) # keywordを修正したい
   end
 
   def create_book_params
