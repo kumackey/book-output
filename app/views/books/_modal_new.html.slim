@@ -1,0 +1,19 @@
+.modal#book-new-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5.modal-title 本を登録
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+          span aria-hidden="true" ×
+      .modal-body
+        - if book.buyLink.present?
+          = link_to book.buyLink
+            = image_tag book.remote_image_url if book.remote_image_url.present?
+            = book.title
+        - else
+          = image_tag book.remote_image_url if book.remote_image_url.present?
+          = book.title
+        = book.author
+        = link_to books_path(googlebooksapi_id: book.googlebooksapi_id), method: :post do
+          button.btn.btn-raised.btn-primary
+            | 本を登録する

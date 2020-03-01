@@ -1,7 +1,0 @@
-- provide :title, "本の登録"
-.container
-  = form_with model: @book, url: search_books_path, scope: :q, local: true, method: :get do |f|
-    .form-group
-      = f.label :isbn, 'isbnキー'
-      = f.text_field :isbn, class: 'form-control'
-    = f.submit '検索する', class: 'btn btn-raised btn-primary'

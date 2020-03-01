@@ -1,9 +1,22 @@
-- provide :title, @book.title
+- provide :title, "本を検索する" #検索キーワードにしたい
 .container
-  = image_tag @book.remote_image_url if @book.remote_image_url.present?
-  - @book.attributes.each do |key, value|
-    li #{key}: #{value if @book}
-  - if @book
-    = link_to books_path(q: {isbn: @book.isbn}), method: :post do
+  = form_with model: @search_form, url: search_books_path, scope: :q, local: true, method: :get do |f|
+    .form-group
+      = f.label :keyword, 'キーワード'
+      = f.text_field :keyword, class: 'form-control', value: @search_form.keyword
+    = f.submit '検索する', class: 'btn btn-raised btn-primary'
+
+  - @books.each do |book|
+    - if book.buyLink.present?
+      = link_to book.buyLink
+        = image_tag(book.remote_image_url || book.image.url) if book.image?
+        = book.title
+    - else
+      = image_tag(book.remote_image_url || book.image.url) if book.image?
+      = book.title
+    = book.author
+    = link_to new_book_path(googlebooksapi_id: book.googlebooksapi_id), remote: true do
       button.btn.btn-raised.btn-primary
         | 本を登録する
+    hr
+  = paginate @books

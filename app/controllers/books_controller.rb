@@ -1,12 +1,12 @@
 class BooksController < ApplicationController
-  before_action :require_login, only: %i[create]
+  before_action :require_login, only: %i[create destroy]
 
   def index
-    @books = Book.all.includes(:user)
+    @books = Book.all.includes(:user).page(params[:page]).per(15).order(created_at: :desc)
   end
 
   def create
-    @book = current_user.books.build(make_hash_of_googlebooksapi)
+    @book = current_user.books.build(hash_when_create_book)
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
     else
@@ -16,7 +16,7 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = SearchBooksForm.new(book_params)
+    @book = Book.new(hash_when_create_book)
   end
 
   def show
@@ -30,34 +30,80 @@ class BooksController < ApplicationController
   end
 
   def search
-    @book = SearchBooksForm.new(make_hash_of_googlebooksapi) ||
-            SearchBooksForm.new(book_params)
+    @search_form = SearchBooksForm.new(search_books_params)
+    if params[:q].present?
+      json = get_json_from_keyword(search_books_params[:keyword])
+      objs = json['items']
+      @books = []
+      objs.each do |obj|
+        @books << SearchBooksForm.new(hash_when_search_book(obj))
+      end
+      @books = Kaminari.paginate_array(@books)
+    else
+      @books = Book.order(created_at: :desc).includes(:user)
+    end
+    @books = @books.page(params[:page]).per(5)
+  end
+
+  def get_json_from_keyword(keyword)
+    JSON.parse(Net::HTTP.get(URI.parse(URI.escape(
+                                         "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP&maxResults=20"
+                                       ))))
+  end
+
+  def get_json_from_id(googlebooksapi_id)
+    JSON.parse(Net::HTTP.get(URI.parse(URI.escape(
+                                         "https://www.googleapis.com/books/v1/volumes?q=id:#{googlebooksapi_id}&country=JP&maxResults=1"
+                                       ))))
+  end
+
+  def image_url(obj)
+    if obj['volumeInfo']['imageLinks'] # imageLinksが無く、エラーを起こすことがあるため
+      obj['volumeInfo']['imageLinks']['smallThumbnail']
+    else
+      ''
+    end
+  end
+
+  def author(obj)
+    if !obj['volumeInfo']
+      obj['volumeInfo']['authors'][0]
+    else
+      obj['volumeInfo']['publisher'] || "-"
+    end
+  end
+
+  def hash_when_create_book
+    json = get_json_from_id(create_book_params[:googlebooksapi_id])
+    obj = json['items'][0]
+    {
+      author: author(obj),
+      description: obj['volumeInfo']['description'],
+      remote_image_url: image_url(obj),
+      googlebooksapi_id: obj['id'],
+      published_at: obj['volumeInfo']['publishedDate'],
+      title: obj['volumeInfo']['title'],
+      buyLink: obj['saleInfo']['buyLink']
+    }
+  end
+
+  def hash_when_search_book(obj)
+    {
+      author: author(obj),
+      remote_image_url: image_url(obj),
+      googlebooksapi_id: obj['id'],
+      title: obj['volumeInfo']['title'],
+      buyLink: obj['saleInfo']['buyLink']
+    }
   end
 
   private
 
-  def get_json_from_isbn(isbn)
-    JSON.parse(Net::HTTP.get(URI.parse(
-                               "https://www.googleapis.com/books/v1/volumes?q=isbn:#{isbn}"
-                             )))
+  def search_books_params
+    params.fetch(:q, keyword: '').permit(:keyword)
   end
 
-  def make_hash_of_googlebooksapi
-    json = get_json_from_isbn(book_params['isbn'])
-    image_url = json['items'][0]['volumeInfo']['imageLinks']['smallThumbnail']
-    {
-      author: json['items'][0]['volumeInfo']['authors'][0],
-      description: json['items'][0]['volumeInfo']['description'],
-      isbn: book_params['isbn'].to_i,
-      remote_image_url: image_url,
-      googlebooksapi_id: json['items'][0]['id'],
-      published_at: json['items'][0]['volumeInfo']['publishedDate'],
-      title: json['items'][0]['volumeInfo']['title'],
-      buyLink: json['items'][0]['saleInfo']['buyLink']
-    }
-  end
-
-  def book_params
-    params.fetch(:q, {}).permit(:isbn)
+  def create_book_params
+    params.permit(:googlebooksapi_id)
   end
 end

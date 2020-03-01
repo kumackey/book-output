@@ -9,7 +9,7 @@ header
       - if logged_in?
         ul.navbar-nav.mr-auto
           li.nav-item class="#{'active' if controller.controller_name == 'books' && controller.action_name == 'new'}"
-            = link_to new_book_path, class: 'nav-link' do
+            = link_to search_books_path, class: 'nav-link' do
               = icon 'fas', 'book', class: 'fa-lg'
               | 本を登録
           li.nav-item
