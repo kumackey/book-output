@@ -42,6 +42,7 @@ gem 'font-awesome-sass', '~> 5.4.1'
 gem 'carrierwave', '~>1.1.0'
 gem 'nokogiri', '~>1.10.8'
 gem 'faker'
+gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

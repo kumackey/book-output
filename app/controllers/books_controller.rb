@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :require_login, only: %i[create destroy]
 
   def index
-    @books = Book.all.includes(:user)
+    @books = Book.all.includes(:user).page(params[:page]).per(15).order(created_at: :desc)
   end
 
   def create
@@ -45,6 +45,7 @@ class BooksController < ApplicationController
         buyLink: obj['saleInfo']['buyLink']
       )
     end
+    @books = Kaminari.paginate_array(@books).page(params[:page]).per(5)
   end
 
   private

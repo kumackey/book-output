@@ -5,6 +5,7 @@
     = book.title
     = book.author
     hr
+  = paginate @books
   / = image_tag @book.remote_image_url if @book.remote_image_url.present?
   / - @book.attributes.each do |key, value|
   /   li #{key}: #{value if @book}
