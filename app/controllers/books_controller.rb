@@ -37,7 +37,6 @@ class BooksController < ApplicationController
       @books << Book.new(
         author: author(obj),
         description: obj['volumeInfo']['description'],
-        # isbn: book_isbn_params['isbn'].to_i,
         remote_image_url: image_url(obj),
         googlebooksapi_id: obj['id'],
         published_at: obj['volumeInfo']['publishedDate'],
