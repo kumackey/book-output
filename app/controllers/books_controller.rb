@@ -16,7 +16,7 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = Book.new
+    @book = SearchBooksForm.new
   end
 
   def show
@@ -30,33 +30,38 @@ class BooksController < ApplicationController
   end
 
   def search
-    @book = SearchBooksForm.new(make_hash_of_googlebooksapi)
+    jsons = get_jsons_from_keyword(book_params['keyword'])
+    @books = []
+    jsons.each do |json|
+      image_url = if json['volumeInfo']['imageLinks']
+        json['volumeInfo']['imageLinks']['smallThumbnail']
+      else
+        ""
+      end
+      author = json['volumeInfo']['publisher'] || json['volumeInfo']['authors'][0]
+      @books << Book.new(
+        author: author,
+        description: json['volumeInfo']['description'],
+        # isbn: book_isbn_params['isbn'].to_i,
+        remote_image_url: image_url,
+        googlebooksapi_id: json['id'],
+        published_at: json['volumeInfo']['publishedDate'],
+        title: json['volumeInfo']['title'],
+        buyLink: json['saleInfo']['buyLink']
+      )
+    end
   end
 
   private
 
-  def get_json_from_isbn(isbn)
-    JSON.parse(Net::HTTP.get(URI.parse(
-                               "https://www.googleapis.com/books/v1/volumes?q=isbn:#{isbn}"
-                             )))
-  end
-
-  def make_hash_of_googlebooksapi
-    json = get_json_from_isbn(book_params['isbn'])
-    image_url = json['items'][0]['volumeInfo']['imageLinks']['smallThumbnail']
-    {
-      author: json['items'][0]['volumeInfo']['authors'][0],
-      description: json['items'][0]['volumeInfo']['description'],
-      isbn: book_params['isbn'].to_i,
-      remote_image_url: image_url,
-      googlebooksapi_id: json['items'][0]['id'],
-      published_at: json['items'][0]['volumeInfo']['publishedDate'],
-      title: json['items'][0]['volumeInfo']['title'],
-      buyLink: json['items'][0]['saleInfo']['buyLink']
-    }
+  def get_jsons_from_keyword(keyword)
+    objs = JSON.parse(Net::HTTP.get(URI.parse(URI.encode(
+        "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP"
+    ))))
+    objs["items"]
   end
 
   def book_params
-    params.fetch(:q, {}).permit(:isbn)
+    params.fetch(:q, {}).permit(:keyword)
   end
 end

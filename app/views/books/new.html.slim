@@ -2,6 +2,6 @@
 .container
   = form_with model: @book, url: search_new_book_path, scope: :q, local: true, method: :get do |f|
     .form-group
-      = f.label :isbn, 'isbnキー'
-      = f.text_field :isbn, class: 'form-control'
+      = f.label :keyword, 'キーワード'
+      = f.text_field :keyword, class: 'form-control'
     = f.submit '検索する', class: 'btn btn-raised btn-primary'
