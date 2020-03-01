@@ -30,24 +30,19 @@ class BooksController < ApplicationController
   end
 
   def search
-    jsons = get_jsons_from_keyword(book_params['keyword'])
     @books = []
-    jsons.each do |json|
-      image_url = if json['volumeInfo']['imageLinks']
-        json['volumeInfo']['imageLinks']['smallThumbnail']
-      else
-        ""
-      end
-      author = json['volumeInfo']['publisher'] || json['volumeInfo']['authors'][0]
+    json = get_jsons_from_keyword(book_params['keyword'])
+    objs = json['items']
+    objs.each do |obj|
       @books << Book.new(
-        author: author,
-        description: json['volumeInfo']['description'],
+        author: author(obj),
+        description: obj['volumeInfo']['description'],
         # isbn: book_isbn_params['isbn'].to_i,
-        remote_image_url: image_url,
-        googlebooksapi_id: json['id'],
-        published_at: json['volumeInfo']['publishedDate'],
-        title: json['volumeInfo']['title'],
-        buyLink: json['saleInfo']['buyLink']
+        remote_image_url: image_url(obj),
+        googlebooksapi_id: obj['id'],
+        published_at: obj['volumeInfo']['publishedDate'],
+        title: obj['volumeInfo']['title'],
+        buyLink: obj['saleInfo']['buyLink']
       )
     end
   end
@@ -55,10 +50,22 @@ class BooksController < ApplicationController
   private
 
   def get_jsons_from_keyword(keyword)
-    objs = JSON.parse(Net::HTTP.get(URI.parse(URI.encode(
-        "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP"
-    ))))
-    objs["items"]
+    JSON.parse(Net::HTTP.get(URI.parse(URI.escape(
+                                         "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP"
+                                       ))))
+  end
+
+  def image_url(obj)
+    if obj['volumeInfo']['imageLinks'] # imageLinksが無く、エラーを起こすことがあるため
+      obj['volumeInfo']['imageLinks']['smallThumbnail']
+    else
+      ''
+    end
+  end
+
+  def author(obj)
+    obj['volumeInfo']['publisher'] || obj['volumeInfo']['authors'][0]
+    # publisherとauthorsの2種がある
   end
 
   def book_params
