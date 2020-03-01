@@ -36,10 +36,8 @@ class BooksController < ApplicationController
     objs.each do |obj|
       @books << Book.new(
         author: author(obj),
-        description: obj['volumeInfo']['description'],
         remote_image_url: image_url(obj),
         googlebooksapi_id: obj['id'],
-        published_at: obj['volumeInfo']['publishedDate'],
         title: obj['volumeInfo']['title'],
         buyLink: obj['saleInfo']['buyLink']
       )

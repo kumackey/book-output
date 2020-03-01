@@ -1,8 +1,13 @@
 - provide :title, "本を検索" #検索キーワードにしたい
 .container
   - @books.each do |book|
-    = image_tag book.remote_image_url if book.remote_image_url.present?
-    = book.title
+    - if book.buyLink.present?
+      = link_to book.buyLink
+        = image_tag book.remote_image_url if book.remote_image_url.present?
+        = book.title
+    - else
+      = image_tag book.remote_image_url if book.remote_image_url.present?
+      = book.title
     = book.author
     = link_to books_path(book: {googlebooksapi_id: book.googlebooksapi_id} ), method: :post do
       button.btn.btn-raised.btn-primary
