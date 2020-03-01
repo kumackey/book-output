@@ -66,8 +66,11 @@ class BooksController < ApplicationController
   end
 
   def author(obj)
-    obj['volumeInfo']['publisher'] || obj['volumeInfo']['authors'][0]
-    # publisherとauthorsの2種がある
+    if !obj['volumeInfo']
+      obj['volumeInfo']['authors'][0]
+    else
+      obj['volumeInfo']['publisher'] || "-"
+    end
   end
 
   def hash_when_create_book
