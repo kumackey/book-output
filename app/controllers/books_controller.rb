@@ -33,9 +33,9 @@ class BooksController < ApplicationController
     @search_form = SearchBooksForm.new(search_books_params)
     if params[:q].present?
       json = get_json_from_keyword(search_books_params[:keyword])
-      items = json['items']
+      volumes = json['items']
       @books = []
-      items.each do |volume|
+      volumes.each do |volume|
         hash = SearchBooksForm.hash_from_volume(volume)
         @books << SearchBooksForm.new(hash)
       end
