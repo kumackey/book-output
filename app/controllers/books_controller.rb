@@ -6,7 +6,8 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = current_user.books.build(hash_when_create_book)
+    hash = Book.hash_from_volume(volume_when_create_book)
+    @book = current_user.books.build(hash)
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
     else

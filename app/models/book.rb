@@ -37,6 +37,18 @@ class Book < ApplicationRecord
                                        ))))
   end
 
+  def self.hash_from_volume(volume)
+    {
+      author: Book.author(volume),
+      description: Book.nil_guard_volumeInfo_key(volume, 'descriptin'),
+      remote_image_url: Book.image_url(volume),
+      googlebooksapi_id: volume['id'],
+      published_at: Book.nil_guard_volumeInfo_key(volume, 'publishedDate'),
+      title: volume['volumeInfo']['title'],
+      buyLink: volume['saleInfo']['buyLink']
+    }
+  end
+
   def self.image_url(volume)
     if volume['volumeInfo']['imageLinks'] # imageLinksが無く、エラーを起こすことがあるため
       volume['volumeInfo']['imageLinks']['smallThumbnail']
