@@ -11,7 +11,7 @@ end
 
 guest_user = User.create(
   username: 'guest',
-  email: 'guest@guest.guest',
+  email: 'guest@guest.jp',
   password: "guestguest",
   password_confirmation: "guestguest",
 )
