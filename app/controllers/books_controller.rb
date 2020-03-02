@@ -47,9 +47,8 @@ class BooksController < ApplicationController
   end
 
   def get_json_from_keyword(keyword)
-    JSON.parse(Net::HTTP.get(URI.parse(URI.escape(
-                                         "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP&maxResults=20"
-                                       ))))
+    url = "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP&maxResults=20"
+    JSON.parse(Net::HTTP.get(URI.parse(Addressable::URI.encode(url))))
   end
 
   def hash_from_create_params
