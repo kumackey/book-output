@@ -30,8 +30,7 @@ FactoryBot.define do
     author  { "ダニエル・カーネマン" }
     description { "我々の直感は間違ってばかり？" }
     image { File.open("#{Rails.root}/spec/factories/fast_and_slow.jpeg") }
-    isbn { 9784150504113 }
-    published_at { 2013-05-24 }
+    published_at { "2013-05-24" }
     title { "ファスト＆スロー(下)" }
     googlebooksapi_id { "yHrxYFWkrfQC" }
     buyLink { "https://play.google.com/store/books/details?id=yHrxYFWkrfQC&rdid=book-yHrxYFWkrfQC&rdot=1&source=gbs_api" }
