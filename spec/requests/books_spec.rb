@@ -4,11 +4,14 @@ RSpec.describe "Books", type: :request do
   it '本一覧画面の表示に成功すること' do
     get '/books'
     expect(response).to have_http_status(200)
+  end
+
+  it "本を登録したときにしたときに本一覧画面に追加されていること" do
+    get '/books'
     expect(response.body).to_not include("ファスト＆スロー(下)")
 
     create(:book, title: "ファスト＆スロー(下)")
     get '/books'
-    expect(response).to have_http_status(200)
     expect(response.body).to include("ファスト＆スロー(下)")
   end
 
