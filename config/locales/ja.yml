@@ -10,7 +10,7 @@ ja:
         password: 'パスワード'
         password_confirmation: 'パスワード確認'
 
-      books:
+      book:
         author: '著者'
         title: 'タイトル'
         buyLink: '購入リンク'
