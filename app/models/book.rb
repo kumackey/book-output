@@ -71,15 +71,7 @@ class Book < ApplicationRecord
 
   def self.new_from_volume(volume)
     if volume
-      new(
-        author: Book.author(volume),
-        description: Book.nil_guard_volumeInfo_key(volume, 'descriptin'),
-        remote_image_url: Book.image_url(volume),
-        googlebooksapi_id: volume['id'],
-        published_at: Book.nil_guard_volumeInfo_key(volume, 'publishedDate'),
-        title: volume['volumeInfo']['title'],
-        buyLink: volume['saleInfo']['buyLink']
-      )
+      new(Book.hash_from_volume(volume))
     else
       new # エラーを返せるようにする
     end
