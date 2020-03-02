@@ -19,9 +19,11 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
     let(:user) { build(:user) }
+    let(:other_user) { build(:other_user) }
 
     it "有効なファクトリを持つこと" do
       expect(user).to be_valid
+      expect(other_user).to be_valid
     end
 
     it "名前が空白であるときに無効なこと" do
@@ -44,33 +46,33 @@ RSpec.describe User, type: :model do
           expect(user.errors[:username]).to include("は20文字以内で入力してください")
         end
       end
+    end
 
-      it "重複したメールアドレスなら無効なこと" do
-        create(:user, email:"duP@example.com")
-        user2 = build(:user, email:"Dup@example.com")
-        user2.valid?
-        expect(user2.errors[:email]).to include("はすでに存在します")
+    it "重複したメールアドレスなら無効なこと" do
+      create(:user, email:"duP@example.com")
+      user2 = build(:user, email:"Dup@example.com")
+      user2.valid?
+      expect(user2.errors[:email]).to include("はすでに存在します")
+    end
+
+    it "不正な値のメールアドレスは無効なこと" do
+      invalid_addresses = %w[user@example,com 
+                            user_at_foo.org user.name@example.
+                            foo@bar_baz.com foo@bar+baz.com foo@bar..com]
+      invalid_addresses.each do |invalid_address|
+        user.email = invalid_address
+        user.valid?
+        expect(user.errors[:email]).to include("は不正な値です")
       end
+    end
 
-      it "不正な値のメールアドレスは無効なこと" do
-        invalid_addresses = %w[user@example,com 
-                              user_at_foo.org user.name@example.
-                              foo@bar_baz.com foo@bar+baz.com foo@bar..com]
-        invalid_addresses.each do |invalid_address|
-          user.email = invalid_address
-          user.valid?
-          expect(user.errors[:email]).to include("は不正な値です")
-        end
-      end
+    it "ユーザがオブジェクトを持っているかを確認する機能own?が有効なこと" do
+      user = create(:user)
+      other_user = create(:user)
+      book = build(:book, user_id: other_user.id)
+      expect(user.own?(book)).not_to be_truthy
 
-      it "ユーザがオブジェクトを持っているかを確認する機能own?が有効なこと" do
-        user = create(:user)
-        other_user = create(:user)
-        book = build(:book, user_id: other_user.id)
-        expect(user.own?(book)).not_to be_truthy
-
-        book = build(:book, user_id: user.id)
-        expect(user.own?(book)).to be_truthy
-      end
+      book = build(:book, user_id: user.id)
+      expect(user.own?(book)).to be_truthy
     end
 end
