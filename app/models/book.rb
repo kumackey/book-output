@@ -40,10 +40,10 @@ class Book < ApplicationRecord
   def self.hash_from_volume(volume)
     {
       author: Book.author(volume),
-      description: Book.nil_guard_volumeInfo_key(volume, 'descriptin'),
+      description: Book.nil_guard_volumeinfo_key(volume, 'descriptin'),
       remote_image_url: Book.image_url(volume),
       googlebooksapi_id: volume['id'],
-      published_at: Book.nil_guard_volumeInfo_key(volume, 'publishedDate'),
+      published_at: Book.nil_guard_volumeinfo_key(volume, 'publishedDate'),
       title: volume['volumeInfo']['title'],
       buyLink: volume['saleInfo']['buyLink']
     }
@@ -65,7 +65,7 @@ class Book < ApplicationRecord
     end
   end
 
-  def self.nil_guard_volumeInfo_key(volume, volumeInfo_key)
-    volume['volumeInfo'][volumeInfo_key] || ''
+  def self.nil_guard_volumeinfo_key(volume, volumeinfo_key)
+    volume['volumeInfo'][volumeinfo_key] || ''
   end
 end
