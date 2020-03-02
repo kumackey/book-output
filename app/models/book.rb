@@ -30,7 +30,8 @@ class Book < ApplicationRecord
   belongs_to :user
 
   validates :author, presence: true, length: { maximum: 255 }
-
+  validates :title, presence: true, length: { maximum: 255 }
+  
   def self.get_json_from_id(googlebooksapi_id)
     JSON.parse(Net::HTTP.get(URI.parse(URI.escape(
                                          "https://www.googleapis.com/books/v1/volumes/#{googlebooksapi_id}"

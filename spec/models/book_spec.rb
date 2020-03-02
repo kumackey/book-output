@@ -39,4 +39,10 @@ RSpec.describe Book, type: :model do
     book.valid?
     expect(book.errors.messages[:author]).to include("を入力してください")
   end
+
+  it "タイトルが空白であるときに無効なこと" do
+    book.title = ''
+    book.valid?
+    expect(book.errors.messages[:title]).to include("を入力してください")
+  end
 end
