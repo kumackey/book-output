@@ -71,7 +71,7 @@ class Book < ApplicationRecord
 
   def self.new_from_volume(volume)
     if volume
-      self.new(
+      new(
         author: Book.author(volume),
         description: Book.nil_guard_volumeInfo_key(volume, 'descriptin'),
         remote_image_url: Book.image_url(volume),
@@ -81,9 +81,7 @@ class Book < ApplicationRecord
         buyLink: volume['saleInfo']['buyLink']
       )
     else
-      self.new(
-        #エラーを返せるようにする
-      )
+      new # エラーを返せるようにする
     end
   end
 end

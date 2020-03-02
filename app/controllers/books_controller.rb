@@ -6,7 +6,8 @@ class BooksController < ApplicationController
   end
 
   def create
-    hash = Book.hash_from_volume(volume_when_create_book)
+    volume = Book.get_json_from_id(create_book_params[:googlebooksapi_id])
+    hash = Book.hash_from_volume(volume)
     @book = current_user.books.build(hash)
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
@@ -51,10 +52,6 @@ class BooksController < ApplicationController
     JSON.parse(Net::HTTP.get(URI.parse(URI.escape(
                                          "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP&maxResults=20"
                                        ))))
-  end
-
-  def volume_when_create_book
-    
   end
 
   private
