@@ -36,4 +36,15 @@ FactoryBot.define do
     buyLink { "https://play.google.com/store/books/details?id=yHrxYFWkrfQC&rdid=book-yHrxYFWkrfQC&rdot=1&source=gbs_api" }
     association :user
   end
+
+  factory :book_owned_by_other_user, class: Book do
+    author  { "ロバート・B. チャルディーニ" }
+    description { "著者は、セールスマン、募金勧誘者、広告主など承諾誘導のプロの世界に潜入。彼らのテクニックや方略から「承諾」についての人間心理のメカニズムを解明。情報の氾濫する現代生活で、だまされない賢い消費者になると共に、プロの手口から人を説得するやり方を学ぶ。" }
+    image { File.open("#{Rails.root}/spec/factories/Influence.jpeg") }
+    published_at { "2007-08" }
+    title { "影響力の武器" }
+    googlebooksapi_id { "axicQgAACAAJ" }
+    buyLink { "" }
+    association :other_user
+  end
 end
