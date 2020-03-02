@@ -13,4 +13,14 @@ class SearchBooksForm
   def image?
     true if remote_image_url.present?
   end
+
+  def self.hash_from_volume(volume)
+    {
+      author: Book.author(volume),
+      remote_image_url: Book.image_url(volume),
+      googlebooksapi_id: volume['id'],
+      title: volume['volumeInfo']['title'],
+      buyLink: volume['saleInfo']['buyLink']
+    }
+  end
 end

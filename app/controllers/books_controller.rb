@@ -34,10 +34,11 @@ class BooksController < ApplicationController
     @search_form = SearchBooksForm.new(search_books_params)
     if params[:q].present?
       json = get_json_from_keyword(search_books_params[:keyword])
-      objs = json['items']
+      items = json['items']
       @books = []
-      objs.each do |obj|
-        @books << SearchBooksForm.new(hash_when_search_book(obj))
+      items.each do |volume|
+        hash = SearchBooksForm.hash_from_volume(volume)
+        @books << SearchBooksForm.new(hash)
       end
       @books = Kaminari.paginate_array(@books)
     else
@@ -53,17 +54,7 @@ class BooksController < ApplicationController
   end
 
   def volume_when_create_book
-    Book.get_json_from_id(create_book_params[:googlebooksapi_id])
-  end
-
-  def hash_when_search_book(obj)
-    {
-      author: Book.author(obj),
-      remote_image_url: Book.image_url(obj),
-      googlebooksapi_id: obj['id'],
-      title: obj['volumeInfo']['title'],
-      buyLink: obj['saleInfo']['buyLink']
-    }
+    
   end
 
   private
