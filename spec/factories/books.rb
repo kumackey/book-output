@@ -29,7 +29,7 @@ FactoryBot.define do
   factory :book do
     author  { "ダニエル・カーネマン" }
     description { "我々の直感は間違ってばかり？" }
-    image { File.open("#{Rails.root}/spec/factories/fast_and_slow.jpeg") }
+    image { File.open("#{Rails.root}/spec/factories/images/fast_and_slow.jpeg") }
     published_at { "2013-05-24" }
     title { "ファスト＆スロー(下)" }
     googlebooksapi_id { "yHrxYFWkrfQC" }
@@ -40,7 +40,7 @@ FactoryBot.define do
   factory :other_book, class: Book do
     author  { "ロバート・B. チャルディーニ" }
     description { "著者は、セールスマン、募金勧誘者、広告主など承諾誘導のプロの世界に潜入。彼らのテクニックや方略から「承諾」についての人間心理のメカニズムを解明。情報の氾濫する現代生活で、だまされない賢い消費者になると共に、プロの手口から人を説得するやり方を学ぶ。" }
-    image { File.open("#{Rails.root}/spec/factories/Influence.jpeg") }
+    image { File.open("#{Rails.root}/spec/factories/images/Influence.jpeg") }
     published_at { "2007-08" }
     title { "影響力の武器" }
     googlebooksapi_id { "axicQgAACAAJ" }
