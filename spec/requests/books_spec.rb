@@ -28,15 +28,18 @@ RSpec.describe "Books", type: :request do
   end
 
   it '本詳細画面の表示に成功すること' do
-    book1 = create(:book, title: "ファスト＆スロー(下)")
-    get "/books/#{book1.id}"
+    book = create(:book)
+    get "/books/#{book.id}"
     expect(response).to have_http_status(200)
+  end
+
+  it '本詳細画面はその本の情報が載っていること' do
+    book = create(:book, title: "ファスト＆スロー(下)")
+    create(:other_book, title: "影響力の武器")
+
+    get "/books/#{book.id}" # ファスト＆スロー(下)のページにアクセス
     expect(response.body).to include("ファスト＆スロー(下)")
-    
-    book2 = create(:other_book, title: "影響力の武器")
-    get "/books/#{book2.id}"
-    expect(response.body).not_to include("ファスト＆スロー(下)")
-    expect(response.body).to include("影響力の武器")
+    expect(response.body).not_to include("影響力の武器")
   end
 end
 
