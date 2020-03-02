@@ -68,12 +68,4 @@ class Book < ApplicationRecord
   def self.nil_guard_volumeInfo_key(volume, volumeInfo_key)
     volume['volumeInfo'][volumeInfo_key] || ''
   end
-
-  def self.new_from_volume(volume)
-    if volume
-      new(Book.hash_from_volume(volume))
-    else
-      new # エラーを返せるようにする
-    end
-  end
 end

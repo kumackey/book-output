@@ -6,8 +6,7 @@ class BooksController < ApplicationController
   end
 
   def create
-    hash = Book.hash_from_volume(volume_from_create_params)
-    @book = current_user.books.build(hash)
+    @book = current_user.books.build(hash_from_create_params)
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
     else
@@ -17,7 +16,7 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = Book.new_from_volume(volume_from_create_params)
+    @book = Book.new(hash_from_create_params)
   end
 
   def show
@@ -53,8 +52,9 @@ class BooksController < ApplicationController
                                        ))))
   end
 
-  def volume_from_create_params
-    Book.get_json_from_id(create_book_params[:googlebooksapi_id])
+  def hash_from_create_params
+    volume = Book.get_json_from_id(create_book_params[:googlebooksapi_id])
+    Book.hash_from_volume(volume)
   end
 
   private
