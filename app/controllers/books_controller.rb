@@ -16,7 +16,7 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = Book.new_from_obj(hash_when_create_book)
+    @book = Book.new_from_volume(volume_when_create_book)
   end
 
   def show
@@ -51,7 +51,7 @@ class BooksController < ApplicationController
                                        ))))
   end
 
-  def hash_when_create_book
+  def volume_when_create_book
     Book.get_json_from_id(create_book_params[:googlebooksapi_id])
   end
 

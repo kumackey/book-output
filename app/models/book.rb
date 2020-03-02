@@ -57,8 +57,7 @@ class Book < ApplicationRecord
     volume['volumeInfo'][volumeInfo_key] || ''
   end
 
-  def self.new_from_obj(obj)
-    volume = obj
+  def self.new_from_volume(volume)
     if volume
       self.new(
         author: Book.author(volume),
