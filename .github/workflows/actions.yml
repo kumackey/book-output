@@ -36,9 +36,9 @@ jobs:
           path: ~/.cache/rubocop_cache
           key: ${{ runner.os }}-rubocop-${{ github.head_ref }}
           restore-keys: |
-          ${{ runner.os }}-rubocop-
-          ${{ runner.os }}-rubocop-${{ github.base_ref }}
-          ${{ runner.os }}-rubocop-${{ hashFiles('**/.rubocop.yml') }}
+            ${{ runner.os }}-rubocop-
+            ${{ runner.os }}-rubocop-${{ github.base_ref }}
+            ${{ runner.os }}-rubocop-${{ hashFiles('**/.rubocop.yml') }}
       - name: Set up yarn and node
         run: |
           curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -57,6 +57,6 @@ jobs:
         run: bundle exec rails db:create db:schema:load --trace
       - name: run rspec
         run: bundle exec rspec
-        
+
       - name: Rubocop
         run: bundle exec rubocop --parallel
