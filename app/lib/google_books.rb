@@ -8,7 +8,7 @@ module GoogleBooks
     "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP&maxResults=20"
   end
 
-  class Volume
+  class GoogleBook
     attr_reader :id, :author, :buyLink, :description, :image, :published_at, :title, :url
 
     def initialize(id)
