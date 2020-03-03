@@ -49,8 +49,7 @@ class BooksController < ApplicationController
   end
 
   def hash_from_create_params
-    volume = get_json_from_url(url_of_creating_from_id(create_book_params[:googlebooksapi_id]))
-    Book.hash_from_volume(volume)
+    Book.hash_from_id(create_book_params[:googlebooksapi_id])
   end
 
   private

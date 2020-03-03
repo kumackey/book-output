@@ -34,15 +34,16 @@ class Book < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :googlebooksapi_id, presence: true, length: { maximum: 255 }
 
-  def self.hash_from_volume(volume)
+  def self.hash_from_id(googlebooksapi_id)
+    volume = Volume.new(googlebooksapi_id)
     {
-      author: Book.author(volume),
-      description: nil_guard_volumeinfo_key(volume, 'descriptin'),
-      remote_image_url: Book.image_url(volume),
-      googlebooksapi_id: volume['id'],
-      published_at: nil_guard_volumeinfo_key(volume, 'publishedDate'),
-      title: volume['volumeInfo']['title'],
-      buyLink: volume['saleInfo']['buyLink']
+      author: volume.author,
+      description: volume.description,
+      remote_image_url: volume.image,
+      googlebooksapi_id: volume.id,
+      published_at: volume.published_at,
+      title: volume.title,
+      buyLink: volume.buyLink,
     }
   end
 
