@@ -23,8 +23,4 @@ class SearchBooksForm
       buyLink: volume['saleInfo']['buyLink']
     }
   end
-
-  def self.url_of_searching_from_keyword(keyword)
-    "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP&maxResults=20"
-  end
 end

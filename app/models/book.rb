@@ -34,17 +34,13 @@ class Book < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :googlebooksapi_id, presence: true, length: { maximum: 255 }
 
-  def self.url_of_creating_from_id(googlebooksapi_id)
-    "https://www.googleapis.com/books/v1/volumes/#{googlebooksapi_id}"
-  end
-
   def self.hash_from_volume(volume)
     {
       author: Book.author(volume),
-      description: Book.nil_guard_volumeinfo_key(volume, 'descriptin'),
+      description: nil_guard_volumeinfo_key(volume, 'descriptin'),
       remote_image_url: Book.image_url(volume),
       googlebooksapi_id: volume['id'],
-      published_at: Book.nil_guard_volumeinfo_key(volume, 'publishedDate'),
+      published_at: nil_guard_volumeinfo_key(volume, 'publishedDate'),
       title: volume['volumeInfo']['title'],
       buyLink: volume['saleInfo']['buyLink']
     }
