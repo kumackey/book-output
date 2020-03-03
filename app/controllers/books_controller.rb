@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  include GoogleBooks # app/lib
   before_action :require_login, only: %i[create destroy]
 
   def index
@@ -33,7 +34,7 @@ class BooksController < ApplicationController
     @search_form = SearchBooksForm.new(search_books_params)
     if params[:q].present?
       url = SearchBooksForm.url_of_searching_from_keyword(search_books_params[:keyword])
-      json = Book.get_json_from_url(url)
+      json = get_json_from_url(url)
       volumes = json['items']
       @books = []
       volumes.each do |volume|
@@ -48,7 +49,7 @@ class BooksController < ApplicationController
   end
 
   def hash_from_create_params
-    volume = Book.get_json_from_url(Book.url_of_creating_from_id(create_book_params[:googlebooksapi_id]))
+    volume = get_json_from_url(Book.url_of_creating_from_id(create_book_params[:googlebooksapi_id]))
     Book.hash_from_volume(volume)
   end
 

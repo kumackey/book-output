@@ -26,16 +26,13 @@
 #
 
 class Book < ApplicationRecord
+  include GoogleBooks #app/lib
   mount_uploader :image, ImageUploader
   belongs_to :user
 
   validates :author, presence: true, length: { maximum: 255 }
   validates :title, presence: true, length: { maximum: 255 }
   validates :googlebooksapi_id, presence: true, length: { maximum: 255 }
-
-  def self.get_json_from_url(url)
-    JSON.parse(Net::HTTP.get(URI.parse(Addressable::URI.encode(url))))
-  end
 
   def self.url_of_creating_from_id(googlebooksapi_id)
     "https://www.googleapis.com/books/v1/volumes/#{googlebooksapi_id}"
