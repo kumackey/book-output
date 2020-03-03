@@ -33,10 +33,12 @@ class Book < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :googlebooksapi_id, presence: true, length: { maximum: 255 }
 
-  def self.get_json_from_id(googlebooksapi_id)
-    JSON.parse(Net::HTTP.get(URI.parse(Addressable::URI.encode(
-                                         "https://www.googleapis.com/books/v1/volumes/#{googlebooksapi_id}"
-                                       ))))
+  def self.get_json_from_url(url)
+    JSON.parse(Net::HTTP.get(URI.parse(Addressable::URI.encode(url))))
+  end
+
+  def self.url_of_creating_from_id(googlebooksapi_id)
+    "https://www.googleapis.com/books/v1/volumes/#{googlebooksapi_id}"
   end
 
   def self.hash_from_volume(volume)
