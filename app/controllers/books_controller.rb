@@ -32,7 +32,8 @@ class BooksController < ApplicationController
   def search
     @search_form = SearchBooksForm.new(search_books_params)
     if params[:q].present?
-      json = get_json_from_keyword(search_books_params[:keyword])
+      url = SearchBooksForm.url_of_searching_from_keyword(search_books_params[:keyword])
+      json = Book.get_json_from_url(url)
       volumes = json['items']
       @books = []
       volumes.each do |volume|
@@ -46,14 +47,8 @@ class BooksController < ApplicationController
     @books = @books.page(params[:page]).per(5)
   end
 
-  def get_json_from_keyword(keyword)
-    JSON.parse(Net::HTTP.get(URI.parse(URI.escape(
-                                         "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP&maxResults=20"
-                                       ))))
-  end
-
   def hash_from_create_params
-    volume = Book.get_json_from_id(create_book_params[:googlebooksapi_id])
+    volume = Book.get_json_from_url(Book.url_of_creating_from_id(create_book_params[:googlebooksapi_id]))
     Book.hash_from_volume(volume)
   end
 
