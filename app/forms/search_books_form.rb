@@ -1,6 +1,7 @@
 class SearchBooksForm
   include ActiveModel::Model
   include ActiveModel::Attributes
+  include GoogleBooksApi
 
   attribute :keyword, :string
   attribute :author, :string

@@ -1,4 +1,4 @@
-module GoogleBooks
+module GoogleBooksApi
   def get_json_from_url(url)
     # 消したい
     JSON.parse(Net::HTTP.get(URI.parse(Addressable::URI.encode(url))))

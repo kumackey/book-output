@@ -26,7 +26,7 @@
 #
 
 class Book < ApplicationRecord
-  include GoogleBooks #app/lib
+  include GoogleBooksApi #app/lib
   mount_uploader :image, ImageUploader
   belongs_to :user
 
