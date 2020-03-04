@@ -13,6 +13,6 @@
         - else
           = image_tag book.image if book.image?
         = book.author
-        = link_to books_path(googlebooksapi_id: book.id), method: :post do
+        = link_to books_path(googlebooksapi_id: book.googlebooksapi_id), method: :post do
           button.btn.btn-raised.btn-primary
             | 本を登録する

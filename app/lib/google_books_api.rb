@@ -9,11 +9,11 @@ module GoogleBooksApi
   end
 
   class GoogleBook
-    attr_reader :id, :author, :buyLink, :description, :image, :published_at, :title, :url
+    attr_reader :googlebooksapi_id, :author, :buyLink, :description, :image, :published_at, :title, :url
 
-    def initialize(id)
-      @id = id
-      @url = url_of_creating_from_id(@id)
+    def initialize(googlebooksapi_id)
+      @googlebooksapi_id = googlebooksapi_id
+      @url = url_of_creating_from_id(@googlebooksapi_id)
       @item = get_json_from_url(@url)
       @volume_info = @item['volumeInfo']
       retrieve_attribute
@@ -34,7 +34,7 @@ module GoogleBooksApi
     end
 
     def retrieve_attribute
-      @id = @item['id']
+      @googlebooksapi_id = @item['id']
       @auther = 'ちょし'
       @author = @volume_info['authors'].first if @volume_info['authors']
       @buyLink = @item['saleInfo']['buyLink']
