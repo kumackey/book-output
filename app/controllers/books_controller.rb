@@ -33,8 +33,8 @@ class BooksController < ApplicationController
   def search
     @search_form = SearchBooksForm.new(search_books_params)
     if params[:q].present?
-      @books = SearchBooksForm.search(search_books_params[:keyword])
-      @books = Kaminari.paginate_array(@books)
+      books = SearchBooksForm.search(search_books_params[:keyword])
+      @books = Kaminari.paginate_array(books)
     else
       @books = Book.order(created_at: :desc).includes(:user)
     end

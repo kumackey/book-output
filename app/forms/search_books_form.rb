@@ -15,12 +15,12 @@ class SearchBooksForm
       url = url_of_searching_from_keyword(keyword)
       json = get_json_from_url(url)
       items = json['items']
-      @books = []
+      books = []
       items.each do |item|
         id = item['id']
-        @books << GoogleBook.new(id) #ここはリファクタリングしたい
+        books << GoogleBook.new(id) #ここはリファクタリングしたい
       end
-      @books
+      books
     end
   end
 end
