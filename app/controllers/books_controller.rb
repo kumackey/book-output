@@ -12,7 +12,7 @@ class BooksController < ApplicationController
       redirect_back_or_to books_path, success: '本を登録しました'
     else
       flash.now[:danger] = '本の登録に失敗しました'
-      render :new
+      render :search
     end
   end
 
