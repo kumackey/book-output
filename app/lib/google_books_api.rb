@@ -40,9 +40,17 @@ module GoogleBooksApi
       @author = @volume_info['authors'].first if @volume_info['authors']
       @buy_link = @item['saleInfo']['buyLink']
       @description = @volume_info['description']
-      @image = @volume_info['imageLink'] # 修正予定
+      @image = image_url
       @published_at = @volume_info['publishedDate']
       @title = @volume_info['title']
+    end
+
+    def image_url
+      if @volume_info['imageLinks']
+        @volume_info['imageLinks']['smallThumbnail']
+      else
+        ""
+      end
     end
   end
 end
