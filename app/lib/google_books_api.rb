@@ -37,9 +37,9 @@ module GoogleBooksApi
       @googlebooksapi_id = @item['id']
       @auther = 'ちょし'
       @author = @volume_info['authors'].first if @volume_info['authors']
-      @buyLink = @item['saleInfo']['buyLink']
+      @buyink = @item['saleInfo']['buyLink']
       @description = @volume_info['description']
-      @image = @volume_info['imageLink'] #修正予定
+      @image = @volume_info['imageLink'] # 修正予定
       @published_at = @volume_info['publishedDate']
       @title = @volume_info['title']
     end
