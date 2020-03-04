@@ -54,7 +54,7 @@ RSpec.describe "Books", type: :request do
       it "本検索画面の表示に成功すること" do
         get "/books/search?q%5Bkeyword%5D=#{keyword}"
         expect(response).to have_http_status(200)
-        expect(response.body).to include("Site Reliability")
+        expect(response.body).to include("Betsy Beyer") # SREの本を出した人が表示されるはず
       end
     end
 
@@ -66,7 +66,7 @@ RSpec.describe "Books", type: :request do
       end
     end
   end
-  
+
 
   it '本詳細画面の表示に成功すること' do
     book = create(:book)
