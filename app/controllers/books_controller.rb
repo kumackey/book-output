@@ -7,13 +7,21 @@ class BooksController < ApplicationController
   end
 
   def create
-    hash = Book.hash_from_id(create_book_params[:googlebooksapi_id])
-    @book = current_user.books.build(hash)
+    book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
+    @book = current_user.books.build(
+      author: book.author,
+      description: book.description,
+      googlebooksapi_id: book.googlebooksapi_id,
+      published_at: book.published_at,
+      title: book.title,
+      buy_link: book.buy_link
+    )
+    @book.remote_image_url = book.image if book.image.present?
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
     else
       flash.now[:danger] = '本の登録に失敗しました'
-      render :search
+      render :search_books_path
     end
   end
 

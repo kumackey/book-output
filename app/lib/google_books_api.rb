@@ -33,8 +33,6 @@ module GoogleBooksApi
       image.present? ? true : false
     end
 
-    private
-
     def retrieve_attribute
       @googlebooksapi_id = @item['id']
       @author = @volume_info['authors'].first if @volume_info['authors']
@@ -44,6 +42,8 @@ module GoogleBooksApi
       @published_at = @volume_info['publishedDate']
       @title = @volume_info['title']
     end
+    
+    private
 
     def image_url
       if @volume_info['imageLinks']

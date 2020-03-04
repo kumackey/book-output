@@ -36,16 +36,4 @@ class Book < ApplicationRecord
                                 length: { maximum: 255 },
                                 uniqueness: { case_sensitive: false }
 
-  def self.hash_from_id(googlebooksapi_id)
-    book = GoogleBook.new_from_id(googlebooksapi_id)
-    {
-      author: book.author,
-      description: book.description,
-      remote_image_url: book.image,
-      googlebooksapi_id: book.googlebooksapi_id,
-      published_at: book.published_at,
-      title: book.title,
-      buy_link: book.buy_link
-    }
-  end
 end
