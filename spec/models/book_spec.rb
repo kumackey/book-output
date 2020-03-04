@@ -51,4 +51,11 @@ RSpec.describe Book, type: :model do
     book.valid?
     expect(book.errors.messages[:googlebooksapi_id]).to include("を入力してください")
   end
+
+  it "Google Books APIのIDが空白であるときに無効なこと" do
+    create(:book, googlebooksapi_id: "yHrxYFWkrfQC")
+    book = build(:other_book, googlebooksapi_id: "yHrxYFWkrfQC")
+    book.valid?
+    expect(book.errors[:googlebooksapi_id]).to include("はすでに存在します")
+  end
 end

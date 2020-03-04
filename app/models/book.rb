@@ -32,7 +32,9 @@ class Book < ApplicationRecord
 
   validates :author, presence: true, length: { maximum: 255 }
   validates :title, presence: true, length: { maximum: 255 }
-  validates :googlebooksapi_id, presence: true, length: { maximum: 255 }
+  validates :googlebooksapi_id, presence: true,
+                                length: { maximum: 255 },
+                                uniqueness: { case_sensitive: false }
 
   def self.hash_from_id(googlebooksapi_id)
     book = GoogleBook.new_from_id(googlebooksapi_id)
