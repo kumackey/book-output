@@ -15,7 +15,7 @@ class BooksController < ApplicationController
       published_at: book.published_at,
       title: book.title,
       buy_link: book.buy_link
-    )
+    ) # DBの情報を持ちすぎてるので、本当ならモデルに移行したい
     @book.remote_image_url = book.image if book.image.present?
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
