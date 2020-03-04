@@ -49,7 +49,7 @@ module GoogleBooksApi
       if @volume_info['imageLinks']
         @volume_info['imageLinks']['smallThumbnail']
       else
-        ""
+        ''
       end
     end
   end
