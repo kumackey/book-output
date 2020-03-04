@@ -33,14 +33,7 @@ class BooksController < ApplicationController
   def search
     @search_form = SearchBooksForm.new(search_books_params)
     if params[:q].present?
-      url = url_of_searching_from_keyword(search_books_params[:keyword])
-      json = get_json_from_url(url)
-      volumes = json['items']
-      @books = []
-      volumes.each do |volume|
-        hash = SearchBooksForm.hash_from_volume(volume)
-        @books << SearchBooksForm.new(hash)
-      end
+      @books = SearchBooksForm.search(search_books_params[:keyword])
       @books = Kaminari.paginate_array(@books)
     else
       @books = Book.order(created_at: :desc).includes(:user)

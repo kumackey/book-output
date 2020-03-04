@@ -5,23 +5,25 @@ class SearchBooksForm
 
   attribute :keyword, :string
   attribute :author, :string
-  attribute :remote_image_url, :string
+  attribute :image, :string
   attribute :googlebooksapi_id, :string
   attribute :title, :string
   attribute :buyLink, :string
 
   # carriorwaveのメソッドに合わせた
-  def image?
-    true if remote_image_url.present?
-  end
 
-  def self.hash_from_volume(volume)
-    {
-      author: Book.author(volume),
-      remote_image_url: Book.image_url(volume),
-      googlebooksapi_id: volume['id'],
-      title: volume['volumeInfo']['title'],
-      buyLink: volume['saleInfo']['buyLink']
-    }
+  class << self
+    include GoogleBooksApi
+    def search(keyword)
+      url = url_of_searching_from_keyword(keyword)
+      json = get_json_from_url(url)
+      items = json['items']
+      @books = []
+      items.each do |item|
+        id = item['id']
+        @books << GoogleBook.new(id) #ここはリファクタリングしたい
+      end
+      @books
+    end
   end
 end

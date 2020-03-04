@@ -19,6 +19,10 @@ module GoogleBooksApi
       retrieve_attribute
     end
 
+    def image?
+      image.present? ? true : false
+    end
+
     private
 
     def url_of_creating_from_id(googlebooksapi_id)
@@ -31,7 +35,8 @@ module GoogleBooksApi
 
     def retrieve_attribute
       @id = @item['id']
-      @author = @volume_info['authors'].first
+      @auther = 'ちょし'
+      # @author = @volume_info['authors'].first
       @buyLink = @item['saleInfo']['buyLink']
       @description = @volume_info['description']
       @image = @volume_info['imageLink'] #修正予定

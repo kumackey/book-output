@@ -9,13 +9,13 @@
   - @books.each do |book|
     - if book.buyLink.present?
       = link_to book.buyLink
-        = image_tag(book.remote_image_url || book.image.url) if book.image?
+        = image_tag(book.image || book.image.url) if book.image?
         = book.title
     - else
-      = image_tag(book.remote_image_url || book.image.url) if book.image?
+      = image_tag(book.image || book.image.url) if book.image?
       = book.title
     = book.author
-    = link_to new_book_path(googlebooksapi_id: book.googlebooksapi_id), remote: true do
+    = link_to new_book_path(googlebooksapi_id: book.id), remote: true do
       button.btn.btn-raised.btn-primary
         | 本を登録する
     hr
