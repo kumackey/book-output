@@ -31,39 +31,12 @@ RSpec.describe "Books", type: :request do
       end
     end
 
-    context "worldのときに" do
-      keyword = 'world'
-      it "本検索画面の表示に成功すること" do
-        get "/books/search?q%5Bkeyword%5D=#{keyword}"
-        expect(response).to have_http_status(200)
-        expect(response.body).to include("Hello")
-      end
-    end
-
-    context "Lambdaのときに" do
-      keyword = 'Lambda'
-      it "本検索画面の表示に成功すること" do
-        get "/books/search?q%5Bkeyword%5D=#{keyword}"
-        expect(response).to have_http_status(200)
-        expect(response.body).to include("AWS")
-      end
-    end
-
     context "SREのときに" do
       keyword = 'SRE'
       it "本検索画面の表示に成功すること" do
         get "/books/search?q%5Bkeyword%5D=#{keyword}"
         expect(response).to have_http_status(200)
         expect(response.body).to include("Betsy Beyer") # SREの本を出した人が表示されるはず
-      end
-    end
-
-    context "kubernetesのときに" do
-      keyword = 'kubernetes'
-      it "本検索画面の表示に成功すること" do
-        get "/books/search?q%5Bkeyword%5D=#{keyword}"
-        expect(response).to have_http_status(200)
-        expect(response.body).to include("Docker")
       end
     end
 
