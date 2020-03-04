@@ -18,7 +18,7 @@ class SearchBooksForm
       books = []
       items.each do |item|
         googlebooksapi_id = item['id']
-        books << GoogleBook.new(googlebooksapi_id) # ここはリファクタリングしたい
+        books << GoogleBook.new_from_id(googlebooksapi_id) # ここはリファクタリングしたい
       end
       books
     end
