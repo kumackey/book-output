@@ -35,10 +35,6 @@ module GoogleBooksApi
 
     private
 
-    def get_json_from_url(url)
-      JSON.parse(Net::HTTP.get(URI.parse(Addressable::URI.encode(url))))
-    end
-
     def retrieve_attribute
       @googlebooksapi_id = @item['id']
       @author = @volume_info['authors'].first if @volume_info['authors']
