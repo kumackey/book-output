@@ -17,7 +17,7 @@ module GoogleBooksApi
     class << self
       include GoogleBooksApi
       def new_from_id(googlebooksapi_id)
-        @url = url_of_creating_from_id(googlebooksapi_id)
+        @url = url_of_creating_from_id(googlebooksapi_id) # ここのurlは効いているか不明
         item = get_json_from_url(@url)
         new(item)
       end
