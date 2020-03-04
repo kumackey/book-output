@@ -34,11 +34,10 @@ class BooksController < ApplicationController
     @search_form = SearchBooksForm.new(search_books_params)
     if params[:q].present?
       books = SearchBooksForm.search(search_books_params[:keyword])
-      @books = Kaminari.paginate_array(books)
+      @books = Kaminari.paginate_array(books).page(params[:page]).per(5)
     else
-      @books = Book.order(created_at: :desc).includes(:user)
+      @books = Kaminari.paginate_array([]).page(params[:page])
     end
-    @books = @books.page(params[:page]).per(5)
   end
 
   def hash_from_create_params
