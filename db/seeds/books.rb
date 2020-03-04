@@ -14,8 +14,7 @@ googlebooksapi_ids = [
 guest_user = User.find_by(email: 'guest@guest.jp')
 
 googlebooksapi_ids.each do |id|
-  volume = Book.get_json_from_id(id)
-  hash = Book.hash_from_volume(volume)
+  hash = Book.hash_from_id(id)
   book = guest_user.books.create(hash)
   puts "\"#{book.title}\" has created! book.id: #{book.id}."
 end

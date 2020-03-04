@@ -20,12 +20,53 @@ RSpec.describe "Books", type: :request do
     expect(response).to have_http_status(200)
   end
 
-  it '本検索後に本検索画面の表示に成功すること' do
-    keyword = 'Rails'
-    get "/books/search?q%5Bkeyword%5D=#{keyword}"
-    expect(response).to have_http_status(200)
-    expect(response.body).to include("Ruby") # Railsで調べればRubyが出てくるはず
+
+  describe "本検索ワードが" do
+    context "Railsのときに" do
+      keyword = 'Rails'
+      it "本検索画面の表示に成功すること" do
+        get "/books/search?q%5Bkeyword%5D=#{keyword}"
+        expect(response).to have_http_status(200)
+        expect(response.body).to include("Ruby") # Railsで調べればRubyが出てくるはず
+      end
+    end
+
+    context "SREのときに" do
+      keyword = 'SRE'
+      it "本検索画面の表示に成功すること" do
+        get "/books/search?q%5Bkeyword%5D=#{keyword}"
+        expect(response).to have_http_status(200)
+        expect(response.body).to include("Betsy Beyer") # SREの本を出した人が表示されるはず
+      end
+    end
+
+    context "Macのときに" do
+      keyword = 'Mac'
+      it "本検索画面の表示に成功すること" do
+        get "/books/search?q%5Bkeyword%5D=#{keyword}"
+        expect(response).to have_http_status(200)
+        expect(response.body).to include("Mac OS")
+      end
+    end
+
+    context "RSpecのときに" do
+      keyword = 'RSpec'
+      it "本検索画面の表示に成功すること" do
+        get "/books/search?q%5Bkeyword%5D=#{keyword}"
+        expect(response).to have_http_status(200)
+        expect(response.body).to include("Rails")
+      end
+    end
+
+    context "検索結果を返すワードでないとき" do
+      keyword = 'p6GwxNed' # 適当
+      it "本検索画面の表示に成功すること" do
+        get "/books/search?q%5Bkeyword%5D=#{keyword}"
+        expect(response).to have_http_status(200)
+      end
+    end
   end
+
 
   it '本詳細画面の表示に成功すること' do
     book = create(:book)

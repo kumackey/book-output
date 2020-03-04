@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  include GoogleBooksApi # app/lib
+  include GoogleBooksApi
   before_action :require_login, only: %i[create destroy]
 
   def index
@@ -7,12 +7,13 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = current_user.books.build(hash_from_create_params)
+    hash = Book.hash_from_id(create_book_params[:googlebooksapi_id])
+    @book = current_user.books.build(hash)
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
     else
       flash.now[:danger] = '本の登録に失敗しました'
-      render :new
+      render :search
     end
   end
 
@@ -34,15 +35,10 @@ class BooksController < ApplicationController
     @search_form = SearchBooksForm.new(search_books_params)
     if params[:q].present?
       books = SearchBooksForm.search(search_books_params[:keyword])
-      @books = Kaminari.paginate_array(books)
+      @books = Kaminari.paginate_array(books).page(params[:page]).per(5)
     else
-      @books = Book.order(created_at: :desc).includes(:user)
+      @books = Kaminari.paginate_array([]).page(params[:page])
     end
-    @books = @books.page(params[:page]).per(5)
-  end
-
-  def hash_from_create_params
-    Book.hash_from_id(create_book_params[:googlebooksapi_id])
   end
 
   private
