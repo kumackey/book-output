@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  include GoogleBooksApi
   before_action :require_login, only: %i[create destroy]
 
   def index
