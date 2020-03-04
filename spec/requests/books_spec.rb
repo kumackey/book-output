@@ -58,6 +58,33 @@ RSpec.describe "Books", type: :request do
       end
     end
 
+    context "kubernetesのときに" do
+      keyword = 'kubernetes'
+      it "本検索画面の表示に成功すること" do
+        get "/books/search?q%5Bkeyword%5D=#{keyword}"
+        expect(response).to have_http_status(200)
+        expect(response.body).to include("Docker")
+      end
+    end
+
+    context "Macのときに" do
+      keyword = 'Mac'
+      it "本検索画面の表示に成功すること" do
+        get "/books/search?q%5Bkeyword%5D=#{keyword}"
+        expect(response).to have_http_status(200)
+        expect(response.body).to include("Mac OS")
+      end
+    end
+
+    context "RSpecのときに" do
+      keyword = 'RSpec'
+      it "本検索画面の表示に成功すること" do
+        get "/books/search?q%5Bkeyword%5D=#{keyword}"
+        expect(response).to have_http_status(200)
+        expect(response.body).to include("Rails")
+      end
+    end
+
     context "検索結果を返すワードでないとき" do
       keyword = 'p6GwxNed' # 適当
       it "本検索画面の表示に成功すること" do
