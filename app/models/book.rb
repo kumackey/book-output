@@ -35,5 +35,4 @@ class Book < ApplicationRecord
   validates :googlebooksapi_id, presence: true,
                                 length: { maximum: 255 },
                                 uniqueness: { case_sensitive: false }
-
 end

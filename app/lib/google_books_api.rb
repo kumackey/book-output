@@ -42,7 +42,7 @@ module GoogleBooksApi
       @published_at = @volume_info['publishedDate']
       @title = @volume_info['title']
     end
-    
+
     private
 
     def image_url
