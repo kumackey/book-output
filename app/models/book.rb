@@ -35,7 +35,7 @@ class Book < ApplicationRecord
   validates :googlebooksapi_id, presence: true, length: { maximum: 255 }
 
   def self.hash_from_id(googlebooksapi_id)
-    book = GoogleBook.new(googlebooksapi_id)
+    book = GoogleBook.new_from_id(googlebooksapi_id)
     {
       author: book.author,
       description: book.description,

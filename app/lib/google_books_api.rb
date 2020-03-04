@@ -1,6 +1,5 @@
 module GoogleBooksApi
   def get_json_from_url(url)
-    # 消したい
     JSON.parse(Net::HTTP.get(URI.parse(Addressable::URI.encode(url))))
   end
 
@@ -8,13 +7,24 @@ module GoogleBooksApi
     "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP&maxResults=20"
   end
 
+  def url_of_creating_from_id(googlebooksapi_id)
+    "https://www.googleapis.com/books/v1/volumes/#{googlebooksapi_id}"
+  end
+
   class GoogleBook
     attr_reader :googlebooksapi_id, :author, :buy_link, :description, :image, :published_at, :title, :url
 
-    def initialize(googlebooksapi_id)
-      @googlebooksapi_id = googlebooksapi_id
-      @url = url_of_creating_from_id(@googlebooksapi_id)
-      @item = get_json_from_url(@url)
+    class << self
+      include GoogleBooksApi
+      def new_from_id(googlebooksapi_id)
+        @url = url_of_creating_from_id(googlebooksapi_id) # ここのurlは効いているか不明
+        item = get_json_from_url(@url)
+        new(item)
+      end
+    end
+
+    def initialize(item)
+      @item = item
       @volume_info = @item['volumeInfo']
       retrieve_attribute
     end
@@ -24,10 +34,6 @@ module GoogleBooksApi
     end
 
     private
-
-    def url_of_creating_from_id(googlebooksapi_id)
-      "https://www.googleapis.com/books/v1/volumes/#{googlebooksapi_id}"
-    end
 
     def get_json_from_url(url)
       JSON.parse(Net::HTTP.get(URI.parse(Addressable::URI.encode(url))))
