@@ -7,7 +7,8 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = current_user.books.build(hash_from_create_params)
+    hash = Book.hash_from_id(create_book_params[:googlebooksapi_id])
+    @book = current_user.books.build(hash)
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
     else
@@ -38,10 +39,6 @@ class BooksController < ApplicationController
     else
       @books = Kaminari.paginate_array([]).page(params[:page])
     end
-  end
-
-  def hash_from_create_params
-    Book.hash_from_id(create_book_params[:googlebooksapi_id])
   end
 
   private
