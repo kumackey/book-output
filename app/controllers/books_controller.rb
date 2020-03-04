@@ -17,7 +17,7 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = Book.new(hash_from_create_params)
+    @book = GoogleBook.new(create_book_params[:googlebooksapi_id])
   end
 
   def show

@@ -47,23 +47,23 @@ class Book < ApplicationRecord
     }
   end
 
-  def self.image_url(volume)
-    if volume['volumeInfo']['imageLinks'] # imageLinksが無く、エラーを起こすことがあるため
-      volume['volumeInfo']['imageLinks']['smallThumbnail']
-    else
-      ''
-    end
-  end
+  # def self.image_url(volume)
+  #   if volume['volumeInfo']['imageLinks'] # imageLinksが無く、エラーを起こすことがあるため
+  #     volume['volumeInfo']['imageLinks']['smallThumbnail']
+  #   else
+  #     ''
+  #   end
+  # end
 
-  def self.author(volume)
-    if volume['volumeInfo']['authors']
-      volume['volumeInfo']['authors'].first
-    else
-      volume['volumeInfo']['publisher'] || '-'
-    end
-  end
+  # def self.author(volume)
+  #   if volume['volumeInfo']['authors']
+  #     volume['volumeInfo']['authors'].first
+  #   else
+  #     volume['volumeInfo']['publisher'] || '-'
+  #   end
+  # end
 
-  def self.nil_guard_volumeinfo_key(volume, volumeinfo_key)
-    volume['volumeInfo'][volumeinfo_key] || ''
-  end
+  # def self.nil_guard_volumeinfo_key(volume, volumeinfo_key)
+  #   volume['volumeInfo'][volumeinfo_key] || ''
+  # end
 end
