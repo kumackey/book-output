@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  include GoogleBooksApi # app/lib
   before_action :require_login, only: %i[create destroy]
 
   def index
@@ -16,7 +17,7 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = Book.new(hash_from_create_params)
+    @book = GoogleBook.new(create_book_params[:googlebooksapi_id])
   end
 
   def show
@@ -32,15 +33,8 @@ class BooksController < ApplicationController
   def search
     @search_form = SearchBooksForm.new(search_books_params)
     if params[:q].present?
-      url = SearchBooksForm.url_of_searching_from_keyword(search_books_params[:keyword])
-      json = Book.get_json_from_url(url)
-      volumes = json['items']
-      @books = []
-      volumes.each do |volume|
-        hash = SearchBooksForm.hash_from_volume(volume)
-        @books << SearchBooksForm.new(hash)
-      end
-      @books = Kaminari.paginate_array(@books)
+      books = SearchBooksForm.search(search_books_params[:keyword])
+      @books = Kaminari.paginate_array(books)
     else
       @books = Book.order(created_at: :desc).includes(:user)
     end
@@ -48,8 +42,7 @@ class BooksController < ApplicationController
   end
 
   def hash_from_create_params
-    volume = Book.get_json_from_url(Book.url_of_creating_from_id(create_book_params[:googlebooksapi_id]))
-    Book.hash_from_volume(volume)
+    Book.hash_from_id(create_book_params[:googlebooksapi_id])
   end
 
   private

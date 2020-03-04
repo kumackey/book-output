@@ -4,7 +4,7 @@
 #
 #  id                :bigint           not null, primary key
 #  author            :string(255)      not null
-#  buyLink           :string(255)
+#  buy_link          :string(255)
 #  description       :text(65535)
 #  image             :string(255)
 #  published_at      :date
@@ -26,6 +26,7 @@
 #
 
 class Book < ApplicationRecord
+  include GoogleBooksApi # app/lib
   mount_uploader :image, ImageUploader
   belongs_to :user
 
@@ -33,43 +34,16 @@ class Book < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :googlebooksapi_id, presence: true, length: { maximum: 255 }
 
-  def self.get_json_from_url(url)
-    JSON.parse(Net::HTTP.get(URI.parse(Addressable::URI.encode(url))))
-  end
-
-  def self.url_of_creating_from_id(googlebooksapi_id)
-    "https://www.googleapis.com/books/v1/volumes/#{googlebooksapi_id}"
-  end
-
-  def self.hash_from_volume(volume)
+  def self.hash_from_id(googlebooksapi_id)
+    book = GoogleBook.new(googlebooksapi_id)
     {
-      author: Book.author(volume),
-      description: Book.nil_guard_volumeinfo_key(volume, 'descriptin'),
-      remote_image_url: Book.image_url(volume),
-      googlebooksapi_id: volume['id'],
-      published_at: Book.nil_guard_volumeinfo_key(volume, 'publishedDate'),
-      title: volume['volumeInfo']['title'],
-      buyLink: volume['saleInfo']['buyLink']
+      author: book.author,
+      description: book.description,
+      remote_image_url: book.image,
+      googlebooksapi_id: book.googlebooksapi_id,
+      published_at: book.published_at,
+      title: book.title,
+      buy_link: book.buy_link
     }
-  end
-
-  def self.image_url(volume)
-    if volume['volumeInfo']['imageLinks'] # imageLinksが無く、エラーを起こすことがあるため
-      volume['volumeInfo']['imageLinks']['smallThumbnail']
-    else
-      ''
-    end
-  end
-
-  def self.author(volume)
-    if volume['volumeInfo']['authors']
-      volume['volumeInfo']['authors'].first
-    else
-      volume['volumeInfo']['publisher'] || '-'
-    end
-  end
-
-  def self.nil_guard_volumeinfo_key(volume, volumeinfo_key)
-    volume['volumeInfo'][volumeinfo_key] || ''
   end
 end

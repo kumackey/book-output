@@ -7,12 +7,12 @@
     = f.submit '検索する', class: 'btn btn-raised btn-primary'
 
   - @books.each do |book|
-    - if book.buyLink.present?
-      = link_to book.buyLink
-        = image_tag(book.remote_image_url || book.image.url) if book.image?
+    - if book.buy_link.present?
+      = link_to book.buy_link
+        = image_tag(book.image || book.image.url) if book.image?
         = book.title
     - else
-      = image_tag(book.remote_image_url || book.image.url) if book.image?
+      = image_tag(book.image || book.image.url) if book.image?
       = book.title
     = book.author
     = link_to new_book_path(googlebooksapi_id: book.googlebooksapi_id), remote: true do

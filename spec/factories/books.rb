@@ -4,7 +4,7 @@
 #
 #  id                :bigint           not null, primary key
 #  author            :string(255)      not null
-#  buyLink           :string(255)
+#  buy_link          :string(255)
 #  description       :text(65535)
 #  image             :string(255)
 #  published_at      :date
@@ -37,7 +37,7 @@ FactoryBot.define do
     published_at { "2013-05-24" }
     title { "ファスト＆スロー(下)" }
     googlebooksapi_id { "yHrxYFWkrfQC" }
-    buyLink { "https://play.google.com/store/books/details?id=yHrxYFWkrfQC&rdid=book-yHrxYFWkrfQC&rdot=1&source=gbs_api" }
+    buy_link { "https://play.google.com/store/books/details?id=yHrxYFWkrfQC&rdid=book-yHrxYFWkrfQC&rdot=1&source=gbs_api" }
     association :user
   end
 
@@ -52,7 +52,7 @@ FactoryBot.define do
     published_at { "2007-08" }
     title { "影響力の武器" }
     googlebooksapi_id { "axicQgAACAAJ" }
-    buyLink { "" }
+    buy_link { "" }
     association :user
   end
 end
