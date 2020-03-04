@@ -1,7 +1,6 @@
 class SearchBooksForm
   include ActiveModel::Model
   include ActiveModel::Attributes
-  include GoogleBooksApi
 
   attribute :keyword, :string
   attribute :author, :string
@@ -9,8 +8,6 @@ class SearchBooksForm
   attribute :googlebooksapi_id, :string
   attribute :title, :string
   attribute :buyLink, :string
-
-  # carriorwaveのメソッドに合わせた
 
   class << self
     include GoogleBooksApi
