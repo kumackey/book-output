@@ -4,7 +4,7 @@
 #
 #  id                :bigint           not null, primary key
 #  author            :string(255)      not null
-#  buyLink           :string(255)
+#  buy_link          :string(255)
 #  description       :text(65535)
 #  image             :string(255)
 #  published_at      :date
@@ -43,7 +43,7 @@ class Book < ApplicationRecord
       googlebooksapi_id: book.googlebooksapi_id,
       published_at: book.published_at,
       title: book.title,
-      buyLink: book.buyLink
+      buy_link: book.buy_link
     }
   end
 end

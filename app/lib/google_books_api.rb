@@ -9,7 +9,7 @@ module GoogleBooksApi
   end
 
   class GoogleBook
-    attr_reader :googlebooksapi_id, :author, :buyLink, :description, :image, :published_at, :title, :url
+    attr_reader :googlebooksapi_id, :author, :buy_link, :description, :image, :published_at, :title, :url
 
     def initialize(googlebooksapi_id)
       @googlebooksapi_id = googlebooksapi_id
@@ -37,7 +37,7 @@ module GoogleBooksApi
       @googlebooksapi_id = @item['id']
       @auther = 'ちょし'
       @author = @volume_info['authors'].first if @volume_info['authors']
-      @buyink = @item['saleInfo']['buyLink']
+      @buy_link = @item['saleInfo']['buyLink']
       @description = @volume_info['description']
       @image = @volume_info['imageLink'] # 修正予定
       @published_at = @volume_info['publishedDate']

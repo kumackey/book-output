@@ -4,7 +4,7 @@
 #
 #  id                :bigint           not null, primary key
 #  author            :string(255)      not null
-#  buyLink           :string(255)
+#  buy_link          :string(255)
 #  description       :text(65535)
 #  image             :string(255)
 #  published_at      :date

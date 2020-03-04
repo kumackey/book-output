@@ -7,7 +7,7 @@ class SearchBooksForm
   attribute :image, :string
   attribute :googlebooksapi_id, :string
   attribute :title, :string
-  attribute :buyLink, :string
+  attribute :buy_link, :string
 
   class << self
     include GoogleBooksApi

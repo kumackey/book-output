@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2020_02_24_013606) do
     t.string "author", null: false
     t.string "image"
     t.text "description"
-    t.string "buyLink"
+    t.string "buy_link"
     t.bigint "user_id"
     t.date "published_at"
     t.datetime "created_at", null: false
