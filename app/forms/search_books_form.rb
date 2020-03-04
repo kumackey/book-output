@@ -17,8 +17,7 @@ class SearchBooksForm
       items = json['items']
       books = []
       items.each do |item|
-        googlebooksapi_id = item['id']
-        books << GoogleBook.new_from_id(googlebooksapi_id) # ここはリファクタリングしたい
+        books << GoogleBook.new(item)
       end
       books
     end
