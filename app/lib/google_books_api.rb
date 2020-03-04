@@ -41,7 +41,6 @@ module GoogleBooksApi
 
     def retrieve_attribute
       @googlebooksapi_id = @item['id']
-      @auther = 'ちょし'
       @author = @volume_info['authors'].first if @volume_info['authors']
       @buy_link = @item['saleInfo']['buyLink']
       @description = @volume_info['description']
