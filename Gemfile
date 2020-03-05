@@ -8,7 +8,7 @@ gem 'rails', '~> 5.2.3'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12.3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -41,6 +41,10 @@ gem 'sorcery'
 gem 'font-awesome-sass', '~> 5.4.1'
 gem 'carrierwave', '~>1.1.0'
 gem 'nokogiri', '~>1.10.8'
+gem 'faker'
+gem 'kaminari'
+gem 'addressable'
+gem 'fog-aws'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -51,7 +55,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'binding_of_caller'
-  gem 'faker'
 end
 
 group :development do

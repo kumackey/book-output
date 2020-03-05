@@ -17,9 +17,16 @@
 
 FactoryBot.define do
   factory :user do
-    username  { Faker::Name.name }
+    username  { "ユーザー" }
     sequence(:email) { |n| "tester#{n}@example.com" }
-    password  {"password" }
+    password  { "password" }
+    password_confirmation { "password" }
+  end
+
+  factory :other_user, class: User do
+    username  { "アザーユーザー" }
+    sequence(:email) { |n| "tester#{n}@example.com" }
+    password  { "password" }
     password_confirmation { "password" }
   end
 end

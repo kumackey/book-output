@@ -1,6 +1,6 @@
 header
   nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-    = link_to '#', class: 'navbar-brand' do
+    = link_to root_path, class: 'navbar-brand' do
       strong
         | BookOutPut
     button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"]
@@ -8,8 +8,8 @@ header
     #navbarSupportedContent.collapse.navbar-collapse
       - if logged_in?
         ul.navbar-nav.mr-auto
-          li.nav-item class="#{'active' if controller.controller_name == 'books' && controller.action_name == 'new'}"
-            = link_to new_book_path, class: 'nav-link' do
+          li.nav-item class="#{'active' if controller.controller_name == 'books' && controller.action_name == 'search'}"
+            = link_to search_books_path, class: 'nav-link' do
               = icon 'fas', 'book', class: 'fa-lg'
               | 本を登録
           li.nav-item
@@ -21,7 +21,7 @@ header
           li.nav-item class="#{'active' if controller.controller_name == 'users' && controller.action_name == 'new'}"
             = link_to signup_path, class: 'nav-link'
               = icon 'fas', 'user-plus', class: 'fa-lg'
-              | ユーザー登録 
+              | ユーザー登録
           li.nav-item class="#{'active' if controller.controller_name == 'sessions' && controller.action_name == 'new'}"
             = link_to login_path, class: 'nav-link'
               = icon 'fas', 'sign-in-alt', class: 'fa-lg'

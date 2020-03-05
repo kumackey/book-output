@@ -1,34 +1,31 @@
+include GoogleBooksApi
 puts 'Start inserting seed "books" ...'
 
-isbn_array = [
-  9784774193977, #プロを目指す人のためのRuby入門
-  9788499924243, #ファスト&スロー(下)
-  9784295403746, #科学的な適職
-  9784799321133, #やり抜く人の９つの習慣
-  9784797399967, #ヤバい集中力 1日ブッ通しでアタマが冴えわたる神ライフハック45
-  9784798153346, #カイゼン・ジャーニー たった1人からはじめて、「越境」するチームをつくるまで
-  9784822289607, #FACTFULNESS(ファクトフルネス)
-  9784478025819, #嫌われる勇気
-  9784414304220, #影響力の武器
-  9784774142043, #Webを支える技術
+googlebooksapi_ids = [
+  "orl2tAEACAAJ", # プロを目指す人のためのRuby入門
+  "WHfDDwAAQBAJ", # 科学的な適職
+  "ROFLDwAAQBAJ", # カイゼン・ジャーニー たった1人からはじめて、「越境」するチームをつくるまで
+  "4GqdwAEACAAJ", # FACTFULNESS(ファクトフルネス)
+  "_bT8oAEACAAJ", # 影響力の武器
+  "qNMHnwEACAAJ", # 嫌われる勇気
+  "c4bnSAAACAAJ", # Webを支える技術
+  "xU6wDwAAQBAJ", # #ヤバい集中力 1日ブッ通しでアタマが冴えわたる神ライフハック45 
 ]
 
-guest_user = User.find_by(email: 'guest@guest.guest')
-isbn_array.each do |isbn|
-  json = JSON.parse(Net::HTTP.get(URI.parse(
-    "https://www.googleapis.com/books/v1/volumes?q=isbn:#{isbn}"
-  )))
-  image_url = json["items"][0]["volumeInfo"]["imageLinks"]["smallThumbnail"]
-  book = guest_user.books.create(
-    author: json["items"][0]["volumeInfo"]["authors"][0],
-    description: json["items"][0]["volumeInfo"]["description"],
-    isbn: isbn,
-    remote_image_url: image_url,
-    googlebooksapi_id: json["items"][0]["id"],
-    published_at: json["items"][0]["volumeInfo"]["publishedDate"],
-    title: json["items"][0]["volumeInfo"]["title"],
-    buyLink: json["items"][0]["saleInfo"]["buyLink"]
-  )
-  puts "\"#{book.title}\" has created!"
+guest_user = User.find_by(email: 'guest@guest.jp')
+
+googlebooksapi_ids.each do |id|
+  book = GoogleBook.new_from_id(id)
+  seed_book = guest_user.books.build(
+    author: book.author,
+    description: book.description,
+    googlebooksapi_id: book.googlebooksapi_id,
+    published_at: book.published_at,
+    title: book.title,
+    buy_link: book.buy_link
+  ) # DBの情報を持ちすぎてるので、本当ならモデルに移行したい
+  seed_book.remote_image_url = book.image if book.image.present?
+  seed_book.save
+  puts "\"#{seed_book.title}\" has created! book.id: #{seed_book.id}."
 end
 

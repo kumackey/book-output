@@ -2,12 +2,22 @@ ja:
   activerecord:
     models:
       user: 'ユーザー'
+      book: '本'
     attributes:
       user:
         username: '名前'
         email: 'Eメール'
         password: 'パスワード'
         password_confirmation: 'パスワード確認'
+
+      book:
+        author: '著者'
+        title: 'タイトル'
+        buyLink: '購入リンク'
+        description: '説明'
+        image: '画像リンク'
+        published_at: '出版日'
+        googlebooksapi_id: 'ID'
 
   attributes:
     created_at: '作成日時'

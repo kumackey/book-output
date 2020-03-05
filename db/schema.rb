@@ -14,18 +14,16 @@ ActiveRecord::Schema.define(version: 2020_02_24_013606) do
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "googlebooksapi_id", null: false
-    t.bigint "isbn", null: false
     t.string "title", null: false
-    t.string "author", null: false
+    t.string "author"
     t.string "image"
     t.text "description"
-    t.string "buyLink"
+    t.string "buy_link"
     t.bigint "user_id"
     t.date "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["googlebooksapi_id"], name: "index_books_on_googlebooksapi_id", unique: true
-    t.index ["isbn"], name: "index_books_on_isbn", unique: true
     t.index ["user_id", "created_at", "author", "title"], name: "index_books_on_user_id_and_created_at_and_author_and_title"
     t.index ["user_id"], name: "index_books_on_user_id"
   end
