@@ -8,4 +8,7 @@
     .form-group
       = f.label :password, 'パスワード'
       = f.password_field :password, class: 'form-control'
-    = f.submit 'ログインする', class: 'btn btn-raised btn-primary'
+    = f.submit 'ログイン', class: 'btn btn-raised btn-primary'
+  = link_to guest_path, method: :post do
+    button.btn.btn-raised.btn-success
+      | 簡易ログイン
