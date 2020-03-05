@@ -1,3 +1,4 @@
+include GoogleBooksApi
 puts 'Start inserting seed "books" ...'
 
 googlebooksapi_ids = [
@@ -14,8 +15,17 @@ googlebooksapi_ids = [
 guest_user = User.find_by(email: 'guest@guest.jp')
 
 googlebooksapi_ids.each do |id|
-  hash = Book.hash_from_id(id)
-  book = guest_user.books.create(hash)
-  puts "\"#{book.title}\" has created! book.id: #{book.id}."
+  book = GoogleBook.new_from_id(id)
+  seed_book = guest_user.books.build(
+    author: book.author,
+    description: book.description,
+    googlebooksapi_id: book.googlebooksapi_id,
+    published_at: book.published_at,
+    title: book.title,
+    buy_link: book.buy_link
+  ) # DBの情報を持ちすぎてるので、本当ならモデルに移行したい
+  seed_book.remote_image_url = book.image if book.image.present?
+  seed_book.save
+  puts "\"#{seed_book.title}\" has created! book.id: #{seed_book.id}."
 end
 

@@ -7,13 +7,21 @@ class BooksController < ApplicationController
   end
 
   def create
-    hash = Book.hash_from_id(create_book_params[:googlebooksapi_id])
-    @book = current_user.books.build(hash)
+    book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
+    @book = current_user.books.build(
+      author: book.author,
+      description: book.description,
+      googlebooksapi_id: book.googlebooksapi_id,
+      published_at: book.published_at,
+      title: book.title,
+      buy_link: book.buy_link
+    ) # DBの情報を持ちすぎてるので、本当ならモデルに移行したい
+    @book.remote_image_url = book.image if book.image.present?
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
     else
       flash.now[:danger] = '本の登録に失敗しました'
-      render :search
+      render :search_books_path
     end
   end
 
@@ -34,7 +42,7 @@ class BooksController < ApplicationController
   def search
     @search_form = SearchBooksForm.new(search_books_params)
     if params[:q].present?
-      books = SearchBooksForm.search(search_books_params[:keyword])
+      books = GoogleBook.search(search_books_params[:keyword])
       @books = Kaminari.paginate_array(books).page(params[:page]).per(5)
     else
       @books = Kaminari.paginate_array([]).page(params[:page])

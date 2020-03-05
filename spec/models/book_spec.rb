@@ -3,7 +3,7 @@
 # Table name: books
 #
 #  id                :bigint           not null, primary key
-#  author            :string(255)      not null
+#  author            :string(255)
 #  buy_link          :string(255)
 #  description       :text(65535)
 #  image             :string(255)
@@ -32,12 +32,6 @@ RSpec.describe Book, type: :model do
 
   it "有効なファクトリを持つこと" do
     expect(book).to be_valid
-  end
-
-  it "著者が空白であるときに無効なこと" do
-    book.author = ''
-    book.valid?
-    expect(book.errors.messages[:author]).to include("を入力してください")
   end
 
   it "タイトルが空白であるときに無効なこと" do

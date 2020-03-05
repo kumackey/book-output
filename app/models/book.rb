@@ -3,7 +3,7 @@
 # Table name: books
 #
 #  id                :bigint           not null, primary key
-#  author            :string(255)      not null
+#  author            :string(255)
 #  buy_link          :string(255)
 #  description       :text(65535)
 #  image             :string(255)
@@ -26,26 +26,11 @@
 #
 
 class Book < ApplicationRecord
-  include GoogleBooksApi # app/lib
   mount_uploader :image, ImageUploader
   belongs_to :user
 
-  validates :author, presence: true, length: { maximum: 255 }
   validates :title, presence: true, length: { maximum: 255 }
   validates :googlebooksapi_id, presence: true,
                                 length: { maximum: 255 },
                                 uniqueness: { case_sensitive: false }
-
-  def self.hash_from_id(googlebooksapi_id)
-    book = GoogleBook.new_from_id(googlebooksapi_id)
-    {
-      author: book.author,
-      description: book.description,
-      remote_image_url: book.image,
-      googlebooksapi_id: book.googlebooksapi_id,
-      published_at: book.published_at,
-      title: book.title,
-      buy_link: book.buy_link
-    }
-  end
 end

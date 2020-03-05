@@ -3,7 +3,7 @@ class CreateBooks < ActiveRecord::Migration[5.2]
     create_table :books do |t|
       t.string :googlebooksapi_id, null: false
       t.string :title, null: false
-      t.string :author, null: false
+      t.string :author
       t.string :image
       t.text :description
       t.string :buy_link
