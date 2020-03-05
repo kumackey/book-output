@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
   end
 
   def guest
-    @user = login("guest@guest.jp", "guestguest")
+    @user = login('guest@guest.jp', 'guestguest')
     if @user
       redirect_back_or_to root_path, success: 'ゲストユーザーとしてログインしました'
     else
