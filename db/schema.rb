@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2020_02_24_013606) do
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "googlebooksapi_id", null: false
     t.string "title", null: false
-    t.string "author", null: false
+    t.string "author"
     t.string "image"
     t.text "description"
     t.string "buy_link"
