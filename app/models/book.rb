@@ -33,4 +33,18 @@ class Book < ApplicationRecord
   validates :googlebooksapi_id, presence: true,
                                 length: { maximum: 255 },
                                 uniqueness: { case_sensitive: false }
+  class << self
+    def build_from_user_and_google_book(user, google_book)
+      book = user.books.build(
+        author: google_book.author,
+        description: google_book.description,
+        googlebooksapi_id: google_book.googlebooksapi_id,
+        published_at: google_book.published_at,
+        title: google_book.title,
+        buy_link: google_book.buy_link
+      )
+      book.remote_image_url = google_book.image if google_book.image.present?
+      book
+    end
+  end
 end

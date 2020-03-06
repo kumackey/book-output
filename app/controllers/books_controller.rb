@@ -7,16 +7,8 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
-    @book = current_user.books.build(
-      author: book.author,
-      description: book.description,
-      googlebooksapi_id: book.googlebooksapi_id,
-      published_at: book.published_at,
-      title: book.title,
-      buy_link: book.buy_link
-    ) # DBの情報を持ちすぎてるので、本当ならモデルに移行したい
-    @book.remote_image_url = book.image if book.image.present?
+    google_book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
+    @book = Book.build_from_user_and_google_book(current_user, google_book)
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
     else
