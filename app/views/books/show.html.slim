@@ -4,5 +4,11 @@
     .col-md-5
       = render 'books/detail', book: @book
     .col-md-7
-      = render 'outputs/form', output: @output, book: @book
+      - if logged_in?
+        = render 'outputs/form', output: @output, book: @book
+      - else
+        | アウトプットするためには
+        = link_to login_path
+          | ログイン
+        |してください。
       = render 'outputs/outputs', outputs: @outputs

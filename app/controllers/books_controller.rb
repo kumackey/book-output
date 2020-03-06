@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   include GoogleBooksApi
-  before_action :require_login, only: %i[create destroy]
+  before_action :require_login, only: %i[create]
 
   def index
     @books = Book.all.includes(:user).page(params[:page]).per(15).order(created_at: :desc)
