@@ -3,12 +3,12 @@
     .col-4.col-md-12
       = image_tag book.image.url, width: '100' if book.image?
     .col-8.col-md-12            
-      p
+      h3
         = book.title
       p 
         | 著者: #{book.author}
       p
-        = book.description
+        = truncate(strip_tags(book.description), length: 100)
       p
         | 出版日: #{book.published_at}
       - if book.buy_link.present?
