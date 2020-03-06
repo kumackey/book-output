@@ -1,0 +1,3 @@
+= form_with model: [book, output], remote: true do |f|
+  = f.text_area :content, class: 'form-control input-output', placeholder: 'アウトプットしてください'
+  = f.submit '投稿する', class: 'btn btn-primary btn-raised'

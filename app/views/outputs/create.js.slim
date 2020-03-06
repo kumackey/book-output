@@ -1,0 +1,5 @@
+- if @output.errors.present?
+  | alert("#{@output.errors.full_messages.join('\n')}");
+- else
+  | $('.outputs-box').prepend("#{j render('outputs/output', output: @output)}");
+  | $('.input-output').val('');

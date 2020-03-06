@@ -1,3 +1,14 @@
 - provide :title, @book.title
 .container
-  = render @book
+  .row
+    .col-md-5
+      = render 'books/detail', book: @book
+    .col-md-7
+      - if logged_in?
+        = render 'outputs/form', output: @output, book: @book
+      - else
+        | アウトプットするためには
+        = link_to login_path
+          | ログイン
+        |してください。
+      = render 'outputs/outputs', outputs: @outputs

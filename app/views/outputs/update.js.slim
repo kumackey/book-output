@@ -1,0 +1,5 @@
+- if @output.errors.present?
+  | alert("#{@output.errors.full_messages.join('\n')}");
+- else
+  | $("#output-#{@output.id}").html("#{j render('outputs/output', output: @output)}");
+  | $("#output-edit-modal").modal('hide');

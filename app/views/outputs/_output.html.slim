@@ -1,0 +1,15 @@
+.container id="output-#{output.id}" 
+  hr
+  .row
+    .col-2
+      = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+      p
+        = output.user.username
+    .col-8.col-md-9.text-break
+      = output.content
+    .col-2.col-md-1
+      - if current_user&.own?(output)
+        = link_to output_path(output), class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'}, remote: true do
+          = icon 'far', 'trash-alt', class: 'fa-md'
+        = link_to edit_output_path(output), remote: true do
+          = icon 'far', 'edit', class: 'fa-md'

@@ -15,17 +15,9 @@ googlebooksapi_ids = [
 guest_user = User.find_by(email: 'guest@guest.jp')
 
 googlebooksapi_ids.each do |id|
-  book = GoogleBook.new_from_id(id)
-  seed_book = guest_user.books.build(
-    author: book.author,
-    description: book.description,
-    googlebooksapi_id: book.googlebooksapi_id,
-    published_at: book.published_at,
-    title: book.title,
-    buy_link: book.buy_link
-  ) # DBの情報を持ちすぎてるので、本当ならモデルに移行したい
-  seed_book.remote_image_url = book.image if book.image.present?
-  seed_book.save
-  puts "\"#{seed_book.title}\" has created! book.id: #{seed_book.id}."
+  google_book = GoogleBook.new_from_id(id)
+  book = Book.build_from_user_and_google_book(guest_user, google_book)
+  book.save
+  puts "\"#{book.title}\" has created! book.id: #{book.id}."
 end
 

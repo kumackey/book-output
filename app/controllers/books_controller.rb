@@ -1,22 +1,14 @@
 class BooksController < ApplicationController
   include GoogleBooksApi
-  before_action :require_login, only: %i[create destroy]
+  before_action :require_login, only: %i[create]
 
   def index
     @books = Book.all.includes(:user).page(params[:page]).per(15).order(created_at: :desc)
   end
 
   def create
-    book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
-    @book = current_user.books.build(
-      author: book.author,
-      description: book.description,
-      googlebooksapi_id: book.googlebooksapi_id,
-      published_at: book.published_at,
-      title: book.title,
-      buy_link: book.buy_link
-    ) # DBの情報を持ちすぎてるので、本当ならモデルに移行したい
-    @book.remote_image_url = book.image if book.image.present?
+    google_book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
+    @book = Book.build_from_user_and_google_book(current_user, google_book)
     if @book.save
       redirect_back_or_to books_path, success: '本を登録しました'
     else
@@ -31,12 +23,8 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-  end
-
-  def destroy
-    @book = current_user.books.find(params[:id])
-    @book.destroy!
-    redirect_to books_path, success: '投稿を削除しました'
+    @outputs = @book.outputs.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
+    @output = Output.new
   end
 
   def search
