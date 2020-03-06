@@ -34,6 +34,7 @@ class Book < ApplicationRecord
   validates :googlebooksapi_id, presence: true,
                                 length: { maximum: 255 },
                                 uniqueness: { case_sensitive: false }
+                                
   class << self
     def build_from_user_and_google_book(user, google_book)
       book = user.books.build(
