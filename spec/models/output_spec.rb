@@ -23,6 +23,7 @@
 require 'rails_helper'
 
 RSpec.describe Output, type: :model do
+  let(:output) { build(:output) }
   it "有効なファクトリを持つこと" do
     expect(output).to be_valid
   end

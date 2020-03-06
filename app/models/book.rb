@@ -28,6 +28,7 @@
 class Book < ApplicationRecord
   mount_uploader :image, ImageUploader
   belongs_to :user
+  has_many :outputs
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :googlebooksapi_id, presence: true,
