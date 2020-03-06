@@ -27,12 +27,6 @@ class BooksController < ApplicationController
     @output = Output.new
   end
 
-  def destroy
-    @book = current_user.books.find(params[:id])
-    @book.destroy!
-    redirect_to books_path, success: '投稿を削除しました'
-  end
-
   def search
     @search_form = SearchBooksForm.new(search_books_params)
     if params[:q].present?
