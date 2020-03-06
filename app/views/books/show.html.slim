@@ -1,8 +1,8 @@
 - provide :title, @book.title
 .container
   .row
-    .col-4
+    .col-md-4
       = render @book
-    .col-8
+    .col-md-8
       = render 'outputs/form', output: @output, book: @book
       = render 'outputs/outputs', outputs: @outputs

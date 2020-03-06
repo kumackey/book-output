@@ -5,9 +5,8 @@ hr
       = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
       p
         = output.user.username
-    .col-9
-      .text-break
-        = output.content
-    .col-1
+    .col-8.col-md-9.text-break
+      = output.content
+    .col-2.col-md-1
       - if current_user&.own?(output)
         | edit,destroy可能
