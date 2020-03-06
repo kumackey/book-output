@@ -1,0 +1,11 @@
+div id="output-#{output.id}"
+  .row
+    .col-2
+      = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+    .col-9
+      span
+        = output.user.username
+      = output.content
+    .col-1
+      - if current_user&.own?(output)
+        | edit,destroy可能
