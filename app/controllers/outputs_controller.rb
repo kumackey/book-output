@@ -15,6 +15,11 @@ class OutputsController < ApplicationController
     end
   end
 
+  def destroy
+    @output = current_user.outputs.find(params[:id])
+    @output.destroy
+  end
+
   private
 
   def create_output_params

@@ -9,4 +9,7 @@ hr
       = output.content
     .col-2.col-md-1
       - if current_user&.own?(output)
-        | edit,destroy可能
+        = link_to output_path(output), class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'}, remote: true do
+          = icon 'far', 'trash-alt', class: 'fa-md'
+        / = link_to edit_comment_path(comment), remote: true do
+        /   = icon 'far', 'edit', class: 'fa-sm'
