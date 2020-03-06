@@ -1,10 +1,12 @@
+hr
 div id="output-#{output.id}"
   .row
     .col-2
       = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+      p
+        = output.user.username
     .col-9
       span
-        = output.user.username
       = output.content
     .col-1
       - if current_user&.own?(output)

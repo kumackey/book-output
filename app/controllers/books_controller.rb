@@ -24,6 +24,7 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @outputs = @book.outputs.includes(:user).order(created_at: :desc)
+    @output = Output.new
   end
 
   def destroy
