@@ -1,0 +1,18 @@
+.container
+  .row
+    .col-4.col-md-12
+      = image_tag book.image.url, width: '100' if book.image?
+    .col-8.col-md-12            
+      p
+        = book.title
+      p 
+        | 著者: #{book.author}
+      p
+        = book.description
+      p
+        | 出版日: #{book.published_at}
+      - if book.buy_link.present?
+        = link_to book.buy_link do
+          p 購入
+      p
+        | 本登録者: #{book.user.username}

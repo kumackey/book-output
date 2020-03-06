@@ -2,7 +2,7 @@
 .container
   .row
     .col-md-4
-      = render @book
+      = render 'books/detail', book: @book
     .col-md-8
       = render 'outputs/form', output: @output, book: @book
       = render 'outputs/outputs', outputs: @outputs
