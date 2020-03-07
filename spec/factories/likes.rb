@@ -22,7 +22,7 @@
 
 FactoryBot.define do
   factory :like do
-    book nil
-    user nil
+    association :user
+    association :book
   end
 end
