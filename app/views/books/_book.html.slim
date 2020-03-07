@@ -7,7 +7,5 @@
 - if book.buy_link.present?
   = link_to book.buy_link do
     | 購入
-- if current_user&.own?(book)
-  = link_to book_path(book), class: 'mr-3', method: :delete, data: { confirm: '本当に削除しますか？' } do
-    = icon 'far', 'trash-alt', class: 'fa-lg'
+= render 'like_area', book: book
 hr
