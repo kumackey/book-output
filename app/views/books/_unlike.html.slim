@@ -1,1 +1,2 @@
-= icon 'fa', 'heart', class: 'fa-md'
+= link_to like_path(current_user.likes.find_by(book_id: book.id)), method: :delete, remote: true do
+  = icon 'fa', 'heart', class: 'fa-md'
