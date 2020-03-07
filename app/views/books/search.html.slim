@@ -6,17 +6,5 @@
       = f.text_field :keyword, class: 'form-control', value: @search_form.keyword
     = f.submit '検索する', class: 'btn btn-raised btn-primary'
 
-  - @books.each do |book|
-    - if book.buy_link.present?
-      = link_to book.buy_link
-        = image_tag book.image if book.image?
-        = book.title
-    - else
-      = image_tag book.image if book.image?
-      = book.title
-    = book.author
-    = link_to new_book_path(googlebooksapi_id: book.googlebooksapi_id), remote: true do
-      button.btn.btn-raised.btn-primary
-        | 本を登録する
-    hr
+  = render 'books_searching', books: @books
   = paginate @books
