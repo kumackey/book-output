@@ -21,4 +21,5 @@
 
 class Choice < ApplicationRecord
   belongs_to :output
+  validates :content, presence: true, length: { maximum: 40 }
 end
