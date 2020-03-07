@@ -20,4 +20,5 @@
 #
 
 class Choice < ApplicationRecord
+  belongs_to :output
 end

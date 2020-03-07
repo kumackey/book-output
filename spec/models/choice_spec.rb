@@ -22,5 +22,9 @@
 require 'rails_helper'
 
 RSpec.describe Choice, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:choice) { build(:choice) }
+
+  it "有効なファクトリを持つこと" do
+    expect(choice).to be_valid
+  end
 end

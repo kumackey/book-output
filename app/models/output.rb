@@ -23,6 +23,7 @@
 class Output < ApplicationRecord
   belongs_to :user
   belongs_to :book
+  has_many :choices
 
   validates :content, presence: true, length: { maximum: 500 }
 end
