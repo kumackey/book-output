@@ -87,4 +87,19 @@ RSpec.describe User, type: :model do
       book = build(:book, user_id: user.id)
       expect(user.own?(book)).to be_truthy
     end
+
+    it "いいねができること" do
+      user = create(:user)
+      book = create(:book)
+      expect { user.like(book) }.to change{ Like.count }.by(1)
+      expect(user.like?(book)).to be_truthy
+    end
+
+    it "いいねを外せること" do
+      like = create(:like)
+      user = like.user
+      book = like.book
+      expect { user.unlike(book) }.to change{ Like.count }.by(-1)
+      expect(user.like?(book)).not_to be_truthy
+    end
 end
