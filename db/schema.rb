@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_07_001317) do
+ActiveRecord::Schema.define(version: 2020_03_07_022727) do
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "googlebooksapi_id", null: false
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 2020_03_07_001317) do
     t.index ["googlebooksapi_id"], name: "index_books_on_googlebooksapi_id", unique: true
     t.index ["user_id", "created_at", "author", "title"], name: "index_books_on_user_id_and_created_at_and_author_and_title"
     t.index ["user_id"], name: "index_books_on_user_id"
+  end
+
+  create_table "choices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "output_id"
+    t.string "content", null: false
+    t.boolean "is_answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["output_id", "is_answer"], name: "index_choices_on_output_id_and_is_answer", unique: true
+    t.index ["output_id"], name: "index_choices_on_output_id"
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -59,6 +69,7 @@ ActiveRecord::Schema.define(version: 2020_03_07_001317) do
   end
 
   add_foreign_key "books", "users"
+  add_foreign_key "choices", "outputs"
   add_foreign_key "likes", "books"
   add_foreign_key "likes", "users"
   add_foreign_key "outputs", "books"
