@@ -1,13 +1,19 @@
-= link_to user_path(book.user) do
-  = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-  = book.user.username
-= link_to book_path(book) do
-  = image_tag book.image.url, width: '100' if book.image?
-  = book.title
-- if book.buy_link.present?
-  = link_to book.buy_link do
-    | 購入
-- if current_user&.own?(book)
-  = link_to book_path(book), class: 'mr-3', method: :delete, data: { confirm: '本当に削除しますか？' } do
-    = icon 'far', 'trash-alt', class: 'fa-lg'
-hr
+.container
+  .row
+    .col-3.col-md-2
+      = link_to book_path(book) do
+        = image_tag book.image.url, width: '70' if book.image?
+    .col-5.col-md-6
+      = link_to book_path(book) do
+        = book.title
+    .col-1
+      - if book.buy_link.present?
+        = link_to book.buy_link do
+          | 購入
+    .col-1
+      = render 'like_area', book: book
+    .col-2
+      = link_to user_path(book.user) do
+        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+        = book.user.username
+  hr

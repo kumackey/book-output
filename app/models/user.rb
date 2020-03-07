@@ -19,6 +19,8 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
   has_many :books, dependent: :destroy
   has_many :outputs, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :like_books, through: :likes, source: :book
 
   validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
@@ -32,5 +34,17 @@ class User < ApplicationRecord
 
   def own?(object)
     id == object.user_id
+  end
+
+  def like(book)
+    like_books << book
+  end
+
+  def unlike(book)
+    like_books.destroy(book)
+  end
+
+  def like?(book)
+    like_books.include?(book)
   end
 end

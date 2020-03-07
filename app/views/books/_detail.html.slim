@@ -5,12 +5,11 @@
     .col-8.col-md-12            
       h5
         = book.title
-      p 
-        | 著者: #{book.author}
+      = render 'books/like_area', book: book
+      p 著者: #{book.author}
       p
-        = truncate(strip_tags(book.description), length: 100)
-      p
-        | 出版日: #{book.published_at}
+       = truncate(strip_tags(book.description), length: 100)
+      p 出版日: #{book.published_at}
       - if book.buy_link.present?
         = link_to book.buy_link do
           p 購入
