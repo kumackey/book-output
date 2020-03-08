@@ -7,4 +7,4 @@
       = link_to book_path(@output.book) do
         | 問題一覧に戻る
       h3 = @output.content
-      = render 'choices/choices', choices: @choices
+      = render @choices
