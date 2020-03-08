@@ -10,6 +10,7 @@ class RegisterOutputForm
   attribute :choice_4, :string
   attribute :answer_number, :integer
 
+  validates :question, presence: true
   validates :choice_1, presence: true
   validates :choice_2, presence: true
 
