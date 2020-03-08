@@ -24,7 +24,6 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @outputs = @book.outputs.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
-    @output = Output.new
   end
 
   def search
