@@ -19,6 +19,16 @@ ja:
         published_at: '出版日'
         googlebooksapi_id: 'ID'
 
+  activemodel:
+    attributes:
+        register_output_form:
+            question: '質問文'
+            choice_1: '選択肢1'
+            choice_2: '選択肢2'
+            choice_3: '選択肢3'
+            choice_4: '選択肢4'
+            answer_number: '正解番号'
+
   attributes:
     created_at: '作成日時'
     updated_at: '更新日時'

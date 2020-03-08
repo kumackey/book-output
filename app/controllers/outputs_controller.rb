@@ -2,7 +2,7 @@ class OutputsController < ApplicationController
   before_action :require_login, only: %i[new create edit update destroy]
 
   def new
-    @book = Book.find(params[:book_id])
+    @register_output_form = RegisterOutputForm.new
   end
 
   def create
