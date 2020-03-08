@@ -57,5 +57,5 @@ RSpec.describe Book, type: :model do
     book = create(:book)
     create(:output, book_id: book.id)
     expect{ book.destroy }.to change{ Output.count }.by(-1)
-  end  
+  end
 end
