@@ -8,9 +8,9 @@ class OutputsController < ApplicationController
 
   def create
     @register_output_form = RegisterOutputForm.new(create_output_params)
+    @book = Book.find(params[:book_id])
     if @register_output_form.valid?
       @output = current_user.outputs.build(content: @register_output_form.question)
-      @book = Book.find(params[:book_id])
       @output.book_id = @book.id
       @output.save
       @choice_1 = @output.choices.build(content: @register_output_form.choice_1)
