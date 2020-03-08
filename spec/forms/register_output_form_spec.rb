@@ -20,5 +20,11 @@ RSpec.describe RegisterOutputForm, type: :model do
         expect(register_output_form).not_to be_valid
       end
     end
+    context "文字のときに" do
+      let(:register_output_form) { build(:register_output_form, answer_number: 'Hello') } 
+      it "無効なこと" do
+        expect(register_output_form).not_to be_valid
+      end
+    end   
   end
 end
