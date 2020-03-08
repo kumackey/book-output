@@ -27,4 +27,19 @@ RSpec.describe RegisterOutputForm, type: :model do
       end
     end   
   end
+
+  describe "選択肢の" do
+    context "1番目が無いときに" do
+      let(:register_output_form) { build(:register_output_form, choice_1: nil) } 
+      it "無効なこと" do
+        expect(register_output_form).not_to be_valid
+      end
+    end
+    context "2番目が無いときに" do
+      let(:register_output_form) { build(:register_output_form, choice_2: nil) } 
+      it "無効なこと" do
+        expect(register_output_form).not_to be_valid
+      end
+    end
+  end
 end

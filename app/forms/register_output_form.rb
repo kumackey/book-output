@@ -10,8 +10,11 @@ class RegisterOutputForm
   attribute :choice_4, :string
   attribute :answer_number, :integer
 
-  VALID_ANSWER_NUMBER_REGEX = /[1-4]/
+  validates :choice_1, presence: true
+  validates :choice_2, presence: true
+
   validates :answer_number, presence: true
+  VALID_ANSWER_NUMBER_REGEX = /[1-4]/
   validates_format_of :answer_number, with: VALID_ANSWER_NUMBER_REGEX
   # def question_params
   #   params
