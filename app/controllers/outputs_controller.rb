@@ -3,6 +3,7 @@ class OutputsController < ApplicationController
 
   def new
     @register_output_form = RegisterOutputForm.new
+    @book = Book.find(params[:book_id])
   end
 
   def create
