@@ -4,5 +4,7 @@
     .col-md-5
       = render 'books/detail', book: @output.book
     .col-md-7
-      = @output.content
-      = render @choices
+      = link_to book_path(@output.book) do
+        | 問題一覧に戻る
+      h3 = @output.content
+      = render 'choices/choices', choices: @choices
