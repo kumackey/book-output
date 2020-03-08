@@ -1,0 +1,8 @@
+- provide :title, "問題"
+.container
+  .row
+    .col-md-5
+      = render 'books/detail', book: @output.book
+    .col-md-7
+      = @output.content
+      = render @choices

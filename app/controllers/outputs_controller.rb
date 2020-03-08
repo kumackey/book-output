@@ -42,6 +42,11 @@ class OutputsController < ApplicationController
     @output = current_user.outputs.find(params[:id])
   end
 
+  def show
+    @output = Output.find(params[:id])
+    @choices = @output.choices.all
+  end
+
   def update
     @output = current_user.outputs.find(params[:id])
     @output.update(update_output_params)
