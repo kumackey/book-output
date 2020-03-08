@@ -4,11 +4,13 @@ class RegisterOutputForm
   include ActiveModel::Validations
 
   attribute :question, :string
-  attribute :choice1, :string
-  attribute :choice2, :string
-  attribute :choice3, :string
-  attribute :choice4, :string
+  attribute :choice_1, :string
+  attribute :choice_2, :string
+  attribute :choice_3, :string
+  attribute :choice_4, :string
+  attribute :answer_number, :integer
 
+  validates :answer_number, presence: true
   # def question_params
   #   params
   # end
