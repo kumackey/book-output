@@ -10,9 +10,11 @@ class RegisterOutputForm
   attribute :choice_4, :string
   attribute :answer_number, :integer
 
-  validates :question, presence: true
-  validates :choice_1, presence: true
-  validates :choice_2, presence: true
+  validates :question, presence: true, length: { maximum: 500 }
+  validates :choice_1, presence: true, length: { maximum: 40 }
+  validates :choice_2, presence: true, length: { maximum: 40 }
+  validates :choice_3, length: { maximum: 40 }
+  validates :choice_4, length: { maximum: 40 }
 
   validates :answer_number, presence: true
   VALID_ANSWER_NUMBER_REGEX = /[1-4]/
