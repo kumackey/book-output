@@ -2,11 +2,12 @@ class SessionsController < ApplicationController
   before_action :require_login, only: %i[destroy]
 
   def new
-    @user = User.new
+    @login_form = LoginForm.new
   end
 
   def create
-    @user = login(params[:email], params[:password])
+    @login_form = LoginForm.new(login_form_params)
+    @user = login(@login_form.email, @login_form.password)
     if @user
       redirect_back_or_to root_path, success: 'ログインしました'
     else
@@ -40,5 +41,11 @@ class SessionsController < ApplicationController
       flash.now[:danger] = 'ログインに失敗しました'
       render :new
     end
+  end
+
+  private
+
+  def login_form_params
+    params.require(:login_form).permit(:email, :password)
   end
 end

@@ -1,14 +1,15 @@
 - provide :title, "ログイン"
 .container
   h1 ログイン
-  = form_with url: login_path, local: true do |f|
+  = form_with model: @login_form, url: login_path, local: true do |f|
     .form-group
-      = f.label :email, 'Eメール'
+      = f.label :email
       = f.email_field :email, class: 'form-control'
     .form-group
-      = f.label :password, 'パスワード'
+      = f.label :password
       = f.password_field :password, class: 'form-control'
     = f.submit 'ログイン', class: 'btn btn-raised btn-primary'
+    
   = link_to guest_login_path, method: :post do
     button.btn.btn-raised.btn-success
       | 簡易ログイン
