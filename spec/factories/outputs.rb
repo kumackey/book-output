@@ -22,7 +22,7 @@
 
 FactoryBot.define do
   factory :output do
-    content { "学校補助金の増額案に対する賛成票は、投票所が学校の場合、そうでない場合よりも有意に多かった" }
+    content { "Outputしています。" }
     association :book
     association :user
   end
