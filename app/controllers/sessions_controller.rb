@@ -2,10 +2,12 @@ class SessionsController < ApplicationController
   before_action :require_login, only: %i[destroy]
 
   def new
+    authenticated
     @login_form = LoginForm.new
   end
 
   def create
+    authenticated
     @login_form = LoginForm.new(login_form_params)
     @user = login(@login_form.email, @login_form.password)
     if @user

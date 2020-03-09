@@ -1,10 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "Sessions", type: :request do
-  
-  it "ログイン画面の表示に成功すること" do
-    get '/login'
-    expect(response).to have_http_status(200)
+  describe "ログイン画面の表示は、" do
+    context "ログインしていない場合は" do
+      it "成功すること" do
+        get '/login'
+        expect(response).to have_http_status(200)
+      end
+    end
+    context "ログインしている場合は" do
+      it "Homeにリダイレクトされること" do
+        get '/login'
+        expect(response).to redirect_to root_path
+      end
+    end
   end
 
   it "ログインに成功すること" do

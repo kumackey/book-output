@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
   def new
+    authenticated
     @user = User.new
   end
 
   def create
+    authenticated
     @user = User.new(user_params)
     if @user.save
       auto_login @user
