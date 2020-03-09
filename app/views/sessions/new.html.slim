@@ -9,6 +9,6 @@
       = f.label :password, 'パスワード'
       = f.password_field :password, class: 'form-control'
     = f.submit 'ログイン', class: 'btn btn-raised btn-primary'
-  = link_to guest_path, method: :post do
+  = link_to guest_login_path, method: :post do
     button.btn.btn-raised.btn-success
       | 簡易ログイン

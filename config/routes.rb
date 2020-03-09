@@ -2,10 +2,14 @@ Rails.application.routes.draw do
   root to: 'books#index'
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
+
+  # セッション系
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
-  post 'guest', to: 'sessions#guest'
+  post 'guest_login', to: 'sessions#guest_login'
+  
+  # リソース
   resources :users
   resources :books, shallow: true do
     collection do
