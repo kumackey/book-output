@@ -10,6 +10,7 @@ RSpec.describe "Sessions", type: :request do
     end
     context "ログインしている場合は" do
       it "Homeにリダイレクトされること" do
+        login
         get '/login'
         expect(response).to redirect_to root_path
       end
@@ -28,5 +29,7 @@ RSpec.describe "Sessions", type: :request do
   it "ゲストログインに成功すること" do
     post '/guest_login'
     expect(response).to redirect_to root_path
+    follow_redirect!
+    expect(response.body).to include('ゲストユーザーとして')
   end
 end
