@@ -9,8 +9,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   post 'guest_login', to: 'sessions#guest_login'
   
-  # リソース
-  resources :users
+  # リソース系
   resources :books, shallow: true do
     collection do
       get :search
