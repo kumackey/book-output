@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
     email = 'guest@guest.jp'
     password = 'guestguest'
     user = User.find_by(email: email)
-    if !user
+    unless user
       User.create(
         username: username,
         email: email,

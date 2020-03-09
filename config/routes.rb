@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   post 'guest_login', to: 'sessions#guest_login'
-  
+
   # リソース系
   resources :books, shallow: true do
     collection do
