@@ -11,7 +11,7 @@ class OutputsController < ApplicationController
     if @register_output_form.valid?
       @book = Book.find(params[:book_id])
       save_question_and_choices_from(@register_output_form, @book)
-      redirect_to @book , success: '問題を作成しました'
+      redirect_to @book, success: '問題を作成しました'
     else
       flash.now[:danger] = '問題の作成に失敗しました'
       render :new
@@ -52,7 +52,7 @@ class OutputsController < ApplicationController
     choices_contents << register_output_form.choice_3
     choices_contents << register_output_form.choice_4
     choices_contents.each.with_index(1) do |content, i|
-    choice = output.choices.build(content: content)
+      choice = output.choices.build(content: content)
       if register_output_form.answer_number == i
         choice.is_answer = true
       end
