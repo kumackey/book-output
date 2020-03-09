@@ -4,7 +4,7 @@ class RegisterOutputForm
   include ActiveModel::Validations
 
   attribute :question, :string
-  attribute :choice_1, :string #これを配列として取得する
+  attribute :choice_1, :string
   attribute :choice_2, :string
   attribute :choice_3, :string
   attribute :choice_4, :string
