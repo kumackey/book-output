@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'books#index'
+  root to: 'static_pages#home'
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
 
