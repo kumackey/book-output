@@ -29,7 +29,7 @@ module GoogleBooksApi
         books = []
         if json['items']
           items = json['items']
-          books = []
+          # books = []
           items.each do |item|
             books << GoogleBook.new(item)
           end

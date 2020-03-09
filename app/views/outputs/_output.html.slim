@@ -6,7 +6,8 @@
       p
         = output.user.username
     .col-8.col-md-9.text-break
-      = output.content
+      = link_to output_path(output) do
+        = output.content
     .col-2.col-md-1
       - if current_user&.own?(output)
         = link_to output_path(output), class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'}, remote: true do

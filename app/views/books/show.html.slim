@@ -5,7 +5,8 @@
       = render 'books/detail', book: @book
     .col-md-7
       - if logged_in?
-        = render 'outputs/form', output: @output, book: @book
+        = link_to new_book_output_path(@book) do
+          | 問題を作成する
       - else
         | アウトプットするためには
         = link_to login_path

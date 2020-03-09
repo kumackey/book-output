@@ -1,0 +1,7 @@
+- provide :title, "問題を作成する"
+.container
+  .row
+    .col-md-5
+      = render 'books/detail', book: @book
+    .col-md-7
+      = render 'outputs/form_new', register_output_form: @register_output_form

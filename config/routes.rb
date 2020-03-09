@@ -14,4 +14,9 @@ Rails.application.routes.draw do
     resources :outputs
   end
   resources :likes, only: %i[create destroy]
+  resources :choices, only: %i[] do
+    member do
+      post :check, to: 'choices#check'
+    end
+  end
 end
