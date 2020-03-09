@@ -1,0 +1,9 @@
+- provide :title, "Home"
+.container
+  .row
+    .col-6
+      = render @books
+      = paginate @books
+    .col-6
+      = render @outputs
+      = paginate @outputs

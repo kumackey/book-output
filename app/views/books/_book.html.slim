@@ -1,4 +1,5 @@
 .container
+  hr
   .row
     .col-3.col-md-2
       = link_to book_path(book) do
@@ -11,9 +12,6 @@
         = link_to book.buy_link do
           | 購入
     .col-1
-      = render 'like_area', book: book
+      = render 'books/like_area', book: book
     .col-2
-      = link_to user_path(book.user) do
-        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-        = book.user.username
-  hr
+      = book.user.username

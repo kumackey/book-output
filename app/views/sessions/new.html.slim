@@ -1,14 +1,18 @@
 - provide :title, "ログイン"
 .container
-  h1 ログイン
-  = form_with url: login_path, local: true do |f|
-    .form-group
-      = f.label :email, 'Eメール'
-      = f.email_field :email, class: 'form-control'
-    .form-group
-      = f.label :password, 'パスワード'
-      = f.password_field :password, class: 'form-control'
-    = f.submit 'ログイン', class: 'btn btn-raised btn-primary'
-  = link_to guest_path, method: :post do
-    button.btn.btn-raised.btn-success
-      | 簡易ログイン
+  .row.justify-content-around
+    .col-md-6
+      .card.text-center
+        h5.card-header.bg-success.text-white
+          strong ログイン
+        .card-body.px-lg-5.pt-0.mt-4
+          = form_with model: @login_form, url: login_path, local: true do |f|
+            = render 'shared/error_messages', object: @login_form
+            .form-group
+              = f.email_field :email, class: 'form-control', placeholder: 'Eメール'
+            .form-group
+              = f.password_field :password, class: 'form-control', placeholder: 'パスワード'
+            = f.submit 'ログイン', class: 'btn btn-raised btn-primary'
+          = link_to guest_login_path, method: :post do
+            button.btn.btn-raised.btn-success
+              | 簡易ログイン
