@@ -10,7 +10,7 @@ module GoogleBooksApi
   def url_of_creating_from_id(googlebooksapi_id)
     "https://www.googleapis.com/books/v1/volumes/#{googlebooksapi_id}"
   end
-
+  
   class GoogleBook
     attr_reader :googlebooksapi_id, :author, :buy_link, :description, :image, :published_at, :title, :url
 
@@ -29,7 +29,7 @@ module GoogleBooksApi
         books = []
         if json['items']
           items = json['items']
-          books = []
+          #books = []
           items.each do |item|
             books << GoogleBook.new(item)
           end
