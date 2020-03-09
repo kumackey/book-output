@@ -13,7 +13,5 @@
     .col-1
       = render 'like_area', book: book
     .col-2
-      = link_to user_path(book.user) do
-        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-        = book.user.username
+      = book.user.username
   hr
