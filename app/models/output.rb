@@ -23,7 +23,7 @@
 class Output < ApplicationRecord
   belongs_to :user
   belongs_to :book
-  has_many :choices
+  has_many :choices, dependent: :destroy
 
   validates :content, presence: true, length: { maximum: 500 }
 end
