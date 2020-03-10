@@ -1,25 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Books", type: :request do
-  it '本一覧画面の表示に成功すること' do
-    get '/books'
-    expect(response).to have_http_status(200)
-  end
-
-  it "本を登録したときにしたときに本一覧画面に追加されていること" do
-    get '/books'
-    expect(response.body).to_not include("ファスト＆スロー(下)")
-
-    create(:book, title: "ファスト＆スロー(下)")
-    get '/books'
-    expect(response.body).to include("ファスト＆スロー(下)")
-  end
-
-  it '本検索画面の表示に成功すること' do
-    get '/books/search'
-    expect(response).to have_http_status(200)
-  end
-
 
   describe "本検索ワードが" do
     context "Railsのときに" do
@@ -67,14 +48,15 @@ RSpec.describe "Books", type: :request do
     end
   end
 
-
-  it '本詳細画面の表示に成功すること' do
-    book = create(:book)
-    get "/books/#{book.id}"
+  it '本一覧画面の表示に成功すること' do
+    get '/books'
     expect(response).to have_http_status(200)
   end
 
-  it '本詳細画面はその本の情報が載っていること' do
+  it '本の登録に成功すること' do
+  end
+
+  it '本詳細画面の表示に成功すること' do
     book = create(:book, title: "ファスト＆スロー(下)")
     create(:other_book, title: "影響力の武器")
 
