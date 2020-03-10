@@ -1,7 +1,6 @@
 class GoogleBook
   attr_reader :googlebooksapi_id, :author, :buy_link, :description,
-              :image, :published_at, :title, :publisher, :web_reader_link,
-              :average_rating, :page_count
+              :image, :published_at, :title, :publisher, :web_reader_link, :page_count
 
   class << self
     include GoogleBooksApi
@@ -46,7 +45,6 @@ class GoogleBook
     @title = @volume_info['title']
     @publisher = @volume_info["publisher"]
     @web_reader_link = reader_link_url
-    @average_rating = @volume_info["averageRating"]
     @page_count = @volume_info["pageCount"]
   end
 
