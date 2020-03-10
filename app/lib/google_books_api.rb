@@ -4,7 +4,7 @@ module GoogleBooksApi
   end
 
   def url_of_searching_from_keyword(keyword)
-    "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP&maxResults=20"
+    "https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=JP"
   end
 
   def url_of_creating_from_id(googlebooksapi_id)
