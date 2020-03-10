@@ -3,8 +3,8 @@ class StaticPagesController < ApplicationController
 
   def home
     # ログイン時のトップページ
-    @outputs = current_user.feed.page(params[:page]).per(10).order(created_at: :desc)
-    @books = current_user.like_books.page(params[:page]).per(6).order(created_at: :desc)
+    @outputs = current_user.feed.includes(%i[user book]).order(created_at: :desc).page(params[:page]).per(10).order(created_at: :desc)
+    @books = current_user.like_books.includes(:user).page(params[:page])
   end
 
   def top
