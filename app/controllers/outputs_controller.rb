@@ -5,6 +5,11 @@ class OutputsController < ApplicationController
     @outputs = Output.all.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
   end
 
+  def latest
+    @output = Output.last
+    redirect_to @output
+  end
+
   def new
     @register_output_form = RegisterOutputForm.new
     @book = Book.find(params[:book_id])
