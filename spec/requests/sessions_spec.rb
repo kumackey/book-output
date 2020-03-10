@@ -32,4 +32,12 @@ RSpec.describe "Sessions", type: :request do
     follow_redirect!
     expect(response.body).to include('ゲストユーザーとして')
   end
+
+  it "ログアウトに成功すること" do
+    login
+    delete '/logout'
+    expect(response).to redirect_to login_path
+    follow_redirect!
+    expect(response.body).to include('ログアウトしました')
+  end
 end
