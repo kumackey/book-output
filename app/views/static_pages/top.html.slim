@@ -1,1 +1,15 @@
-非ログイン
+- provide :title, "Top"
+.jumbotron.jumbotron-fluid
+  .container.text-center.text-white
+    .display-2
+      | BookOutPut
+    .lead.mt-3
+      | 読書で得た知識をクイズにし、アウトプットしよう！
+.container
+  .row
+    .col-12.col-md-6
+      = render @books
+      = paginate @books
+    .col-12.col-md-6
+      = render @outputs
+      = paginate @outputs
