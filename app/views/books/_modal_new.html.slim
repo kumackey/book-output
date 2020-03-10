@@ -3,21 +3,25 @@
     .modal-content
       .modal-header
         h5.modal-title 
-          = book.title
+          = google_book.title
         button.close aria-label="Close" data-dismiss="modal" type="button"
           span aria-hidden="true" ×
       .modal-body
-        = link_to book.buy_link
-          = image_tag book.image if book.image?
-        = book.description
-        = book.author
-        = book.published_at
-        = book.publisher
-        = book.web_reader_link
-        = book.average_rating
-        = book.page_count
-        = link_to books_path(googlebooksapi_id: book.googlebooksapi_id), method: :post do
-          button.btn.btn-raised.btn-primary
-            | 本を登録する
-        - if book.buy_link.present?
-          | 購入する
+        = link_to google_book.buy_link
+          = image_tag google_book.image if google_book.image?
+        = google_book.description
+        = google_book.author
+        = google_book.published_at
+        = google_book.publisher
+        = google_book.web_reader_link
+        = google_book.average_rating
+        = google_book.page_count
+        - if book
+          | この本は既に登録されています。
+        - else
+          = link_to books_path(googlebooksapi_id: google_book.googlebooksapi_id), method: :post do
+            button.btn.btn-raised.btn-primary
+              | 本を登録する
+        - if google_book.buy_link.present?
+          = link_to google_book.buy_link do
+            | 購入する

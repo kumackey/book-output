@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :require_login, only: %i[create new]
+  before_action :require_login, only: %i[create]
 
   def index
     @books = Book.all.includes(:user).page(params[:page]).per(15).order(created_at: :desc)
@@ -18,7 +18,8 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
+    @google_book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
+    @book = Book.find_by(googlebooksapi_id: @google_book.googlebooksapi_id)
   end
 
   def show
