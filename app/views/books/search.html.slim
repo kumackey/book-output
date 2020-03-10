@@ -1,9 +1,10 @@
 - provide :title, "本を検索する" #検索キーワードにしたい
 .container
-  = form_with model: @search_form, url: search_books_path, scope: :q, local: true, method: :get do |f|
-    .form-group
-      = f.label :keyword, 'キーワード'
-      = f.text_field :keyword, class: 'form-control', value: @search_form.keyword
-    = f.submit '検索する', class: 'btn btn-raised btn-primary'
-
-  = render 'books_searching', books: @books
+  .row.justify-content-around
+    .col-md-7
+      = form_with model: @search_form, url: search_books_path, class: 'form-row align-items-center', scope: :q, local: true, method: :get do |f|
+        .form-group.col-9
+          = f.text_field :keyword, class: 'form-control', value: @search_form.keyword, placeholder: 'キーワードを入力してください'
+        .col-3
+          = f.submit '検索する', class: 'btn btn-raised btn-primary'
+= render 'books_searching', books: @books
