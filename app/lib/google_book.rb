@@ -14,8 +14,9 @@ class GoogleBook
     def search(keyword)
       url = url_of_searching_from_keyword(keyword)
       json = get_json_from_url(url)
+      items = json['items']
       books = []
-      if items = json['items']
+      if items
         items.each do |item|
           books << GoogleBook.new(item)
         end
@@ -23,7 +24,6 @@ class GoogleBook
       books
     end
   end
-
 
   def initialize(item)
     @item = item
@@ -43,9 +43,9 @@ class GoogleBook
     @image = image_url
     @published_at = @volume_info['publishedDate']
     @title = @volume_info['title']
-    @publisher = @volume_info["publisher"]
+    @publisher = @volume_info['publisher']
     @web_reader_link = reader_link_url
-    @page_count = @volume_info["pageCount"]
+    @page_count = @volume_info['pageCount']
   end
 
   private
@@ -59,10 +59,10 @@ class GoogleBook
   end
 
   def first_author
-    @volume_info['authors'].first if @volume_info['authors']
+    @volume_info['authors']&.first
   end
 
   def reader_link_url
-    @item["accessInfo"]["webReaderLink"] if @item["accessInfo"]
+    @item['accessInfo']['webReaderLink'] if @item['accessInfo']
   end
 end

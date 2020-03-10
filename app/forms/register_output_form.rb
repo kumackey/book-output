@@ -22,10 +22,10 @@ class RegisterOutputForm
 
   def choices
     array = []
-    array << self.choice_1
-    array << self.choice_2
-    array << self.choice_3
-    array << self.choice_4
+    array << choice_1
+    array << choice_2
+    array << choice_3
+    array << choice_4
     array
   end
 end
