@@ -8,11 +8,8 @@ class StaticPagesController < ApplicationController
   end
 
   def top
-    if logged_in?
-      redirect_to home_path
-    else
-      @outputs = Output.all.includes(%i[user book]).page(params[:page]).per(15).order(created_at: :desc)
-      @books = Book.all.includes(:user).page(params[:page]).per(15).order(created_at: :desc)
-    end
+    authenticated
+    @outputs = Output.all.includes(%i[user book]).page(params[:page]).per(6).order(created_at: :desc)
+    @books = Book.all.includes(:user).page(params[:page]).per(6).order(created_at: :desc)
   end
 end
