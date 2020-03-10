@@ -4,7 +4,8 @@ class StaticPagesController < ApplicationController
   def home
     # ログイン時のトップページ
     @outputs = current_user.feed.includes(%i[user book]).order(created_at: :desc).page(params[:page]).per(10).order(created_at: :desc)
-    @books = current_user.like_books.includes(:user).page(params[:page])
+    @books = Book.includes(:user).order(created_at: :desc).limit(5)
+    @outputs_count = @outputs.size
   end
 
   def top
