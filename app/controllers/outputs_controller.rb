@@ -8,8 +8,8 @@ class OutputsController < ApplicationController
 
   def create
     @register_output_form = RegisterOutputForm.new(create_output_params)
+    @book = Book.find(params[:book_id])
     if @register_output_form.valid?
-      @book = Book.find(params[:book_id])
       save_question_and_choices_from(@register_output_form, @book)
       redirect_to @book, success: '問題を作成しました'
     else
