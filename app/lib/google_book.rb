@@ -16,10 +16,8 @@ class GoogleBook
       json = get_json_from_url(url)
       items = json['items']
       books = []
-      if items
-        items.each do |item|
-          books << GoogleBook.new(item)
-        end
+      items&.each do |item|
+        books << GoogleBook.new(item)
       end
       books
     end

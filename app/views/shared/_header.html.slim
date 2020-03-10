@@ -8,16 +8,40 @@ header
     #navbarSupportedContent.collapse.navbar-collapse
       - if logged_in?
         ul.navbar-nav.mr-auto
+          li.nav-item class="#{'active' if controller.controller_name == 'static_pages' && controller.action_name == 'home'}"
+            = link_to home_path, class: 'nav-link' do
+              = icon 'fas', 'home', class: 'fa-lg'
+              | Home
           li.nav-item class="#{'active' if controller.controller_name == 'books' && controller.action_name == 'search'}"
             = link_to search_books_path, class: 'nav-link' do
-              = icon 'fas', 'book', class: 'fa-lg'
+              = icon 'fas', 'search-plus', class: 'fa-lg'
               | 本を検索
+          li.nav-item class="#{'active' if controller.controller_name == 'books' && controller.action_name == 'index'}"
+            = link_to books_path, class: 'nav-link' do
+              = icon 'fas', 'book', class: 'fa-lg'
+              | 本一覧
+          li.nav-item class="#{'active' if controller.controller_name == 'outputs' && controller.action_name == 'index'}"
+            = link_to outputs_path, class: 'nav-link' do
+              = icon 'fas', 'swatchbook', class: 'fa-lg'
+              | クイズ一覧
           li.nav-item
             = link_to logout_path, class: 'nav-link', method: :delete
               = icon 'fas', 'sign-out-alt', class: 'fa-lg'
               | ログアウト
       - else
         ul.navbar-nav.mr-auto
+          li.nav-item class="#{'active' if controller.controller_name == 'books' && controller.action_name == 'search'}"
+            = link_to search_books_path, class: 'nav-link' do
+              = icon 'fas', 'search-plus', class: 'fa-lg'
+              | 本を検索
+          li.nav-item class="#{'active' if controller.controller_name == 'books' && controller.action_name == 'index'}"
+            = link_to books_path, class: 'nav-link' do
+              = icon 'fas', 'book', class: 'fa-lg'
+              | 本一覧
+          li.nav-item class="#{'active' if controller.controller_name == 'outputs' && controller.action_name == 'index'}"
+            = link_to outputs_path, class: 'nav-link' do
+              = icon 'fas', 'swatchbook', class: 'fa-lg'
+              | クイズ一覧
           li.nav-item class="#{'active' if controller.controller_name == 'users' && controller.action_name == 'new'}"
             = link_to signup_path, class: 'nav-link'
               = icon 'fas', 'user-plus', class: 'fa-lg'
@@ -26,8 +50,3 @@ header
             = link_to login_path, class: 'nav-link'
               = icon 'fas', 'sign-in-alt', class: 'fa-lg'
               | ログイン
-                  ul.navbar-nav.mr-auto
-          li.nav-item class="#{'active' if controller.controller_name == 'books' && controller.action_name == 'search'}"
-            = link_to search_books_path, class: 'nav-link' do
-              = icon 'fas', 'book', class: 'fa-lg'
-              | 本を検索

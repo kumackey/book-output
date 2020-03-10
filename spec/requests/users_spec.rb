@@ -14,7 +14,7 @@ RSpec.describe "Users", type: :request do
       password: 'password',
       password_confirmation: 'password'
     } }
-    expect(response).to redirect_to root_path
+    expect(response).to redirect_to home_path
     follow_redirect!
     expect(response.body).to include('ユーザーを作成し')
   end

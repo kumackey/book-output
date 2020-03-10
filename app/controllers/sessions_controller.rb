@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     @login_form = LoginForm.new(login_form_params)
     @user = login(@login_form.email, @login_form.password)
     if @user
-      redirect_back_or_to root_path, success: 'ログインしました'
+      redirect_back_or_to home_path, success: 'ログインしました'
     else
       flash.now[:danger] = 'ログインに失敗しました'
       render :new
@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
     end
     @user = login(email, password)
     if @user
-      redirect_back_or_to root_path, success: 'ゲストユーザーとしてログインしました'
+      redirect_back_or_to home_path, success: 'ゲストユーザーとしてログインしました'
     else
       flash.now[:danger] = 'ログインに失敗しました'
       render :new

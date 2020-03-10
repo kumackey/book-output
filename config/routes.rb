@@ -1,15 +1,20 @@
 Rails.application.routes.draw do
-  root to: 'static_pages#home'
+  root to: 'static_pages#top'
+  get 'home', to: 'static_pages#home'
+
+  # ユーザリソース
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
 
-  # セッション系
+  # セッションリソース
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   post 'guest_login', to: 'sessions#guest_login'
 
-  # リソース系
+  # その他リソース
+  get 'outputs', to: 'outputs#index'
+  get 'outputs/latest', to: 'outputs#latest'
   resources :books, only: %i[index create new show], shallow: true do
     collection do
       get :search

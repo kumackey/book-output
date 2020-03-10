@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticated
-    redirect_to root_path, info: '既にログインしています' if logged_in?
+    redirect_to home_path if logged_in?
   end
 end

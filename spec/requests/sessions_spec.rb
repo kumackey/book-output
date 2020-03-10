@@ -12,7 +12,7 @@ RSpec.describe "Sessions", type: :request do
       it "Homeにリダイレクトされること" do
         login
         get '/login'
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to home_path
       end
     end
   end
@@ -23,12 +23,12 @@ RSpec.describe "Sessions", type: :request do
       email: user.email,
       password: 'password',
     } }
-    expect(response).to redirect_to root_path
+    expect(response).to redirect_to home_path
   end
 
   it "ゲストログインに成功すること" do
     post '/guest_login'
-    expect(response).to redirect_to root_path
+    expect(response).to redirect_to home_path
     follow_redirect!
     expect(response.body).to include('ゲストユーザーとして')
   end

@@ -53,7 +53,7 @@ RSpec.describe Book, type: :model do
     expect(book.errors[:googlebooksapi_id]).to include("はすでに存在します")
   end
 
-  it "本が消去されたとき、関連するアウトプットも消えること" do
+  it "本が消去されたとき、関連するクイズも消えること" do
     book = create(:book)
     create(:output, book_id: book.id)
     expect{ book.destroy }.to change{ Output.count }.by(-1)

@@ -72,7 +72,7 @@ RSpec.describe User, type: :model do
     expect{ owner.destroy }.to change{ Book.count }.by(-1)
   end 
 
-  it "ユーザーが消去されたとき、関連するアウトプットも消えること" do
+  it "ユーザーが消去されたとき、関連するクイズも消えること" do
     user = create(:user)
     create(:output, user_id: user.id)
     expect{ user.destroy }.to change{ Output.count }.by(-1)
@@ -101,5 +101,17 @@ RSpec.describe User, type: :model do
     book = like.book
     expect { user.unlike(book) }.to change{ Like.count }.by(-1)
     expect(user.like?(book)).not_to be_truthy
+  end
+
+  it "フィードにいいねした本の問題が載ること" do
+    user = create(:user)
+    book = create(:book)
+    create(:output, book_id: book.id)
+    expect { user.like(book) }.to change{ user.feed.count }.by(1)
+  end
+
+  it "フィードに自分が作った問題が載ること" do
+    user = create(:user)
+    expect { create(:output, user_id: user.id) }.to change{ user.feed.count }.by(1)
   end
 end
