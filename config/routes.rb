@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post 'guest_login', to: 'sessions#guest_login'
 
   # リソース系
-  resources :books, shallow: true do
+  resources :books, only: %i[index create new show], shallow: true do
     collection do
       get :search
     end

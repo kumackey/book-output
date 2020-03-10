@@ -1,12 +1,9 @@
-- if book.buy_link.present?
-  = link_to book.buy_link
-    = image_tag book.image if book.image?
-    = book.title
-- else
-  = image_tag book.image if book.image?
-  = book.title
-= book.author
-= link_to new_book_path(googlebooksapi_id: book.googlebooksapi_id), remote: true do
-  button.btn.btn-raised.btn-primary
-    | 本を登録する
-hr
+.container-fluid
+  .row
+    .col-3.col-lg-4
+      - if book.image?
+        = image_tag book.image, height: '100'
+    .col-9.col-lg-8
+      = link_to new_book_path(googlebooksapi_id: book.googlebooksapi_id), remote: true do
+        h5 = book.title
+      = book.author

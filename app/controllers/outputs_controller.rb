@@ -8,8 +8,8 @@ class OutputsController < ApplicationController
 
   def create
     @register_output_form = RegisterOutputForm.new(create_output_params)
+    @book = Book.find(params[:book_id])
     if @register_output_form.valid?
-      @book = Book.find(params[:book_id])
       save_question_and_choices_from(@register_output_form, @book)
       redirect_to @book, success: '問題を作成しました'
     else
@@ -40,20 +40,13 @@ class OutputsController < ApplicationController
   private
 
   def save_question_and_choices_from(register_output_form, book)
-    # 質問文のsave
     output = current_user.outputs.build(content: register_output_form.question)
     output.book_id = book.id
     output.save
 
-    # 選択肢のsave
-    choices_contents = []
-    choices_contents << register_output_form.choice_1
-    choices_contents << register_output_form.choice_2
-    choices_contents << register_output_form.choice_3
-    choices_contents << register_output_form.choice_4
-    choices_contents.each.with_index(1) do |content, i|
+    register_output_form.choices.each.with_index do |content, i|
       choice = output.choices.build(content: content)
-      if register_output_form.answer_number == i
+      if register_output_form.answer_number == i + 1
         choice.is_answer = true
       end
       choice.save

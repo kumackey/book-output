@@ -11,7 +11,7 @@ header
           li.nav-item class="#{'active' if controller.controller_name == 'books' && controller.action_name == 'search'}"
             = link_to search_books_path, class: 'nav-link' do
               = icon 'fas', 'book', class: 'fa-lg'
-              | 本を登録
+              | 本を検索
           li.nav-item
             = link_to logout_path, class: 'nav-link', method: :delete
               = icon 'fas', 'sign-out-alt', class: 'fa-lg'
@@ -26,3 +26,8 @@ header
             = link_to login_path, class: 'nav-link'
               = icon 'fas', 'sign-in-alt', class: 'fa-lg'
               | ログイン
+                  ul.navbar-nav.mr-auto
+          li.nav-item class="#{'active' if controller.controller_name == 'books' && controller.action_name == 'search'}"
+            = link_to search_books_path, class: 'nav-link' do
+              = icon 'fas', 'book', class: 'fa-lg'
+              | 本を検索

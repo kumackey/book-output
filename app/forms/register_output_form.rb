@@ -19,7 +19,13 @@ class RegisterOutputForm
   validates :answer_number, presence: true
   VALID_ANSWER_NUMBER_REGEX = /[1-4]/.freeze
   validates_format_of :answer_number, with: VALID_ANSWER_NUMBER_REGEX
-  # def question_params
-  #   params
-  # end
+
+  def choices
+    array = []
+    array << choice_1
+    array << choice_2
+    array << choice_3
+    array << choice_4
+    array
+  end
 end

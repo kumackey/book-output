@@ -1,17 +1,12 @@
-.container
-  hr
+.container.card.pt-3.pb-3.mb-3
   .row
-    .col-3.col-md-2
+    .col-2.col-md-3
       = link_to book_path(book) do
         = image_tag book.image.url, width: '70' if book.image?
-    .col-5.col-md-6
-      = link_to book_path(book) do
-        = book.title
-    .col-1
-      - if book.buy_link.present?
-        = link_to book.buy_link do
-          | 購入
-    .col-1
-      = render 'books/like_area', book: book
-    .col-2
-      = book.user.username
+    .col-10.col-md-9
+      .d-inline-block
+        = link_to book_path(book) do
+          h5 = book.title
+      .d-inline-block.float-right.pl-1
+        = render 'books/like_area', book: book
+      p = book.author

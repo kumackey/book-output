@@ -1,5 +1,4 @@
 class BooksController < ApplicationController
-  include GoogleBooksApi
   before_action :require_login, only: %i[create]
 
   def index
@@ -19,7 +18,8 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
+    @google_book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
+    @book = Book.find_by(googlebooksapi_id: @google_book.googlebooksapi_id)
   end
 
   def show
@@ -31,7 +31,7 @@ class BooksController < ApplicationController
     @search_form = SearchBooksForm.new(search_books_params)
     if params[:q].present?
       books = GoogleBook.search(search_books_params[:keyword])
-      @books = Kaminari.paginate_array(books).page(params[:page]).per(5)
+      @books = Kaminari.paginate_array(books).page(params[:page]).per(6)
     else
       @books = Kaminari.paginate_array([]).page(params[:page])
     end

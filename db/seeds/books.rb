@@ -1,4 +1,3 @@
-include GoogleBooksApi
 puts 'Start inserting seed "books" ...'
 
 googlebooksapi_ids = [
