@@ -54,13 +54,18 @@ RSpec.describe "Books", type: :request do
   end
 
   it '本の登録に成功すること' do
+    login
+    post '/books', params: { googlebooksapi_id: "xPbRxgEACAAJ" }
+    expect(response).to redirect_to books_path
+    follow_redirect!
+    expect(response.body).to include('本を登録しました')
   end
 
   it '本詳細画面の表示に成功すること' do
     book = create(:book, title: "ファスト＆スロー(下)")
     create(:other_book, title: "影響力の武器")
-
     get "/books/#{book.id}" # ファスト＆スロー(下)のページにアクセス
+    expect(response).to have_http_status(200)
     expect(response.body).to include("ファスト＆スロー(下)")
     expect(response.body).not_to include("影響力の武器")
   end
