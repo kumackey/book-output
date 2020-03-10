@@ -10,7 +10,7 @@ class StaticPagesController < ApplicationController
 
   def top
     authenticated
-    @outputs = Output.all.includes(%i[user book]).page(params[:page]).per(6).order(created_at: :desc)
-    @books = Book.all.includes(:user).page(params[:page]).per(6).order(created_at: :desc)
+    @outputs = Output.all.includes(%i[user book]).order(created_at: :desc).limit(5)
+    @books = Book.all.includes(:user).order(created_at: :desc).limit(3)
   end
 end
