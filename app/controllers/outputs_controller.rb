@@ -44,9 +44,9 @@ class OutputsController < ApplicationController
     output.book_id = book.id
     output.save
 
-    register_output_form.choices.each.with_index(1) do |content, i|
+    register_output_form.choices.each.with_index do |content, i|
       choice = output.choices.build(content: content)
-      if register_output_form.answer_number == i
+      if register_output_form.answer_number == i + 1
         choice.is_answer = true
       end
       choice.save
