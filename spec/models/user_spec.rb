@@ -102,4 +102,16 @@ RSpec.describe User, type: :model do
     expect { user.unlike(book) }.to change{ Like.count }.by(-1)
     expect(user.like?(book)).not_to be_truthy
   end
+
+  it "フィードにいいねした本の問題が載ること" do
+    user = create(:user)
+    book = create(:book)
+    create(:output, book_id: book.id)
+    expect { user.like(book) }.to change{ user.feed.count }.by(1)
+  end
+
+  it "フィードに自分が作った問題が載ること" do
+    user = create(:user)
+    expect { create(:output, user_id: user.id) }.to change{ user.feed.count }.by(1)
+  end
 end
