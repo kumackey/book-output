@@ -8,9 +8,13 @@ header
     #navbarSupportedContent.collapse.navbar-collapse
       - if logged_in?
         ul.navbar-nav.mr-auto
+          li.nav-item class="#{'active' if controller.controller_name == 'static_pages' && controller.action_name == 'home'}"
+            = link_to home_path, class: 'nav-link' do
+              = icon 'fas', 'list', class: 'fa-lg'
+              | トップ
           li.nav-item class="#{'active' if controller.controller_name == 'books' && controller.action_name == 'search'}"
             = link_to search_books_path, class: 'nav-link' do
-              = icon 'fas', 'book', class: 'fa-lg'
+              = icon 'fas', 'search-plus', class: 'fa-lg'
               | 本を検索
           li.nav-item
             = link_to logout_path, class: 'nav-link', method: :delete
@@ -20,7 +24,7 @@ header
         ul.navbar-nav.mr-auto
           li.nav-item class="#{'active' if controller.controller_name == 'books' && controller.action_name == 'search'}"
             = link_to search_books_path, class: 'nav-link' do
-              = icon 'fas', 'book', class: 'fa-lg'
+              = icon 'fas', 'search-plus', class: 'fa-lg'
               | 本を検索
           li.nav-item class="#{'active' if controller.controller_name == 'users' && controller.action_name == 'new'}"
             = link_to signup_path, class: 'nav-link'
