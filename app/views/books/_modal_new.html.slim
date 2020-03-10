@@ -7,12 +7,17 @@
         button.close aria-label="Close" data-dismiss="modal" type="button"
           span aria-hidden="true" ×
       .modal-body
-        - if book.buy_link.present?
-          = link_to book.buy_link
-            = image_tag book.image if book.image?
-        - else
+        = link_to book.buy_link
           = image_tag book.image if book.image?
+        = book.description
         = book.author
+        = book.published_at
+        = book.publisher
+        = book.web_reader_link
+        = book.average_rating
+        = book.page_count
         = link_to books_path(googlebooksapi_id: book.googlebooksapi_id), method: :post do
           button.btn.btn-raised.btn-primary
             | 本を登録する
+        - if book.buy_link.present?
+          | 購入する

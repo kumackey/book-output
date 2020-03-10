@@ -1,12 +1,14 @@
 class GoogleBook
-  attr_reader :googlebooksapi_id, :author, :buy_link, :description, :image, :published_at, :title, :url
+  attr_reader :googlebooksapi_id, :author, :buy_link, :description,
+              :image, :published_at, :title, :publisher, :web_reader_link,
+              :average_rating, :page_count
 
   class << self
     include GoogleBooksApi
 
     def new_from_id(googlebooksapi_id)
-      @url = url_of_creating_from_id(googlebooksapi_id) # ここのurlは効いているか不明
-      item = get_json_from_url(@url)
+      url = url_of_creating_from_id(googlebooksapi_id)
+      item = get_json_from_url(url)
       new(item)
     end
 
@@ -36,12 +38,16 @@ class GoogleBook
 
   def retrieve_attribute
     @googlebooksapi_id = @item['id']
-    @author = @volume_info['authors'].first if @volume_info['authors']
+    @author = first_author
     @buy_link = @item['saleInfo']['buyLink']
     @description = @volume_info['description']
     @image = image_url
     @published_at = @volume_info['publishedDate']
     @title = @volume_info['title']
+    @publisher = @volume_info["publisher"]
+    @web_reader_link = reader_link_url
+    @average_rating = @volume_info["averageRating"]
+    @page_count = @volume_info["pageCount"]
   end
 
   private
@@ -52,5 +58,13 @@ class GoogleBook
     else
       ''
     end
+  end
+
+  def first_author
+    @volume_info['authors'].first if @volume_info['authors']
+  end
+
+  def reader_link_url
+    @item["accessInfo"]["webReaderLink"] if @item["accessInfo"]
   end
 end
