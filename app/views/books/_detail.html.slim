@@ -13,4 +13,12 @@
       - if book.buy_link.present?
         = link_to book.buy_link do
           span 購入する
+      - if logged_in?
+        = link_to new_book_output_path(book) do
+          | 問題を作成する
+      - else
+        | クイズを作成するためには
+        = link_to login_path
+          | ログイン
+        |してください。
       
