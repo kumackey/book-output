@@ -19,5 +19,6 @@ googlebooksapi_ids.each do |id|
   book = book.substitute_for_googlebook(google_book)
   book.save
   puts "\"#{book.title}\" has created! book.id: #{book.id}."
+  guest_user.like(book)
 end
 
