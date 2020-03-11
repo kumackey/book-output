@@ -10,6 +10,7 @@ class BooksController < ApplicationController
     @book = current_user.books.build
     @book = @book.substitute_for_googlebook(google_book)
     if @book.save
+      current_user.like(@book)
       redirect_back_or_to books_path, success: '本を登録しました'
     else
       flash.now[:danger] = '本の登録に失敗しました'
