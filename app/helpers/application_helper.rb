@@ -13,17 +13,17 @@ module ApplicationHelper
         { href: image_url('favicon.ico') }
       ],
       og: {
-        site_name: "BookOutPut | ",
-        title: "DOYA（どや）| 読書をクイズとしてアウトプットするサービス",
+        site_name: 'BookOutPut',
+        title: 'BookOutPut',
         description: :description,
         type: 'website',
         url: request.original_url,
         image: image_url('janbotron.jpg'),
-        locale: 'ja_JP',
+        locale: 'ja_JP'
       },
       twitter: {
         card: 'summary_large_image',
-        site: '@kumackey_',
+        site: '@kumackey_'
       }
     }
   end
