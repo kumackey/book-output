@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   # その他リソース
   get 'outputs', to: 'outputs#index'
-  get 'outputs/latest', to: 'outputs#latest'
+  get 'outputs/random', to: 'outputs#random'
   resources :books, only: %i[index create new show], shallow: true do
     collection do
       get :search

@@ -5,8 +5,8 @@ class OutputsController < ApplicationController
     @outputs = Output.all.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
   end
 
-  def latest
-    @output = Output.last
+  def random
+    @output = Output.all.shuffle.first
     redirect_to @output
   end
 
