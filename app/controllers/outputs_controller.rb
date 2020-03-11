@@ -6,7 +6,7 @@ class OutputsController < ApplicationController
   end
 
   def random
-    @output = Output.all.shuffle[0]
+    @output = Output.all.sample
     redirect_to @output
   end
 
@@ -29,7 +29,7 @@ class OutputsController < ApplicationController
 
   def show
     @output = Output.find(params[:id])
-    @choices = @output.choices.includes([:output, output: [:book, :user]]).shuffle
+    @choices = @output.choices.includes([:output, output: %i[book user]]).shuffle
   end
 
   def destroy
