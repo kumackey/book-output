@@ -6,7 +6,7 @@ class OutputsController < ApplicationController
   end
 
   def random
-    @output = Output.all.shuffle.first
+    @output = Output.all.shuffle[0]
     redirect_to @output
   end
 
