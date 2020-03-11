@@ -1,0 +1,21 @@
+- provide :title, "Contact me"
+.container
+  .row.justify-content-around
+    .col-lg-6
+      .card
+        h5.card-header.bg-success.text-white.text-center
+          strong Contant me
+        .card-body.px-lg-5.pt-0.mt-4
+          ul.list-group
+            li.list-group-item
+              .mr-1 GitHub:
+              = link_to "https://github.com/kumackey" do
+                | kumackey
+            li.list-group-item
+              .mr-1 wantedly:
+              = link_to "https://www.wantedly.com/users/125461735" do
+                | https://www.wantedly.com/users/125461735
+            li.list-group-item
+              .mr-1 Twitter:
+              = link_to "https://twitter.com/kumackey_" do
+                | @kumackey_

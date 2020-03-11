@@ -13,4 +13,6 @@ class StaticPagesController < ApplicationController
     @outputs = Output.all.includes(%i[user book]).order(created_at: :desc).limit(5)
     @books = Book.all.includes(:user).order(created_at: :desc).limit(3)
   end
+
+  def contact; end
 end

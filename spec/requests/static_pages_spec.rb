@@ -23,4 +23,10 @@ RSpec.describe "Static_pages", type: :request do
     get '/home'
     expect(response).to redirect_to login_path
   end
+
+  it "contact me画面の取得に成功すること" do
+    get '/contact'
+    expect(response).to have_http_status(200)
+    expect(response.body).to include("kumackey")
+  end
 end
