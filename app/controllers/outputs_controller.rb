@@ -29,7 +29,7 @@ class OutputsController < ApplicationController
 
   def show
     @output = Output.find(params[:id])
-    @choices = @output.choices.all
+    @choices = @output.choices.includes([:output, output: [:book, :user]]).shuffle
   end
 
   def destroy
