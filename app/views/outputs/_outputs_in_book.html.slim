@@ -1,6 +1,7 @@
-.outputs-box
-  - if outputs.empty?
+- if outputs.empty?
+  .text-center
     p まだクイズがありません。
+.outputs-box
   - outputs.each do |output|
     = render 'outputs/output_in_book', output: output
   .mt-5
