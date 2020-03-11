@@ -4,21 +4,19 @@
       .mb-3
         = image_tag book.image.url, width: '100' if book.image?
     .col-8.col-md-12            
-      h5 = book.title
+      .d-inline-block
+        h5 = book.title
+      .d-inline-block.ml-3
+        = render 'books/like_area', book: book
       p 著者: #{book.author}
       p = truncate(strip_tags(book.description), length: 100)
-      p 出版日: #{book.published_at}
-      .mb-3
-        = render 'books/like_area', book: book
-      - if book.buy_link.present?
-        = link_to book.buy_link do
-          span 購入する
-      - if logged_in?
-        = link_to new_book_output_path(book) do
-          | 問題を作成する
-      - else
-        | クイズを作成するためには
-        = link_to login_path
-          | ログイン
-        |してください。
+      .d-inline
+        | 出版日: #{book.published_at}
+      .d-inline.ml-3
+        - if book.buy_link.present?
+          = link_to book.buy_link do
+            | 購入する
+      
+      = link_to new_book_output_path(book) do
+        p クイズを作成
       
