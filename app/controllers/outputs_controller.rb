@@ -1,5 +1,5 @@
 class OutputsController < ApplicationController
-  before_action :require_login, only: %i[new create edit update destroy]
+  before_action :require_login, only: %i[new create destroy]
 
   def index
     @outputs = Output.all.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
@@ -27,18 +27,9 @@ class OutputsController < ApplicationController
     end
   end
 
-  def edit
-    @output = current_user.outputs.find(params[:id])
-  end
-
   def show
     @output = Output.find(params[:id])
     @choices = @output.choices.all
-  end
-
-  def update
-    @output = current_user.outputs.find(params[:id])
-    @output.update(update_output_params)
   end
 
   def destroy

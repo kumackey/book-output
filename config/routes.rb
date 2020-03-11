@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     collection do
       get :search
     end
-    resources :outputs
+    resources :outputs, only: %i[create new show destroy]
   end
   resources :likes, only: %i[create destroy]
   resources :choices, only: %i[] do
