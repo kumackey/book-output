@@ -1,7 +1,7 @@
-- provide :title, "クイズを作成"
+- provide :title, "#{@book.title}のクイズ作成"
 .container
-  .row
+  .row.flex-row-reverse
+    .col-md-7.mb-3
+      = render 'outputs/form_new', register_output_form: @register_output_form
     .col-md-5
       = render 'books/detail', book: @book
-    .col-md-7
-      = render 'outputs/form_new', register_output_form: @register_output_form

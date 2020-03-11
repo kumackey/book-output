@@ -21,7 +21,7 @@ ja:
         published_at: '出版日'
         googlebooksapi_id: 'ID'
       output:
-        content: クイズ文
+        content: 問題文
       choice:
         content: 選択肢
         is_answer: 正誤
@@ -29,11 +29,11 @@ ja:
   activemodel:
     attributes:
         register_output_form:
-            question: 'クイズ文'
-            choice_1: '選択肢1'
-            choice_2: '選択肢2'
-            choice_3: '選択肢3'
-            choice_4: '選択肢4'
+            question: '問題文'
+            choice_1: '1'
+            choice_2: '2'
+            choice_3: '3'
+            choice_4: '4'
             answer_number: '正解番号'
 
   attributes:

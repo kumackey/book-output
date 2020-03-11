@@ -1,15 +1,7 @@
 - provide :title, @book.title
 .container
-  .row
+  .row.flex-row-reverse
+    .col-md-7.mb-3
+      = render 'outputs/outputs_in_book', outputs: @outputs
     .col-md-5
       = render 'books/detail', book: @book
-    .col-md-7
-      - if logged_in?
-        = link_to new_book_output_path(@book) do
-          | 問題を作成する
-      - else
-        | アウトプットするためには
-        = link_to login_path
-          | ログイン
-        |してください。
-      = render 'outputs/outputs', outputs: @outputs

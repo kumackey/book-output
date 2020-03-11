@@ -16,3 +16,13 @@ body {
   background-size: cover;
   background-position: center 60%;
 }
+
+.card-book {
+  background-color: #e9f5e3;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+input[type=radio] {
+  display: none; /* ラジオボタンを非表示にする */
+}

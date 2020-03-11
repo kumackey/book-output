@@ -14,17 +14,17 @@ Rails.application.routes.draw do
 
   # その他リソース
   get 'outputs', to: 'outputs#index'
-  get 'outputs/latest', to: 'outputs#latest'
+  get 'outputs/random', to: 'outputs#random'
   resources :books, only: %i[index create new show], shallow: true do
     collection do
       get :search
     end
-    resources :outputs
+    resources :outputs, only: %i[create new show destroy]
   end
   resources :likes, only: %i[create destroy]
   resources :choices, only: %i[] do
     member do
-      post :check, to: 'choices#check'
+      get :check, to: 'choices#check'
     end
   end
 end

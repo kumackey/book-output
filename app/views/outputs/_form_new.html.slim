@@ -1,22 +1,40 @@
-  h1 クイズを作成する
-  = form_with model: register_output_form, url: book_outputs_path, local: true do |f|
-    = render 'shared/error_messages', object: register_output_form
-    .form-group
-      = f.label :question
-      = f.text_field :question, class: 'form-control'
-    .form-group
-      = f.label :choice_1
-      = f.text_field :choice_1, class: 'form-control'
-    .form-group
-      = f.label :choice_2
-      = f.text_field :choice_2, class: 'form-control'
-    .form-group
-      = f.label :choice_3
-      = f.text_field :choice_3, class: 'form-control'
-    .form-group
-      = f.label :choice_4
-      = f.text_field :choice_4, class: 'form-control'
-    .form-group
-      = f.label :answer_number
-      = f.text_field :answer_number, class: 'form-control'
-    = f.submit '登録する', class: 'btn btn-raised btn-primary'
+.card
+  h5.card-header.bg-primary.text-white.text-center
+    strong クイズ作成
+  .card-body.bg-light
+    = form_with model: register_output_form, url: book_outputs_path, local: true do |f|
+      = render 'shared/error_messages', object: register_output_form
+      .form-group
+        = f.label :question
+        = f.text_field :question, class: 'form-control', placeholder: "問題文を入力してください"
+      .pt-2.pb-1
+        label 選択肢
+      .form-group.row
+        = f.label :choice_1, class: 'col-1 text-center'
+        = f.text_field :choice_1, class: 'form-control col-9', placeholder: "例: ○"
+      .form-group.row
+        = f.label :choice_2, class: 'col-1 text-center'
+        = f.text_field :choice_2, class: 'form-control col-9', placeholder: "例: ×"
+      .form-group.row
+        = f.label :choice_3, class: 'col-1 text-center'
+        = f.text_field :choice_3, class: 'form-control col-9'
+      .form-group.row
+        = f.label :choice_4, class: 'col-1 text-center'
+        = f.text_field :choice_4, class: 'form-control col-9'
+      .form-group.row
+        .col-6
+          = f.label :answer_number, {class: 'form-label'}
+        .btn-group.col-6[data-toggle="buttons"]
+          label.btn.btn-outline-success.active[style="width:25%"]
+            = f.radio_button :answer_number, "1", {checked: true}
+            |  1
+          label.btn.btn-outline-success[style="width:25%"]
+            = f.radio_button :answer_number, "2", {}
+            |  2
+          label.btn.btn-outline-success[style="width:25%"]
+            = f.radio_button :answer_number, "3", {}
+            |  3
+          label.btn.btn-outline-success[style="width:25%"]
+            = f.radio_button :answer_number, "4", {}
+            |  4
+      = f.submit '登録する', class: 'btn btn-raised btn-primary'
