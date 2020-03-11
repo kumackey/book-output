@@ -22,3 +22,7 @@ body {
   padding: 1em;
   margin-bottom: 1em;
 }
+
+input[type=radio] {
+  display: none; /* ラジオボタンを非表示にする */
+}
