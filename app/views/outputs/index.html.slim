@@ -1,4 +1,5 @@
-- provide :title, "クイズ"
+- provide :title, "クイズ一覧"
 .container
   = render @outputs
-  = paginate @outputs
+  .mt-3
+    = paginate @outputs
