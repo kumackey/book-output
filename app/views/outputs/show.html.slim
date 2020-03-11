@@ -1,8 +1,8 @@
 - provide :title, "クイズ"
 .container
   .row.flex-row-reverse
-    .col-md-5
-      = render 'books/detail', book: @output.book
     .col-md-7.mb-3
       h3 = @output.content
       = render @choices
+    .col-md-5
+      = render 'books/detail', book: @output.book
