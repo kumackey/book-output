@@ -1,6 +1,7 @@
 .outputs-box
   - if outputs.empty?
     p まだクイズがありません。
-  = render outputs
+  - outputs.each do |output|
+    = render 'outputs/output_in_book', output: output
   .mt-5
     = paginate outputs
