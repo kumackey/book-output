@@ -1,0 +1,8 @@
+.container-fuild
+  .row
+    - books.each do |book|
+      .col-12.col-md-6.col-lg-4
+        .card.card-book
+          = render 'book_searching', book: book
+.mt-3
+  = paginate books

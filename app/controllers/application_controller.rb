@@ -4,4 +4,8 @@ class ApplicationController < ActionController::Base
   def not_authenticated
     redirect_to login_path, warning: 'ログインしてください'
   end
+
+  def authenticated
+    redirect_to home_path if logged_in?
+  end
 end

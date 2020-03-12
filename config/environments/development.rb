@@ -61,10 +61,14 @@ Rails.application.configure do
 
   config.session_store :redis_store,
                        servers: {
-                         host: 'localhost',
+                         host: 'redis',
                          port: 6379,
                          db: 0,
                          namespace: 'sessions'
                        },
                        expire_after: 60.minutes
+end
+
+if Rails.env.development?
+  BetterErrors::Middleware.allow_ip! '0.0.0.0/0'
 end

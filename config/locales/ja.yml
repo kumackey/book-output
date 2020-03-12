@@ -3,13 +3,15 @@ ja:
     models:
       user: 'ユーザー'
       book: '本'
+      like: 'いいね'
+      output: 'クイズ'
+      choice: '選択肢'
     attributes:
       user:
         username: '名前'
         email: 'Eメール'
         password: 'パスワード'
         password_confirmation: 'パスワード確認'
-
       book:
         author: '著者'
         title: 'タイトル'
@@ -18,6 +20,21 @@ ja:
         image: '画像リンク'
         published_at: '出版日'
         googlebooksapi_id: 'ID'
+      output:
+        content: 問題文
+      choice:
+        content: 選択肢
+        is_answer: 正誤
+
+  activemodel:
+    attributes:
+        register_output_form:
+            question: '問題文'
+            choice_1: '1'
+            choice_2: '2'
+            choice_3: '3'
+            choice_4: '4'
+            answer_number: '正解番号'
 
   attributes:
     created_at: '作成日時'

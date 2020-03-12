@@ -1,0 +1,6 @@
+- if logged_in?
+  div id="book-#{book.id}"
+    - if current_user.like?(book)
+      = render 'books/unlike', book: book
+    - else
+      = render 'books/like', book: book
