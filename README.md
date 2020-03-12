@@ -6,11 +6,9 @@ http://bookoutput.work/
 
 ## 動機
 
-このアプリ作成者(私)は、読書をするのが好きです。
-せっかく読書をしても、読んだままとなってしまい、その知識が定着しないのが悩みでした。
+このアプリ作成者(私)は、読書をするのが好きです。せっかく読書をしても、読んだままとなってしまい、その知識が定着しないのが悩みでした。
 
-知識を定着させるには、その知識に関する問題(クイズ)を作るのが有効と言われています。
-しかし、本に関するクイズを作るサービスが見つかりませんでした。
+知識を定着させるには、その知識に関する問題(クイズ)を作るのが有効と言われています。しかし、本に関するクイズを作るサービスが見つかりませんでした。
 
 このサービスは、私が作りたかったサービスです。
 
@@ -56,11 +54,15 @@ http://bookoutput.work/
 - Redis 3.0.5
 
 AWS: VPC / EC2 / RDS / S3 / Route53 / IAM
+
 その他: Nginx / puma 
 
 #### 確認手順
 
 $ git clone git@github.com:kumackey/book-output.git
+
 $ docker-compose build
+
 $ docker-compose up
+
 $ docker-compose run web rails db:create db:migrate db:seed
