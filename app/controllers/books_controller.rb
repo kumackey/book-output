@@ -7,8 +7,7 @@ class BooksController < ApplicationController
 
   def create
     google_book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
-    @book = current_user.books.build
-    @book = @book.substitute_for_googlebook(google_book)
+    @book = google_book.build_book_by_user(current_user)
     if @book.save
       current_user.like(@book)
       redirect_back_or_to books_path, success: '本を登録しました'
