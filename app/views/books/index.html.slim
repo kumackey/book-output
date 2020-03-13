@@ -1,4 +1,7 @@
 - provide :title, "本一覧"
 .container
-  = render @books
+  .row
+    - @books.each do |book|
+      .col-12.col-md-6
+        = render book
   = paginate @books

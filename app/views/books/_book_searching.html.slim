@@ -1,4 +1,4 @@
-.container-fluid
+.container.card.card-book
   .row
     = link_to new_book_path(googlebooksapi_id: book.googlebooksapi_id), class: 'col-3 col-lg-4', remote: true do
       - if book.image?

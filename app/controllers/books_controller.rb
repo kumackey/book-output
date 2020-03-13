@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :require_login, only: %i[create]
 
   def index
-    @books = Book.all.includes(:user).page(params[:page]).per(15).order(created_at: :desc)
+    @books = Book.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
   end
 
   def create
