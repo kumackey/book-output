@@ -26,12 +26,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if logged_in? && @user.id == current_user.id
-      redirect_to mypage_path
-    else
-      @outputs = @user.outputs.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
-      @books = @user.like_books.includes(:user).order(created_at: :desc)
-    end
+    @outputs = @user.outputs.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
+    @books = @user.like_books.includes(:user).order(created_at: :desc)
   end
 
   private

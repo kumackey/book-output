@@ -36,12 +36,5 @@ RSpec.describe "Users", type: :request do
     expect(response).to have_http_status(200)
     expect(response.body).to include("サンプルユーザー")
   end
-
-  it "ログイン時に自分のユーザー詳細画面はマイページに遷移すること" do
-    login
-    user = User.find_by(email:'guest@guest.jp') # loginしているユーザー
-    get "/users/#{user.id}"
-    expect(response).to redirect_to mypage_path
-  end
 end
 
