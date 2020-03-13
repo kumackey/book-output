@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # ユーザリソース
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
+  get 'mypage', to: 'users#mypage'
 
   # セッションリソース
   get 'login', to: 'sessions#new'

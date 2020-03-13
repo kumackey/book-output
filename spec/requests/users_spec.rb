@@ -19,11 +19,29 @@ RSpec.describe "Users", type: :request do
     expect(response.body).to include('ユーザーを作成し')
   end
 
+  it "ログイン時にマイページ画面の表示に成功すること" do
+    login
+    get "/mypage"
+    expect(response).to have_http_status(200)
+  end
+
+  it "非ログイン時にマイページはログイン画面に遷移すること" do
+    get "/mypage"
+    expect(response).to redirect_to login_path
+  end
+
   it "ユーザー詳細画面の表示に成功すること" do
     user = create(:user, username: 'サンプルユーザー')
     get "/users/#{user.id}"
     expect(response).to have_http_status(200)
     expect(response.body).to include("サンプルユーザー")
+  end
+
+  it "ログイン時に自分のユーザー詳細画面はマイページに遷移すること" do
+    login
+    user = User.find_by(email:'guest@guest.jp') # loginしているユーザー
+    get "/users/#{user.id}"
+    expect(response).to redirect_to mypage_path
   end
 end
 
