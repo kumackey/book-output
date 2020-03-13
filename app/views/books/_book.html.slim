@@ -9,4 +9,5 @@
           h5 = book.title
       .d-inline-block.float-right.pl-1
         = render 'books/like_area', book: book
-      p = book.author
+    .name-position
+      = book.author

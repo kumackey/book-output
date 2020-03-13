@@ -6,4 +6,5 @@
     .col-9.col-lg-8
       = link_to new_book_path(googlebooksapi_id: book.googlebooksapi_id), remote: true do
         h5 = book.title
+    .name-position
       = book.author
