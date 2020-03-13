@@ -1,7 +1,7 @@
 - provide :title, "Home"
 .container
   .row
-    .col-12.col-md-6
+    .col-12.col-md-6.mb-3
       = render 'outputs/outputs', outputs: @outputs
       - if @outputs.empty?
         .text-center
