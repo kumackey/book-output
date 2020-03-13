@@ -25,7 +25,7 @@ header
               = icon 'fas', 'swatchbook', class: 'fa-lg'
               | クイズ一覧
           li.nav-item class="#{'active' if controller.controller_name == 'users' && controller.action_name == 'mypage'}"
-            = link_to user_path(current_user), class: 'nav-link' do
+            = link_to mypage_path(current_user), class: 'nav-link' do
               = icon 'fas', 'user', class: 'fa-lg'
               | マイページ
           li.nav-item
