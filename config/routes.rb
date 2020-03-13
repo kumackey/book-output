@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # ユーザリソース
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
+  get 'mypage', to: 'users#mypage'
 
   # セッションリソース
   get 'login', to: 'sessions#new'
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   # その他リソース
   get 'outputs', to: 'outputs#index'
   get 'outputs/random', to: 'outputs#random'
+  resources :users, only: %i[show]
   resources :books, only: %i[index create new show], shallow: true do
     collection do
       get :search

@@ -24,6 +24,10 @@ header
             = link_to outputs_path, class: 'nav-link' do
               = icon 'fas', 'swatchbook', class: 'fa-lg'
               | クイズ一覧
+          li.nav-item class="#{'active' if controller.controller_name == 'users' && controller.action_name == 'mypage'}"
+            = link_to user_path(current_user), class: 'nav-link' do
+              = icon 'fas', 'user', class: 'fa-lg'
+              | マイページ
           li.nav-item
             = link_to logout_path, class: 'nav-link', method: :delete
               = icon 'fas', 'sign-out-alt', class: 'fa-lg'
