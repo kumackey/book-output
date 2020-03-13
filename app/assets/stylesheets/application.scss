@@ -23,8 +23,14 @@ body {
   margin-bottom: 1em;
 }
 
+.card-choice {
+  padding: .75em;
+  margin-top: 1em;
+  background-color: #f9ffe6;
+}
+
 input[type=radio] {
-  display: none; /* ラジオボタンを非表示にする */
+  display: none;
 }
 
 .name-position {
