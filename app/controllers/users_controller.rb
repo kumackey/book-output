@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       format.html do
         @outputs = @user.outputs.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
         @books = @user.like_books.includes(:user).order(created_at: :desc)
-      end 
+      end
       format.csv do
         @outputs = @user.outputs.includes(%i[user book]).order(created_at: :desc)
       end
