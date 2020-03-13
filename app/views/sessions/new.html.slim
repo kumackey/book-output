@@ -12,7 +12,7 @@
               = f.email_field :email, class: 'form-control', placeholder: 'Eメール'
             .form-group
               = f.password_field :password, class: 'form-control', placeholder: 'パスワード'
-            = f.submit 'ログイン', class: 'btn btn-raised btn-primary'
+            = f.submit 'ログイン', class: 'btn btn-raised btn-success'
           = link_to guest_login_path, method: :post do
-            button.btn.btn-raised.btn-success
+            button.btn.btn-raised.btn-info
               | ゲストログイン

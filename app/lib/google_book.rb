@@ -46,6 +46,19 @@ class GoogleBook
     @page_count = @volume_info['pageCount']
   end
 
+  def build_book_by_user(user)
+    book = user.books.build(
+      author: @author,
+      description: @description,
+      googlebooksapi_id: @googlebooksapi_id,
+      published_at: @published_at,
+      title: @title,
+      buy_link: @buy_link
+    )
+    book.remote_image_url = @image if @image.present?
+    book
+  end
+
   private
 
   def image_url

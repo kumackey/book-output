@@ -1,17 +1,16 @@
 - provide :title, "Home"
 .container
   .row
-    .col-12.col-md-6
-      = render @outputs
-      .text-center
-        - if @outputs_count <= 5
+    .col-12.col-md-6.mb-3
+      = render 'outputs/outputs', outputs: @outputs
+      - if @outputs.empty?
+        .text-center
           p 本をいいねすると、そのクイズが表示されます。
           = link_to books_path do
             p 本一覧を見ていいねする
-      .mb-5
-        = paginate @outputs
     .col-12.col-md-6
-      h6.text-center
+      h6.text-center.mb-3
         | 最近登録された本
       = render @books
-      = render 'shared/random_quiz'
+      .text-center
+        = render 'shared/random_quiz'

@@ -12,7 +12,7 @@ body {
 }
 
 .jumbotron {
-  background-image: url("janbotron.jpg");
+  background-image: image-url("janbotron.jpg");
   background-size: cover;
   background-position: center 60%;
 }
@@ -23,6 +23,18 @@ body {
   margin-bottom: 1em;
 }
 
+.card-choice {
+  padding: .75em;
+  margin-top: 1em;
+  background-color: #f9ffe6;
+}
+
 input[type=radio] {
-  display: none; /* ラジオボタンを非表示にする */
+  display: none;
+}
+
+.name-position {
+  position: absolute;
+  right: .75em;
+  bottom: .75em;
 }

@@ -3,10 +3,9 @@
     .col-2.col-md-3
       = link_to book_path(book) do
         = image_tag book.image.url, width: '70' if book.image?
-    .col-10.col-md-9
-      .d-inline-block
-        = link_to book_path(book) do
-          h5 = book.title
-      .d-inline-block.float-right.pl-1
-        = render 'books/like_area', book: book
-      p = book.author
+    = link_to book_path(book), class: 'col-9 col-md-8' do
+      h5 = book.title
+    .col-1.text-right
+      = render 'books/like_area', book: book
+    .name-position
+      = book.author

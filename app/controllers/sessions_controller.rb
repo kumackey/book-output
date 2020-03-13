@@ -24,21 +24,17 @@ class SessionsController < ApplicationController
   end
 
   def guest_login
-    username = 'guest'
-    email = 'guest@guest.jp'
-    password = 'guestguest'
-    user = User.find_by(email: email)
-    unless user
-      User.create(
-        username: username,
-        email: email,
-        password: password,
-        password_confirmation: password
-      )
-    end
-    @user = login(email, password)
+    user_infomation_hash = {
+      username: 'guest',
+      email: 'guest@guest.jp',
+      password: 'guestguest',
+      password_confirmation: 'guestguest'
+    }
+    user = User.find_by(email: user_infomation_hash[:email])
+    User.create(user_infomation_hash) unless user
+    @user = login(user_infomation_hash[:email], user_infomation_hash[:password])
     if @user
-      redirect_back_or_to home_path, success: 'ゲストユーザーとしてログインしました'
+      redirect_back_or_to home_path, info: 'ゲストユーザーとしてログインしました'
     else
       flash.now[:danger] = 'ログインに失敗しました'
       render :new
