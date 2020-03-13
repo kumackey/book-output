@@ -6,5 +6,5 @@
       - if current_user&.own?(output)
         = link_to output_path(output), class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'}, remote: true do
           = icon 'far', 'trash-alt', class: 'fa-md'
-  span.text-right
+  .user-name-position
     = output.user.username
