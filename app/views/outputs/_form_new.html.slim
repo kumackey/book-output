@@ -7,18 +7,18 @@
       .form-group
         = f.label :question
         = f.text_field :question, class: 'form-control', placeholder: "問題文を入力してください"
-      .pt-2.pb-1
+      .mt-4.pb-2
         label 選択肢
       .form-group.row
-        = f.label :correct_choice, class: 'col-2 text-center text-success p-2'
-        = f.text_field :correct_choice, class: 'form-control col-7', placeholder: "例: ○"
+        = f.label :correct_choice, class: 'col-3 text-center text-success p-2'
+        = f.text_field :correct_choice, class: 'form-control col-8', placeholder: "例: ○"
       .form-group.row
-        = f.label :incorrect_choice_1, class: 'col-2 text-center text-danger p-2'
-        = f.text_field :incorrect_choice_1, class: 'form-control col-7', placeholder: "例: ×"
+        = f.label :incorrect_choice_1, class: 'col-3 text-center text-danger p-2'
+        = f.text_field :incorrect_choice_1, class: 'form-control col-8', placeholder: "例: ×"
       .form-group.row
-        = f.label :incorrect_choice_2, class: 'col-2 text-center text-danger p-2'
-        = f.text_field :incorrect_choice_2, class: 'form-control col-7'
+        = f.label :incorrect_choice_2, class: 'col-3 text-center text-danger p-2'
+        = f.text_field :incorrect_choice_2, class: 'form-control col-8'
       .form-group.row
-        = f.label :incorrect_choice_3, class: 'col-2 text-center text-danger p-2'
-        = f.text_field :incorrect_choice_3, class: 'form-control col-7'
+        = f.label :incorrect_choice_3, class: 'col-3 text-center text-danger p-2'
+        = f.text_field :incorrect_choice_3, class: 'form-control col-8'
       = f.submit '登録する', class: 'btn btn-raised btn-primary'
