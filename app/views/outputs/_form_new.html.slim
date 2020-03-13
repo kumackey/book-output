@@ -1,5 +1,5 @@
 .card
-  h5.card-header.bg-primary.text-white.text-center
+  h5.card-header.bg-success.text-white.text-center
     strong クイズ作成
   .card-body.bg-white
     = form_with model: register_output_form, url: book_outputs_path, local: true do |f|
@@ -21,4 +21,5 @@
       .form-group.row
         = f.label :incorrect_choice_3, class: 'col-3 text-center text-danger p-2'
         = f.text_field :incorrect_choice_3, class: 'form-control col-8'
-      = f.submit '登録する', class: 'btn btn-raised btn-primary'
+      .text-center
+        = f.submit '登録する', class: 'btn btn-raised btn-success'
