@@ -19,7 +19,7 @@ class OutputsController < ApplicationController
     @register_output_form = RegisterOutputForm.new(create_output_params)
     @book = Book.find(params[:book_id])
     if @register_output_form.valid?
-      @register_output_form.save_question_and_choices(current_user, @book)
+      @register_output_form.save_from_user_and_book(current_user, @book)
       redirect_to @book, success: '問題を作成しました'
     else
       flash.now[:danger] = '問題の作成に失敗しました'
