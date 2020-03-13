@@ -2,13 +2,12 @@ class BooksController < ApplicationController
   before_action :require_login, only: %i[create]
 
   def index
-    @books = Book.all.includes(:user).page(params[:page]).per(15).order(created_at: :desc)
+    @books = Book.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
   end
 
   def create
     google_book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
-    @book = current_user.books.build
-    @book = @book.substitute_for_googlebook(google_book)
+    @book = google_book.build_book_by_user(current_user)
     if @book.save
       current_user.like(@book)
       redirect_back_or_to books_path, success: '本を登録しました'
@@ -32,7 +31,7 @@ class BooksController < ApplicationController
     @search_form = SearchBooksForm.new(search_books_params)
     if params[:q].present?
       books = GoogleBook.search(search_books_params[:keyword])
-      @books = Kaminari.paginate_array(books).page(params[:page]).per(6)
+      @books = Kaminari.paginate_array(books).page(params[:page])
     else
       @books = Kaminari.paginate_array([]).page(params[:page])
     end

@@ -32,7 +32,7 @@
           - else
             - if logged_in?
               = link_to books_path(googlebooksapi_id: google_book.googlebooksapi_id), method: :post do
-                button.btn.btn-raised.btn-primary
+                button.btn.btn-raised.btn-success
                   | 本を登録する
             - else
               | 本を登録するには

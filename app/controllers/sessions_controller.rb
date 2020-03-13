@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
     end
     @user = login(email, password)
     if @user
-      redirect_back_or_to home_path, success: 'ゲストユーザーとしてログインしました'
+      redirect_back_or_to home_path, info: 'ゲストユーザーとしてログインしました'
     else
       flash.now[:danger] = 'ログインに失敗しました'
       render :new

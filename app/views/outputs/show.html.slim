@@ -2,10 +2,10 @@
 .container
   .row.flex-row-reverse
     .col-md-7.mb-3
-      .card.bg-light
-        h5.card-header.bg-primary.text-white.text-center
+      .card
+        h5.card-header.bg-success.text-white.text-center
           strong 
-            | Q. #{@output.content}
+            | #{@output.content}
         .card-body.px-lg-5.pt-0
           = render @choices
     .col-md-5

@@ -1,11 +1,10 @@
-.container.card.p-2 id="output-#{output.id}" 
+.container.card.p-3 id="output-#{output.id}" 
   .row
-    .col-10.text-break
-      = link_to output_path(output) do
-        h5 = output.content
-      p.text-right
-        = output.user.username
-    .col-2
+    = link_to output_path(output), class: 'col-11 text-break' do
+      h6 = output.content
+    .col-1.text-right
       - if current_user&.own?(output)
         = link_to output_path(output), class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'}, remote: true do
           = icon 'far', 'trash-alt', class: 'fa-md'
+  .name-position
+    = output.user.username
