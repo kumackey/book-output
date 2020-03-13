@@ -6,6 +6,6 @@
     strong クイズ一覧
   .outputs-box
     - outputs.each do |output|
-      = render 'outputs/output_in_book', output: output
+      = render 'outputs/output', output: output
   .mt-3
     = paginate outputs

@@ -1,14 +1,15 @@
-.container.card.p-1 id="output-#{output.id}" 
+.container.card.p-3 id="output-#{output.id}" 
   .row
     .col-2
       = link_to book_path(output.book) do
-        = image_tag output.book.image.url, height: '60'
-    .col-9.text-break
-      = link_to output_path(output) do
-        h5 = output.content
-      p.text-right
+        = image_tag output.book.image.url, height: '70'
+    .col-10
+      .row
+        = link_to output_path(output), class: 'col-11 text-break' do
+          h6 = output.content
+        .col-1
+          - if current_user&.own?(output)
+            = link_to output_path(output), class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'}, remote: true do
+              = icon 'far', 'trash-alt', class: 'fa-md'
+      .text-right
         = output.user.username
-    .col-1
-      - if current_user&.own?(output)
-        = link_to output_path(output), class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'}, remote: true do
-          = icon 'far', 'trash-alt', class: 'fa-md'
