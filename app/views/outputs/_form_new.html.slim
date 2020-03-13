@@ -1,7 +1,7 @@
 .card
   h5.card-header.bg-primary.text-white.text-center
     strong クイズ作成
-  .card-body.bg-light
+  .card-body.bg-white
     = form_with model: register_output_form, url: book_outputs_path, local: true do |f|
       = render 'shared/error_messages', object: register_output_form
       .form-group
@@ -10,31 +10,15 @@
       .pt-2.pb-1
         label 選択肢
       .form-group.row
-        = f.label :choice_1, class: 'col-1 text-center'
-        = f.text_field :choice_1, class: 'form-control col-9', placeholder: "例: ○"
+        = f.label :correct_choice, class: 'col-2 text-center text-success p-2'
+        = f.text_field :correct_choice, class: 'form-control col-7', placeholder: "例: ○"
       .form-group.row
-        = f.label :choice_2, class: 'col-1 text-center'
-        = f.text_field :choice_2, class: 'form-control col-9', placeholder: "例: ×"
+        = f.label :incorrect_choice_1, class: 'col-2 text-center text-danger p-2'
+        = f.text_field :incorrect_choice_1, class: 'form-control col-7', placeholder: "例: ×"
       .form-group.row
-        = f.label :choice_3, class: 'col-1 text-center'
-        = f.text_field :choice_3, class: 'form-control col-9'
+        = f.label :incorrect_choice_2, class: 'col-2 text-center text-danger p-2'
+        = f.text_field :incorrect_choice_2, class: 'form-control col-7'
       .form-group.row
-        = f.label :choice_4, class: 'col-1 text-center'
-        = f.text_field :choice_4, class: 'form-control col-9'
-      .form-group.row
-        .col-6
-          = f.label :answer_number, {class: 'form-label'}
-        .btn-group.col-6[data-toggle="buttons"]
-          label.btn.btn-outline-success.active[style="width:25%"]
-            = f.radio_button :answer_number, "1", {checked: true}
-            |  1
-          label.btn.btn-outline-success[style="width:25%"]
-            = f.radio_button :answer_number, "2", {}
-            |  2
-          label.btn.btn-outline-success[style="width:25%"]
-            = f.radio_button :answer_number, "3", {}
-            |  3
-          label.btn.btn-outline-success[style="width:25%"]
-            = f.radio_button :answer_number, "4", {}
-            |  4
+        = f.label :incorrect_choice_3, class: 'col-2 text-center text-danger p-2'
+        = f.text_field :incorrect_choice_3, class: 'form-control col-7'
       = f.submit '登録する', class: 'btn btn-raised btn-primary'
