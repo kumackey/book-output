@@ -4,28 +4,28 @@ class RegisterOutputForm
   include ActiveModel::Validations
 
   attribute :question, :string
-  attribute :choice_1, :string
-  attribute :choice_2, :string
-  attribute :choice_3, :string
-  attribute :choice_4, :string
-  attribute :answer_number, :integer
+  attribute :correct_choice, :string
+  attribute :incorrect_choice_1, :string
+  attribute :incorrect_choice_2, :string
+  attribute :incorrect_choice_3, :string
 
   validates :question, presence: true, length: { maximum: 500 }
-  validates :choice_1, presence: true, length: { maximum: 40 }
-  validates :choice_2, presence: true, length: { maximum: 40 }
-  validates :choice_3, length: { maximum: 40 }
-  validates :choice_4, length: { maximum: 40 }
+  validates :correct_choice, presence: true, length: { maximum: 40 }
+  validates :incorrect_choice_1, presence: true, length: { maximum: 40 }
+  validates :incorrect_choice_2, length: { maximum: 40 }
+  validates :incorrect_choice_3, length: { maximum: 40 }
 
-  validates :answer_number, presence: true
-  VALID_ANSWER_NUMBER_REGEX = /[1-4]/.freeze
-  validates_format_of :answer_number, with: VALID_ANSWER_NUMBER_REGEX
+  def save_question_and_choices(user, book)
+    output = user.outputs.build(content: self.question)
+    output.book_id = book.id
+    output.save
 
-  def choices
-    array = []
-    array << choice_1
-    array << choice_2
-    array << choice_3
-    array << choice_4
-    array
+    correct_choice = output.choices.build(content: self.correct_choice)
+    correct_choice.is_answer = true
+    correct_choice.save
+
+    output.choices.create(content: self.incorrect_choice_1)
+    output.choices.create(content: self.incorrect_choice_2)
+    output.choices.create(content: self.incorrect_choice_3)
   end
 end

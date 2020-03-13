@@ -30,11 +30,10 @@ ja:
     attributes:
         register_output_form:
             question: '問題文'
-            choice_1: '1'
-            choice_2: '2'
-            choice_3: '3'
-            choice_4: '4'
-            answer_number: '正解番号'
+            correct_choice: '正答'
+            incorrect_choice_1: '誤答1'
+            incorrect_choice_2: '誤答2'
+            incorrect_choice_3: '誤答3'
 
   attributes:
     created_at: '作成日時'
