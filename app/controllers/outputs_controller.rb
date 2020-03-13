@@ -39,7 +39,6 @@ class OutputsController < ApplicationController
 
   private
 
-
   def create_output_params
     params.require(:register_output_form).permit(:question, :correct_choice, :incorrect_choice_1, :incorrect_choice_2, :incorrect_choice_3)
   end

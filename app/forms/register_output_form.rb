@@ -16,7 +16,7 @@ class RegisterOutputForm
   validates :incorrect_choice_3, length: { maximum: 40 }
 
   def save_from_user_and_book(user, book)
-    output = user.outputs.build(content: self.question)
+    output = user.outputs.build(content: question)
     output.book_id = book.id
     output.save
 
@@ -24,8 +24,8 @@ class RegisterOutputForm
     correct_choice.is_answer = true
     correct_choice.save
 
-    output.choices.create(content: self.incorrect_choice_1)
-    output.choices.create(content: self.incorrect_choice_2)
-    output.choices.create(content: self.incorrect_choice_3)
+    output.choices.create(content: incorrect_choice_1)
+    output.choices.create(content: incorrect_choice_2)
+    output.choices.create(content: incorrect_choice_3)
   end
 end
