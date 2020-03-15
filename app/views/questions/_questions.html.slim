@@ -1,0 +1,11 @@
+- if questions.empty?
+  .text-center
+    p まだクイズがありません。
+- else
+  h5.card-header.bg-success.text-white.text-center
+    strong クイズ一覧
+  .questions-box
+    - questions.each do |question|
+      = render 'questions/question', question: question
+  .mt-3
+    = paginate questions

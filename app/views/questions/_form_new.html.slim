@@ -2,7 +2,7 @@
   h5.card-header.bg-success.text-white.text-center
     strong クイズ作成
   .card-body.bg-white
-    = form_with model: register_output_form, url: book_outputs_path, local: true do |f|
+    = form_with model: register_output_form, url: book_questions_path, local: true do |f|
       = render 'shared/error_messages', object: register_output_form
       .form-group
         = f.label :question
