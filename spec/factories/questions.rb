@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: outputs
+# Table name: questions
 #
 #  id         :bigint           not null, primary key
 #  content    :text(65535)      not null
@@ -11,8 +11,8 @@
 #
 # Indexes
 #
-#  index_outputs_on_book_id  (book_id)
-#  index_outputs_on_user_id  (user_id)
+#  index_questions_on_book_id  (book_id)
+#  index_questions_on_user_id  (user_id)
 #
 # Foreign Keys
 #
