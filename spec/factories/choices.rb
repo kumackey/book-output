@@ -23,6 +23,6 @@ FactoryBot.define do
   factory :choice do
     content { "○" }
     is_answer { true }
-    association :output
+    association :question
   end
 end

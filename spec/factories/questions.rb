@@ -21,8 +21,8 @@
 #
 
 FactoryBot.define do
-  factory :output do
-    content { "Outputしています。" }
+  factory :question do
+    content { "質問しています。" }
     association :book
     association :user
   end

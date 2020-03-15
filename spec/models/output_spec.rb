@@ -22,31 +22,31 @@
 
 require 'rails_helper'
 
-RSpec.describe Output, type: :model do
-  let(:output) { build(:output) }
+RSpec.describe Question, type: :model do
+  let(:question) { build(:question) }
 
   it "有効なファクトリを持つこと" do
-    expect(output).to be_valid
+    expect(question).to be_valid
   end
 
   it "アウトプットが空白であるときに無効なこと" do
-    output.content = nil
-    output.valid?
-    expect(output.errors.messages[:content]).to include("を入力してください")
+    question.content = nil
+    question.valid?
+    expect(question.errors.messages[:content]).to include("を入力してください")
   end
 
   describe "アウトプットの文字数が" do
     context "500文字のときに" do
-      let(:output) { build(:output, content: 'a' * 500) }
+      let(:question) { build(:question, content: 'a' * 500) }
       it "有効なこと" do
-        expect(output).to be_valid
+        expect(question).to be_valid
       end
     end
     context "501文字のときに" do
-      let(:output) { build(:output, content: 'a' * 501) }
+      let(:question) { build(:question, content: 'a' * 501) }
       it "無効なこと" do
-        output.valid?
-        expect(output.errors[:content]).to include("は500文字以内で入力してください")
+        question.valid?
+        expect(question.errors[:content]).to include("は500文字以内で入力してください")
       end
     end
   end
