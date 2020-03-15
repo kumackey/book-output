@@ -20,7 +20,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-class Output < ApplicationRecord
+class Question < ApplicationRecord
   belongs_to :user
   belongs_to :book
   has_many :choices, dependent: :destroy
