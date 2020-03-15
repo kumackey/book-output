@@ -56,7 +56,7 @@ http://bookoutput.work/
 - MySQL 5.7 
 - Redis 3.0.5
 
-AWS: VPC / EC2 / RDS / S3 / Route53 / IAM
+AWS: VPC / EC2 / RDS / S3 / ElastiCache / Route53 / IAM
 
 その他: Nginx / puma 
 
