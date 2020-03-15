@@ -91,4 +91,13 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.session_store :redis_store,
+                       servers: {
+                         host: ENV['REDIS_HOST'],
+                         port: 6379,
+                         db: 0,
+                         namespace: 'sessions'
+                       },
+                       expire_after: 60.minutes
 end
