@@ -15,14 +15,17 @@ Rails.application.routes.draw do
   post 'guest_login', to: 'sessions#guest_login'
 
   # その他リソース
-  get 'outputs', to: 'outputs#index'
-  get 'outputs/random', to: 'outputs#random'
+  resources :questions, only: %i[index] do
+    collection do
+      get :random
+    end
+  end
   resources :users, only: %i[show]
   resources :books, only: %i[index create new show], shallow: true do
     collection do
       get :search
     end
-    resources :outputs, only: %i[create new show destroy]
+    resources :questions, only: %i[create new show destroy]
   end
   resources :likes, only: %i[create destroy]
   resources :choices, only: %i[] do
