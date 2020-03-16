@@ -23,7 +23,8 @@
 
 FactoryBot.define do
   factory :question do
-    content { "質問しています。" }
+    content { "これは問題文です" }
+    commentary { "これは問題文の解説です。" }
     association :book
     association :user
   end
