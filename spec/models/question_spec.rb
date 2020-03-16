@@ -37,17 +37,17 @@ RSpec.describe Question, type: :model do
   end
 
   describe "問題文の文字数が" do
-    context "500文字のときに" do
-      let(:question) { build(:question, content: 'a' * 500) }
+    context "140文字のときに" do
+      let(:question) { build(:question, content: 'a' * 140) }
       it "有効なこと" do
         expect(question).to be_valid
       end
     end
-    context "501文字のときに" do
-      let(:question) { build(:question, content: 'a' * 501) }
+    context "141文字のときに" do
+      let(:question) { build(:question, content: 'a' * 141) }
       it "無効なこと" do
         question.valid?
-        expect(question.errors[:content]).to include("は500文字以内で入力してください")
+        expect(question.errors[:content]).to include("は140文字以内で入力してください")
       end
     end
   end
