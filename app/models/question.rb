@@ -27,4 +27,5 @@ class Question < ApplicationRecord
   has_many :choices, dependent: :destroy
 
   validates :content, presence: true, length: { maximum: 500 }
+  validates :commentary, length: { maximum: 140 }
 end
