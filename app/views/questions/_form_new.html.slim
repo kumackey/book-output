@@ -21,5 +21,8 @@
       .form-group.row
         = f.label :incorrect_choice_3, class: 'col-3 text-center text-danger p-2'
         = f.text_field :incorrect_choice_3, class: 'form-control col-8'
+      .form-group.mt-5
+        = f.label :commentary
+        = f.text_field :commentary, class: 'form-control', placeholder: "解説文を入れられます(任意)"
       .text-center
         = f.submit '登録する', class: 'btn btn-raised btn-success'

@@ -31,6 +31,7 @@ ja:
     attributes:
         register_output_form:
             question_content: '問題文'
+            commentary: '解説'
             correct_choice: '正答'
             incorrect_choice_1: '誤答1'
             incorrect_choice_2: '誤答2'

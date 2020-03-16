@@ -4,6 +4,7 @@ class RegisterOutputForm
   include ActiveModel::Validations
 
   attribute :question_content, :string
+  attribute :commentary, :string
   attribute :correct_choice, :string
   attribute :incorrect_choice_1, :string
   attribute :incorrect_choice_2, :string
@@ -21,14 +22,12 @@ class RegisterOutputForm
 
   def save_question_and_choices
     user = User.find(user_id)
-    book = Book.find(book_id)
-    question = user.questions.build(content: question_content)
-    question.book_id = book.id
-    question.save
+    question = user.questions.build(content: question_content, commentary: commentary, book_id: book_id)
+    question.save # 問題文と解説文の保存
 
-    correct_choice = question.choices.build(content: self.correct_choice)
-    correct_choice.is_answer = true
-    correct_choice.save
+    choice = question.choices.build(content: correct_choice)
+    choice.is_answer = true
+    choice.save # 正解選択肢の保存
 
     question.choices.create(content: incorrect_choice_1)
     question.choices.create(content: incorrect_choice_2)
