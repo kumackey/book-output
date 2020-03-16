@@ -22,6 +22,27 @@ RSpec.describe RegisterOutputForm, type: :model do
     expect(register_output_form).not_to be_valid
   end
 
+  describe "解説文が" do
+    context "無くとも" do
+      let(:register_output_form) { build(:register_output_form, commentary: nil) } 
+      it "有効なこと" do
+        expect(register_output_form).to be_valid
+      end
+    end
+    context "140文字のときに" do
+      let(:register_output_form) { build(:register_output_form, commentary: "a" * 140) } 
+      it "有効なこと" do
+        expect(register_output_form).to be_valid
+      end
+    end
+    context "141文字のときに" do
+      let(:register_output_form) { build(:register_output_form, commentary: "a" * 141) } 
+      it "無効なこと" do
+        expect(register_output_form).not_to be_valid
+      end
+    end
+  end
+
   it "問題文が141文字のときに無効なこと" do
     register_output_form.question_content = "a" * 141
     expect(register_output_form).not_to be_valid
