@@ -12,7 +12,7 @@ class RegisterOutputForm
   attribute :user_id, :integer
   attribute :book_id, :integer
 
-  validates :question_content, presence: true, length: { maximum: 500 }
+  validates :question_content, presence: true, length: { maximum: 140 }
   validates :correct_choice, presence: true, length: { maximum: 40 }
   validates :incorrect_choice_1, presence: true, length: { maximum: 40 }
   validates :incorrect_choice_2, length: { maximum: 40 }

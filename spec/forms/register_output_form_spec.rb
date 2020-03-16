@@ -22,8 +22,8 @@ RSpec.describe RegisterOutputForm, type: :model do
     expect(register_output_form).not_to be_valid
   end
 
-  it "質問文が501文字のときに無効なこと" do
-    register_output_form.question_content = "a" * 501
+  it "問題文が141文字のときに無効なこと" do
+    register_output_form.question_content = "a" * 141
     expect(register_output_form).not_to be_valid
   end
 
