@@ -33,6 +33,5 @@ class RegisterOutputForm
     question.choices.create(content: incorrect_choice_1)
     question.choices.create(content: incorrect_choice_2)
     question.choices.create(content: incorrect_choice_3)
-    question
   end
 end
