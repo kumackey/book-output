@@ -8,12 +8,12 @@ RSpec.describe RegisterOutputForm, type: :model do
   end
 
   it "質問文が無い時に無効なこと" do
-    register_output_form.question = nil
+    register_output_form.question_content = nil
     expect(register_output_form).not_to be_valid
   end
 
   it "質問文が501文字のときに無効なこと" do
-    register_output_form.question = "a" * 501
+    register_output_form.question_content = "a" * 501
     expect(register_output_form).not_to be_valid
   end
 
