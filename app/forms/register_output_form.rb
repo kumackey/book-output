@@ -16,6 +16,8 @@ class RegisterOutputForm
   validates :incorrect_choice_1, presence: true, length: { maximum: 40 }
   validates :incorrect_choice_2, length: { maximum: 40 }
   validates :incorrect_choice_3, length: { maximum: 40 }
+  validates :user_id, presence: true
+  validates :book_id, presence: true
 
   def save_question_and_choices
     user = User.find(user_id)
