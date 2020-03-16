@@ -34,8 +34,11 @@ ActiveRecord::Schema.define(version: 2020_03_15_221408) do
     t.boolean "is_answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "question_id"
     t.index ["output_id", "is_answer"], name: "index_choices_on_output_id_and_is_answer", unique: true
     t.index ["output_id"], name: "index_choices_on_output_id"
+    t.index ["question_id", "is_answer"], name: "index_choices_on_question_id_and_is_answer"
+    t.index ["question_id"], name: "index_choices_on_question_id"
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
