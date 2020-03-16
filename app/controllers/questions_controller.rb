@@ -40,6 +40,6 @@ class QuestionsController < ApplicationController
   private
 
   def create_question_params
-    params.require(:register_output_form).permit(:question, :correct_choice, :incorrect_choice_1, :incorrect_choice_2, :incorrect_choice_3)
+    params.require(:register_output_form).permit(:question_content, :correct_choice, :incorrect_choice_1, :incorrect_choice_2, :incorrect_choice_3)
   end
 end
