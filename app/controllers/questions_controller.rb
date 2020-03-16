@@ -17,7 +17,8 @@ class QuestionsController < ApplicationController
 
   def create
     @book = Book.find(params[:book_id])
-    @register_output_form = RegisterOutputForm.new(create_question_params)
+    @register_output_form = RegisterOutputForm.new(create_question_params
+      .merge(user_id: current_user.id, book_id: @book.id))
     if @register_output_form.valid?
       @register_output_form.save_question_and_choices
       redirect_to @book, success: '問題を作成しました'
@@ -42,6 +43,5 @@ class QuestionsController < ApplicationController
   def create_question_params
     params.require(:register_output_form)
     .permit(:question_content, :correct_choice, :incorrect_choice_1, :incorrect_choice_2, :incorrect_choice_3)
-    .merge(user_id: current_user.id, book_id: @book.id)
   end
 end
