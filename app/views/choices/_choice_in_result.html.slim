@@ -1,6 +1,15 @@
-- if choice_in_result.is_answer
-  .card.card-choice.alert.alert-success
-    h6 = choice_in_result.content
+- if choice.id == choice_in_result.id
+  .select-card
+    - if choice_in_result.is_answer
+      .card.card-choice.alert.alert-success
+        h6 ▶︎ #{choice_in_result.content}
+    - else
+      .card.card-choice.alert.alert-danger
+        h6 ▶︎ #{choice_in_result.content}
 - else
-  .card.card-choice.alert.alert-danger
-    h6 = choice_in_result.content
+  - if choice_in_result.is_answer
+    .card.card-choice.alert.alert-success
+      h6 = choice_in_result.content
+  - else
+    .card.card-choice.alert.alert-danger
+      h6 = choice_in_result.content
