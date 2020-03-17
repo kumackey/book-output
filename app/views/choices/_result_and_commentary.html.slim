@@ -6,9 +6,10 @@
       = render 'choices/correct'
     - else
       = render 'choices/incorrect'
-    = render partial: 'choices/choice_in_result', collection: choices
+    .mt-4
+      = render partial: 'choices/choice_in_result', collection: choices
     = render 'choices/commentary', question: choice.question
-    .mt-3.text-center
+    .mt-4.text-center
       = link_to choice.question.book do
         button.btn.btn-raised.btn-success
           | クイズ一覧へ戻る
