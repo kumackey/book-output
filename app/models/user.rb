@@ -18,7 +18,7 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
   has_many :books, dependent: :destroy
-  has_many :outputs, dependent: :destroy
+  has_many :questions, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :like_books, through: :likes, source: :book
 
@@ -50,6 +50,6 @@ class User < ApplicationRecord
 
   def feed
     favorite_book_ids = 'SELECT book_id FROM likes WHERE user_id = :user_id'
-    Output.where("book_id IN (#{favorite_book_ids}) OR user_id = :user_id", user_id: id)
+    Question.where("book_id IN (#{favorite_book_ids}) OR user_id = :user_id", user_id: id)
   end
 end

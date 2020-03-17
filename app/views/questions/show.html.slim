@@ -1,16 +1,16 @@
-- provide :title, "クイズ #{@output.book.title}"
+- provide :title, "クイズ #{@question.book.title}"
 .container
   .row.flex-row-reverse
     .col-md-7.mb-3
       .card
         h5.card-header.bg-success.text-white.text-center
           strong 
-            | #{@output.content}
+            | #{@question.content}
         .card-body.px-lg-5.pt-0
           = render @choices
         .text-right.mr-3.mb-3
           | 作者:
-          = link_to user_path(@output.user), class: 'ml-1' do
-            | #{@output.user.username}さん
+          = link_to user_path(@question.user), class: 'ml-1' do
+            | #{@question.user.username}さん
     .col-md-5
-      = render 'books/detail', book: @output.book
+      = render 'books/detail', book: @question.book

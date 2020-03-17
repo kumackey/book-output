@@ -1,5 +1,5 @@
 require './db/seeds/users'
 require './db/seeds/books'
-require './db/seeds/outputs1'
-require './db/seeds/outputs2'
-require './db/seeds/outputs3'
+require './db/seeds/questions1'
+require './db/seeds/questions2'
+require './db/seeds/questions3'

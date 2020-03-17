@@ -2,8 +2,8 @@
 .container
   .row
     .col-12.col-md-6.mb-3
-      = render 'outputs/outputs', outputs: @outputs
-      - if @outputs.empty?
+      = render 'questions/questions', questions: @questions
+      - if @questions.empty?
         .text-center
           p 本をいいねすると、そのクイズが表示されます。
           = link_to books_path do

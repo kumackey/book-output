@@ -1,0 +1,11 @@
+.container.card.p-3 id="question-#{question.id}" 
+  .row
+    = link_to question, class: 'col-11 text-break' do
+      h6 = question.content
+    .col-1.text-right
+      - if current_user&.own?(question)
+        = link_to question, class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'}, remote: true do
+          = icon 'far', 'trash-alt', class: 'fa-md'
+  .name-position
+    = link_to user_path(question.user) do 
+      = question.user.username
