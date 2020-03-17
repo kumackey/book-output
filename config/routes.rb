@@ -28,9 +28,5 @@ Rails.application.routes.draw do
     resources :questions, only: %i[create new show destroy]
   end
   resources :likes, only: %i[create destroy]
-  resources :choices, only: %i[] do
-    member do
-      get :check, to: 'choices#check'
-    end
-  end
+  resources :choices, only: %i[show]
 end

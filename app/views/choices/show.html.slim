@@ -1,0 +1,7 @@
+- provide :title, "解答・解説"
+.container
+  .row.flex-row-reverse
+    .col-md-7.mb-3
+      = render 'choices/result_and_commentary', choice: @choice, choices: @choices
+    .col-md-5
+      = render 'books/detail', book: @choice.question.book
