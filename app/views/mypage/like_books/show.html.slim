@@ -1,0 +1,8 @@
+- provide :title, "#{@user.username}さんが作成したクイズ"
+h5.text-center.pt-3.pb-3
+  strong #{@user.username}さんがいいねしている本
+.container-fluid
+  = render partial: 'books/book', collection: @books, as: :book
+  - if @books.empty?
+    .text-center
+      p まだ本をいいねしていません。
