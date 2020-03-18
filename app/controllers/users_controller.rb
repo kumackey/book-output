@@ -18,19 +18,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def mypage
-    @user = current_user
-    respond_to do |format|
-      format.html do
-        @questions = @user.questions.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
-        @books = @user.like_books.includes(%i[user book]).order(created_at: :desc)
-      end
-      format.csv do
-        @questions = @user.questions.includes(%i[user book]).order(created_at: :desc)
-      end
-    end
-  end
-
   def show
     @user = User.find(params[:id])
     @questions = @user.questions.includes(:user, :book).page(params[:page]).per(10).order(created_at: :desc)
