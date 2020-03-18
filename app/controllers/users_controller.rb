@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @questions = @user.questions.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
+    @questions = @user.questions.includes(:user, :book).page(params[:page]).per(10).order(created_at: :desc)
     @books = @user.like_books.includes(:user).order(created_at: :desc)
   end
 

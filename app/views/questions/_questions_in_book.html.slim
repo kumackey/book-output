@@ -5,7 +5,6 @@
   h5.card-header.bg-success.text-white.text-center
     strong クイズ一覧
   .questions-box
-    - questions.each do |question|
-      = render 'questions/question_in_book', question: question
+    = render partial: 'questions/question_in_book', collection: questions, as: :question
   .mt-3
     = paginate questions
