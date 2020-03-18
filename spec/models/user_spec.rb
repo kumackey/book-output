@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id               :bigint           not null, primary key
+#  avatar           :string(255)
 #  crypted_password :string(255)
 #  email            :string(255)      not null
 #  salt             :string(255)
@@ -23,6 +24,9 @@ RSpec.describe User, type: :model do
 
   it "有効なファクトリを持つこと" do
     expect(user).to be_valid
+  end
+
+  it "画像を持つファクトリでも有効なこと" do
     expect(other_user).to be_valid
   end
 
@@ -74,8 +78,8 @@ RSpec.describe User, type: :model do
 
   it "ユーザーが消去されたとき、関連するクイズも消えること" do
     user = create(:user)
-    create(:output, user_id: user.id)
-    expect{ user.destroy }.to change{ Output.count }.by(-1)
+    create(:question, user_id: user.id)
+    expect{ user.destroy }.to change{ Question.count }.by(-1)
   end 
 
   it "ユーザがオブジェクトを持っているかを確認する機能own?が有効なこと" do
@@ -106,12 +110,12 @@ RSpec.describe User, type: :model do
   it "フィードにいいねした本の問題が載ること" do
     user = create(:user)
     book = create(:book)
-    create(:output, book_id: book.id)
+    create(:question, book_id: book.id)
     expect { user.like(book) }.to change{ user.feed.count }.by(1)
   end
 
   it "フィードに自分が作った問題が載ること" do
     user = create(:user)
-    expect { create(:output, user_id: user.id) }.to change{ user.feed.count }.by(1)
+    expect { create(:question, user_id: user.id) }.to change{ user.feed.count }.by(1)
   end
 end

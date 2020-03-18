@@ -2,12 +2,18 @@
 .container
   .row
     .col-12.col-md-6.mb-3
-      h6.text-center.mb-3
-        | #{@user.username}さん作成したクイズ
-      = render 'outputs/outputs', outputs: @outputs
+      .row
+        .col-6
+          = image_tag @user.avatar.url, class: 'rounded-circle mt-3', size: '100x100' if @user.avatar?
+        .col-6.mt-5
+          | #{@user.username}さん
+      hr
+      h6.text-center.mb-3.mt-3
+        | 作成したクイズ
+      = render 'questions/questions', questions: @questions
     .col-12.col-md-6
       h6.text-center.mb-3
-        | #{@user.username}さんがいいねしている本
+        | いいねしている本
       = render @books
       - if @books.empty?
         .text-center

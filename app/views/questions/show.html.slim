@@ -1,0 +1,13 @@
+- provide :title, "クイズ #{@question.book.title}"
+.container
+  .row.flex-row-reverse
+    .col-md-7.mb-3
+      .card
+        h5.card-header.bg-success.text-white.text-center
+          strong 
+            | #{@question.content}
+        .card-body.px-lg-5.pt-0
+          = render @choices
+        = render 'users/writer', user: @question.user
+    .col-md-5
+      = render 'books/detail', book: @question.book

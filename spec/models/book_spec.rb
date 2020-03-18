@@ -55,7 +55,7 @@ RSpec.describe Book, type: :model do
 
   it "本が消去されたとき、関連するクイズも消えること" do
     book = create(:book)
-    create(:output, book_id: book.id)
-    expect{ book.destroy }.to change{ Output.count }.by(-1)
+    create(:question, book_id: book.id)
+    expect{ book.destroy }.to change{ Question.count }.by(-1)
   end
 end

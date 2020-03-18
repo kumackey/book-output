@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :require_login, only: %i[create]
 
   def index
-    @books = Book.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
+    @books = Book.all.page(params[:page]).per(10).order(created_at: :desc)
   end
 
   def create
@@ -24,7 +24,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @outputs = @book.outputs.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
+    @questions = @book.questions.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
   end
 
   def search

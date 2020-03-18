@@ -4,7 +4,7 @@ ja:
       user: 'ユーザー'
       book: '本'
       like: 'いいね'
-      output: 'クイズ'
+      question: 'クイズ'
       choice: '選択肢'
     attributes:
       user:
@@ -12,6 +12,7 @@ ja:
         email: 'Eメール'
         password: 'パスワード'
         password_confirmation: 'パスワード確認'
+        avatar: 'ユーザー画像'
       book:
         author: '著者'
         title: 'タイトル'
@@ -20,20 +21,27 @@ ja:
         image: '画像リンク'
         published_at: '出版日'
         googlebooksapi_id: 'ID'
-      output:
+      question:
         content: 問題文
+        commentary: 解説文
       choice:
         content: 選択肢
         is_answer: 正誤
 
   activemodel:
     attributes:
-        register_output_form:
-            question: '問題文'
-            correct_choice: '正答'
-            incorrect_choice_1: '誤答1'
-            incorrect_choice_2: '誤答2'
-            incorrect_choice_3: '誤答3'
+      register_output_form:
+        question_content: '問題文'
+        commentary: '解説'
+        correct_choice: '正答'
+        incorrect_choice_1: '誤答1'
+        incorrect_choice_2: '誤答2'
+        incorrect_choice_3: '誤答3'
+        user_id: '投稿者'
+        book_id: '本'
+      login_form:
+        email: 'Eメール'
+        password: 'パスワード'
 
   attributes:
     created_at: '作成日時'

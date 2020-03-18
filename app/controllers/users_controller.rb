@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  before_action :require_login, only: %i[mypage]
-
   def new
     authenticated
     @user = User.new
@@ -18,22 +16,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def mypage
-    @user = current_user
-    respond_to do |format|
-      format.html do
-        @outputs = @user.outputs.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
-        @books = @user.like_books.includes(%i[user book]).order(created_at: :desc)
-      end
-      format.csv do
-        @outputs = @user.outputs.includes(%i[user book]).order(created_at: :desc)
-      end
-    end
-  end
-
   def show
     @user = User.find(params[:id])
-    @outputs = @user.outputs.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
+    @questions = @user.questions.includes(:user, :book).page(params[:page]).per(10).order(created_at: :desc)
     @books = @user.like_books.includes(:user).order(created_at: :desc)
   end
 

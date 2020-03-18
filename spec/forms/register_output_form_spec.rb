@@ -8,12 +8,43 @@ RSpec.describe RegisterOutputForm, type: :model do
   end
 
   it "質問文が無い時に無効なこと" do
-    register_output_form.question = nil
+    register_output_form.question_content = nil
     expect(register_output_form).not_to be_valid
   end
 
-  it "質問文が501文字のときに無効なこと" do
-    register_output_form.question = "a" * 501
+  it "そのクイズの本が無い時に無効なこと" do
+    register_output_form.book_id = nil
+    expect(register_output_form).not_to be_valid
+  end
+
+  it "そのクイズの投稿者が無い時に無効なこと" do
+    register_output_form.user_id = nil
+    expect(register_output_form).not_to be_valid
+  end
+
+  describe "解説文が" do
+    context "無くとも" do
+      let(:register_output_form) { build(:register_output_form, commentary: nil) } 
+      it "有効なこと" do
+        expect(register_output_form).to be_valid
+      end
+    end
+    context "140文字のときに" do
+      let(:register_output_form) { build(:register_output_form, commentary: "a" * 140) } 
+      it "有効なこと" do
+        expect(register_output_form).to be_valid
+      end
+    end
+    context "141文字のときに" do
+      let(:register_output_form) { build(:register_output_form, commentary: "a" * 141) } 
+      it "無効なこと" do
+        expect(register_output_form).not_to be_valid
+      end
+    end
+  end
+
+  it "問題文が141文字のときに無効なこと" do
+    register_output_form.question_content = "a" * 141
     expect(register_output_form).not_to be_valid
   end
 

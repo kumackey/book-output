@@ -20,12 +20,12 @@ header
             = link_to books_path, class: 'nav-link' do
               = icon 'fas', 'book', class: 'fa-lg'
               | 本一覧
-          li.nav-item class="#{'active' if controller.controller_name == 'outputs' && controller.action_name == 'index'}"
-            = link_to outputs_path, class: 'nav-link' do
+          li.nav-item class="#{'active' if controller.controller_name == 'questions' && controller.action_name == 'index'}"
+            = link_to questions_path, class: 'nav-link' do
               = icon 'fas', 'swatchbook', class: 'fa-lg'
               | クイズ一覧
-          li.nav-item class="#{'active' if controller.controller_name == 'users' && controller.action_name == 'mypage'}"
-            = link_to user_path(current_user), class: 'nav-link' do
+          li.nav-item class="#{'active' if controller.controller_path.include?("mypage/")}"
+            = link_to edit_mypage_account_path, class: 'nav-link' do
               = icon 'fas', 'user', class: 'fa-lg'
               | マイページ
           li.nav-item
@@ -42,8 +42,8 @@ header
             = link_to books_path, class: 'nav-link' do
               = icon 'fas', 'book', class: 'fa-lg'
               | 本一覧
-          li.nav-item class="#{'active' if controller.controller_name == 'outputs' && controller.action_name == 'index'}"
-            = link_to outputs_path, class: 'nav-link' do
+          li.nav-item class="#{'active' if controller.controller_name == 'questions' && controller.action_name == 'index'}"
+            = link_to questions_path, class: 'nav-link' do
               = icon 'fas', 'swatchbook', class: 'fa-lg'
               | クイズ一覧
           li.nav-item class="#{'active' if controller.controller_name == 'users' && controller.action_name == 'new'}"

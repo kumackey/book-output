@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_07_022727) do
+ActiveRecord::Schema.define(version: 2020_03_18_032923) do
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "googlebooksapi_id", null: false
@@ -34,8 +34,11 @@ ActiveRecord::Schema.define(version: 2020_03_07_022727) do
     t.boolean "is_answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "question_id"
     t.index ["output_id", "is_answer"], name: "index_choices_on_output_id_and_is_answer", unique: true
     t.index ["output_id"], name: "index_choices_on_output_id"
+    t.index ["question_id", "is_answer"], name: "index_choices_on_question_id_and_is_answer"
+    t.index ["question_id"], name: "index_choices_on_question_id"
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -48,14 +51,15 @@ ActiveRecord::Schema.define(version: 2020_03_07_022727) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "outputs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content", null: false
     t.bigint "user_id"
     t.bigint "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_outputs_on_book_id"
-    t.index ["user_id"], name: "index_outputs_on_user_id"
+    t.text "commentary"
+    t.index ["book_id"], name: "index_questions_on_book_id"
+    t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -65,13 +69,14 @@ ActiveRecord::Schema.define(version: 2020_03_07_022727) do
     t.string "salt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "books", "users"
-  add_foreign_key "choices", "outputs"
+  add_foreign_key "choices", "questions", column: "output_id"
   add_foreign_key "likes", "books"
   add_foreign_key "likes", "users"
-  add_foreign_key "outputs", "books"
-  add_foreign_key "outputs", "users"
+  add_foreign_key "questions", "books"
+  add_foreign_key "questions", "users"
 end

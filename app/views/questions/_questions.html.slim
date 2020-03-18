@@ -1,11 +1,10 @@
-- if outputs.empty?
+- if questions.empty?
   .text-center
     p まだクイズがありません。
 - else
   h5.card-header.bg-success.text-white.text-center
     strong クイズ一覧
-  .outputs-box
-    - outputs.each do |output|
-      = render 'outputs/output_in_book', output: output
+  .questions-box
+    = render partial: 'questions/question', collection: questions, as: :question
   .mt-3
-    = paginate outputs
+    = paginate questions
