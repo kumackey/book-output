@@ -40,7 +40,7 @@ gem 'redis-rails'
 gem 'sorcery'
 gem 'font-awesome-sass', '~> 5.4.1'
 gem 'carrierwave', '~>1.1.0'
-gem "mini_magick"
+gem 'mini_magick'
 gem 'nokogiri', '~>1.10.8'
 gem 'faker'
 gem 'kaminari'
