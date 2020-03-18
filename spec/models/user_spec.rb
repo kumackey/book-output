@@ -24,6 +24,9 @@ RSpec.describe User, type: :model do
 
   it "有効なファクトリを持つこと" do
     expect(user).to be_valid
+  end
+
+  it "画像を持つファクトリでも有効なこと" do
     expect(other_user).to be_valid
   end
 
