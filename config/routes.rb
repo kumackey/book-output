@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   resources :choices, only: %i[show]
 
   namespace :mypage do
-    resource :account, only: %i[edit update show]
+    resource :account, only: %i[edit update]
+    resource :like_books, only: %i[show]
+    resource :make_questions, only: %i[show]
   end
 end
