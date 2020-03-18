@@ -8,7 +8,9 @@ http://bookoutput.work/
 
 ## 動機
 
-このアプリ作成者(私)は、読書をするのが好きです。せっかく読書をしても、読んだままとなってしまい、その知識が定着しないのが悩みでした。
+このアプリ作成者(私)は、読書をするのが好きです。
+
+せっかく読書をしても、読んだままとなってしまい、その知識が定着しないのが悩みでした。
 
 知識を定着させるには、その知識に関する問題(クイズ)を作るのが有効と言われています。しかし、本に関するクイズを作るサービスが見つかりませんでした。
 
@@ -17,7 +19,6 @@ http://bookoutput.work/
 ## 主要機能
 
 - 本に紐づいたクイズの作成・出題機能
-- 本の検索機能
 - 本のお気に入り機能と、それに基づくフィード機能
 - 作ったクイズのCSV出力機能
 
@@ -25,25 +26,24 @@ http://bookoutput.work/
 
 ![bookoutput (1)](https://user-images.githubusercontent.com/55213482/76920941-18853e00-6910-11ea-8d9d-be8276037a41.png)
 
+基本的なDB設計におけるアンチパターン・正規化などについては理解しているつもりです。
+
 ## 技術アピールポイント
 
 #### コード関連
 
-- Google Books APIを用いた本情報の取得
-- 本の検索結果をリソースとしてURL表示
-- ActiveModelの関数をincludeしたForm objectによる複数リソース登録
-- Ajaxによるモーダル・いいね・クイズ削除
-- ActiveRecordのwhereと、SQLを組み合わせたFeed
-- Fat Controllerへの警戒
+- Google Books APIを用いた本リソースの検索/取得
+- Google Books APIの情報をオブジェクト指向により分離
+- ActiveModelのmoduleをincludeしたフォームオブジェクトによる複数リソース登録
+- namespaceによるマイページ機能/ルーティング
+- RESTを意識したリソース/URL設計
 
 #### gem関連
 
 - Rubocopの静的コード解析の利用
 - RSpecでのテスト(特にrequest spec)を充実
 - Carrierwave, fogを用いたS3への画像アップロード
-- slimを用いたスッキリとしたテンプレートエンジン記述
 - pry, binding_of_callerを用いたデバッグ
-- kaminariを用いたページネーション
 
 #### その他周辺
 
