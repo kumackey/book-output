@@ -5,9 +5,9 @@
       .card.text-center
         h5.card-header.bg-success.text-white
           strong ログイン
-        .card-body.px-lg-5.pt-0.mt-4
+        .card-body.px-lg-5.pt-0.mt-4          
           = form_with model: @login_form, url: login_path, local: true do |f|
-            = render 'shared/error_messages', object: @login_form
+            = render 'shared/error_messages', object: f.object
             .form-group
               = f.email_field :email, class: 'form-control', placeholder: 'Eメール'
             .form-group

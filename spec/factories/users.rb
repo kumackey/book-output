@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id               :bigint           not null, primary key
+#  avatar           :string(255)
 #  crypted_password :string(255)
 #  email            :string(255)      not null
 #  salt             :string(255)
@@ -28,5 +29,6 @@ FactoryBot.define do
     sequence(:email) { |n| "tester#{n}@example.com" }
     password  { "password" }
     password_confirmation { "password" }
+    avatar { File.open("#{Rails.root}/spec/factories/images/boy.png") }
   end
 end

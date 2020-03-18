@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id               :bigint           not null, primary key
+#  avatar           :string(255)
 #  crypted_password :string(255)
 #  email            :string(255)      not null
 #  salt             :string(255)
@@ -23,6 +24,9 @@ RSpec.describe User, type: :model do
 
   it "有効なファクトリを持つこと" do
     expect(user).to be_valid
+  end
+
+  it "画像を持つファクトリでも有効なこと" do
     expect(other_user).to be_valid
   end
 

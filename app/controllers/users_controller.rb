@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  before_action :require_login, only: %i[mypage]
-
   def new
     authenticated
     @user = User.new
@@ -15,19 +13,6 @@ class UsersController < ApplicationController
     else
       flash.now[:danger] = 'ユーザーの作成に失敗しました'
       render :new
-    end
-  end
-
-  def mypage
-    @user = current_user
-    respond_to do |format|
-      format.html do
-        @questions = @user.questions.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
-        @books = @user.like_books.includes(%i[user book]).order(created_at: :desc)
-      end
-      format.csv do
-        @questions = @user.questions.includes(%i[user book]).order(created_at: :desc)
-      end
     end
   end
 

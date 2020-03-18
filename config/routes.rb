@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   # ユーザリソース
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
-  get 'mypage', to: 'users#mypage'
 
   # セッションリソース
   get 'login', to: 'sessions#new'
@@ -29,4 +28,10 @@ Rails.application.routes.draw do
   end
   resources :likes, only: %i[create destroy]
   resources :choices, only: %i[show]
+
+  namespace :mypage do
+    resource :account, only: %i[edit update]
+    resource :like_books, only: %i[show]
+    resource :make_questions, only: %i[show]
+  end
 end
