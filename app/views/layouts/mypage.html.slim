@@ -14,6 +14,18 @@ html
   body.black-skin
     = render 'shared/header'
     = render 'shared/flash_messages'
-    main.pt-5.pb-5
-      = yield
+    main.pt-3.pb-3
+      .container.mb-3
+        .row.justify-content-around
+            .col-md-8
+              .card
+                h5.text-center.pt-3
+                  strong マイページ
+                .card-body.px-lg-5.pt-0.mt-4
+                  | ここに色々表示
+      .container
+        .row.justify-content-around
+            .col-md-8
+              .card
+                = yield
     = render 'shared/footer'
