@@ -4,7 +4,7 @@
     .col-12.col-md-6.mb-3
       .row
         .col-6
-          = image_tag @user.avatar.url, class: 'rounded-circle mt-3', size: '100x100', id: 'preview' if @user.avatar?
+          = image_tag @user.avatar.url, class: 'rounded-circle mt-3', size: '100x100' if @user.avatar?
         .col-6.mt-5
           | #{@user.username}さん
       hr

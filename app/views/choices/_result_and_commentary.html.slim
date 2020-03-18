@@ -8,6 +8,11 @@
       = render 'choices/incorrect'
     .mt-4
       = render partial: 'choices/choice_in_result', collection: choices, locals: { choice: choice }
+    .text-right.mr-3.mb-3
+      | 作者:
+      = link_to user_path(choice.question.user), class: 'ml-1' do
+        | #{choice.question.user.username}さん
+        = image_tag choice.question.user.avatar.url, class: 'rounded-circle', size: '40x40' if choice.question.user.avatar?
     = render 'choices/commentary', question: choice.question
     .mt-4.text-center
       = link_to choice.question.book do
