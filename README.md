@@ -21,6 +21,10 @@ http://bookoutput.work/
 - 本のお気に入り機能と、それに基づくフィード機能
 - 作ったクイズのCSV出力機能
 
+## ER図
+
+![bookoutput (1)](https://user-images.githubusercontent.com/55213482/76920941-18853e00-6910-11ea-8d9d-be8276037a41.png)
+
 ## 技術アピールポイント
 
 #### コード関連
