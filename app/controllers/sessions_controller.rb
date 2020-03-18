@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     authenticated
     @login_form = LoginForm.new(login_form_params)
     @user = login(@login_form.email, @login_form.password)
-    if @user
+    if @login_form.valid? && @user
       redirect_back_or_to home_path, success: 'ログインしました'
     else
       flash.now[:danger] = 'ログインに失敗しました'
