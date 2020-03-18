@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    meta[name="viewport" content="width=device-width, initial-scale=1.0"]
+    title
+      = "#{yield :title} | BookOutput"
+    = display_meta_tags(default_meta_tags)
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'mypage', media: 'all'
+    = javascript_include_tag 'mypage'
+    = favicon_link_tag 'favicon.ico'
+  body.black-skin
+    = render 'shared/header'
+    = render 'shared/flash_messages'
+    main.pt-5.pb-5
+      = yield
+    = render 'shared/footer'
