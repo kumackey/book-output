@@ -8,10 +8,6 @@
             | #{@question.content}
         .card-body.px-lg-5.pt-0
           = render @choices
-        .text-right.mr-3.mb-3
-          | 作者:
-          = link_to user_path(@question.user), class: 'ml-1' do
-            | #{@question.user.username}さん
-            = image_tag @question.user.avatar.url, class: 'rounded-circle', size: '40x40' if @question.user.avatar?
+        = render 'users/writer', user: @question.user
     .col-md-5
       = render 'books/detail', book: @question.book
