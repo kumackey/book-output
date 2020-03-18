@@ -12,6 +12,7 @@ ja:
         email: 'Eメール'
         password: 'パスワード'
         password_confirmation: 'パスワード確認'
+        avatar: 'ユーザー画像'
       book:
         author: '著者'
         title: 'タイトル'

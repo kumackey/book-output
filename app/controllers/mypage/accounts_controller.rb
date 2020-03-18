@@ -1,14 +1,21 @@
 class Mypage::AccountsController < Mypage::BaseController
-  def show
+  def edit
     @user = User.find(current_user.id)
-    @books = @user.like_books.includes(:user).order(created_at: :desc)
-    respond_to do |format|
-      format.html do
-        @questions = @user.questions.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
-      end
-      format.csv do
-        @questions = @user.questions.includes(%i[user book]).order(created_at: :desc)
-      end
+  end
+
+  def update
+    @user = User.find(current_user.id)
+    if @user.update(account_params)
+      redirect_to edit_mypage_account_path, success: 'プロフィールを更新しました'
+    else
+      flash.now['danger'] = 'プロフィールの更新に失敗しました'
+      render :edit
     end
+  end
+
+  private
+
+  def account_params
+    params.require(:user).permit(:email, :username, :avatar, :avatar_cache)
   end
 end
