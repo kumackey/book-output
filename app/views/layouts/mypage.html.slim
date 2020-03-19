@@ -7,7 +7,7 @@ html
   body
     = render 'shared/header'
     = render 'shared/flash_messages'
-    main.pt-3.pb-3
+    main
       = render 'mypage/mypage_tab'
       .container
         .row.justify-content-around
@@ -15,4 +15,3 @@ html
               .card
                 = yield
     = render 'shared/footer'
-    = debug(params) if Rails.env.development?

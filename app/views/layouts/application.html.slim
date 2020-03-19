@@ -7,11 +7,7 @@ html
   body
     = render 'shared/header'
     = render 'shared/flash_messages'
-    - if controller.controller_name == 'static_pages' && controller.action_name == 'top'
-      main
-        = yield
-    - else
-      main.pt-5.pb-5 
-        = yield
+    main
+      = yield
     = render 'shared/footer'
     = render 'shared/modal'
