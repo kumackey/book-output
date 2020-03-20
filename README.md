@@ -47,11 +47,18 @@ http://bookoutput.work/
 
 #### その他周辺
 
-- Git flowに基づいたbranch管理
 - チーム開発を想定したissue管理、pull request
 - GitHub Actionsを用いたCI(ビルド、テスト、lintチェック)
 - 基本的なAWSマネージドサービスを用いたインフラ構成
 
+#### 開発の流れ
+
+基本的な開発の流れとしては以下の通りで、チーム開発を想定した流れを意識しました。
+
+- ブランチの命名規則についてはGit flowに基づいています(develop, release, feature/*)。
+- issueに対応したfeatureブランチを作成し開発を進める。
+- pull requestを作るとCIが起動し、完了を確認できたらdevelopにマージする。
+- デプロイする際にはreleaseブランチ・タグ・pull requestを作りCIが起動、完了が確認できたらmasterにマージ。
 
 #### 開発環境
 
