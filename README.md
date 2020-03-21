@@ -47,11 +47,35 @@ http://bookoutput.work/
 
 #### その他周辺
 
-- Git flowに基づいたbranch管理
 - チーム開発を想定したissue管理、pull request
-- Docker, docker-composeを使用した開発環境構築
 - GitHub Actionsを用いたCI(ビルド、テスト、lintチェック)
 - 基本的なAWSマネージドサービスを用いたインフラ構成
+
+#### 開発の流れ
+
+基本的な開発の流れとしては以下の通りで、チーム開発を想定した流れを意識しました。
+
+- ブランチの命名規則についてはGit flowに基づいています(develop, release, feature/*)。
+- issueに対応したfeatureブランチを作成し開発を進める。
+- pull requestを作るとCIが起動し、完了を確認できたらdevelopにマージする。
+- デプロイする際にはreleaseブランチ・タグ・pull requestを作りCIが起動、完了が確認できたらmasterにマージ。
+
+#### 開発環境
+
+チーム開発での開発環境構築を想定し、Docker,docker-composeを使用いたしました。
+
+[Dockerfile](https://github.com/kumackey/book-output/blob/develop/Dockerfile), [docker-compose.yml](https://github.com/kumackey/book-output/blob/develop/docker-compose.yml)
+
+確認手順は以下の通りです。
+
+$ git clone git@github.com:kumackey/book-output.git
+
+$ docker-compose build
+
+$ docker-compose up
+
+$ docker-compose run web rails db:create db:migrate db:seed
+
 
 ## その他情報
 
@@ -63,13 +87,3 @@ http://bookoutput.work/
 AWS: VPC / EC2 / RDS / S3 / ElastiCache / Route53 / IAM
 
 その他: Nginx / puma 
-
-#### 確認手順
-
-$ git clone git@github.com:kumackey/book-output.git
-
-$ docker-compose build
-
-$ docker-compose up
-
-$ docker-compose run web rails db:create db:migrate db:seed
