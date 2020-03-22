@@ -9,10 +9,11 @@ class StaticPagesController < ApplicationController
 
   def top
     # 非ログイン時のトップページ　get /
-    authenticated
-    @questions = Question.all.includes(%i[user book]).order(created_at: :desc).limit(5)
-    @books = Book.all.order(created_at: :desc).limit(3)
-    render layout: 'top'
+    unless authenticated
+      @questions = Question.all.includes(%i[user book]).order(created_at: :desc).limit(5)
+      @books = Book.all.order(created_at: :desc).limit(3)
+      render layout: 'top'
+    end
   end
 
   def contact; end
