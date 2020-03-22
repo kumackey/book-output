@@ -25,6 +25,14 @@ http://bookoutput.work/
 - 本のお気に入り機能と、それに基づくフィード機能
 - 作ったクイズのCSV出力機能
 
+## 要件定義
+
+issueを用いて実装したい機能の管理を行っております。
+
+https://github.com/kumackey/book-output/issues
+
+今後追加したい機能に関しては【機能要件】として表示しております。
+
 ## ER図
 
 ![bookoutput](https://user-images.githubusercontent.com/55213482/77245830-f881b180-6c64-11ea-8511-130f8b641da4.png)
