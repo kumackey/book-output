@@ -6,6 +6,9 @@ http://bookoutput.work/
 
 本に関するクイズを作り、みんなで共有するWEBサービスです。
 
+使い方紹介: [gif](https://twitter.com/kumackey_/status/1241634940216729600)
+※ 2分半ほどの長さです。
+
 ## 動機
 
 このアプリ作成者(私)は、読書をするのが好きです。
@@ -24,19 +27,20 @@ http://bookoutput.work/
 
 ## ER図
 
-![bookoutput (1)](https://user-images.githubusercontent.com/55213482/76920941-18853e00-6910-11ea-8d9d-be8276037a41.png)
+![bookoutput](https://user-images.githubusercontent.com/55213482/77245830-f881b180-6c64-11ea-8511-130f8b641da4.png)
 
-基本的なDB設計におけるアンチパターン・正規化などについては理解しているつもりです。
+クイズアプリにおけるデータベース設計について、以下Qiita記事を書きました。
+https://qiita.com/kumackey/items/7ccbc949458bd0af22bd
 
 ## 技術アピールポイント
 
 #### コード関連
 
-- Google Books APIを用いた本リソースの検索/取得
-- Google Books APIの情報をオブジェクト指向により分離
+Google Books APIを用いた本リソースの検索/取得に関して、以下Qiita記事を書きました。
+https://qiita.com/kumackey/items/bd369a23360c94452d33
+
 - ActiveModelのmoduleをincludeしたフォームオブジェクトによる複数リソース登録
 - namespaceによるマイページ機能/ルーティング
-- RESTを意識したリソース/URL設計
 
 #### gem関連
 
@@ -55,10 +59,12 @@ http://bookoutput.work/
 
 基本的な開発の流れとしては以下の通りで、チーム開発を想定した流れを意識しました。
 
-- ブランチの命名規則についてはGit flowに基づいています(develop, release, feature/*)。
+- ブランチの命名規則についてはGit flowに基づく(develop, release, feature/*)。
 - issueに対応したfeatureブランチを作成し開発を進める。
 - pull requestを作るとCIが起動し、完了を確認できたらdevelopにマージする。
 - デプロイする際にはreleaseブランチ・タグ・pull requestを作りCIが起動、完了が確認できたらmasterにマージ。
+
+[デプロイ手順書](https://github.com/kumackey/book-output/wiki/How-to-deploy)
 
 #### 開発環境
 

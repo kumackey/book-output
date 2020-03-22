@@ -7,12 +7,10 @@ body {
   height: 100vh;
 }
 
-main {
-  padding-top: 50px;
-}
-
-.pagination {
-  justify-content: center;
+.jumbotron {
+  background-image: image-url("janbotron.jpg");
+  background-size: cover;
+  background-position: center 60%;
 }
 
 .card-book {
@@ -21,24 +19,8 @@ main {
   margin-bottom: 1em;
 }
 
-.card-choice {
-  padding: .75em;
-  margin-top: 1em;
-}
-
-input[type=radio] {
-  display: none;
-}
-
 .name-position {
   position: absolute;
   right: .75em;
   bottom: .75em;
-}
-
-.select-card {
-  background-color: #000;
-  .card-choice {
-    opacity: 0.9;
-  }
 }

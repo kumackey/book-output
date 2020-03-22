@@ -1,0 +1,17 @@
+.container.mb-3
+  .row.justify-content-around
+      .col-md-8
+        .card
+          h5.text-center.pt-3
+            strong マイページ
+          .card-body.px-lg-5.pt-0.pb-1
+            ul.nav.nav-tabs
+              li.nav-item
+                = link_to mypage_make_questions_path, class: "nav-link #{"active" if controller.controller_name == 'make_questions' && controller.action_name == 'show'}" do
+                  | 作成したクイズ
+              li.nav-item
+                = link_to mypage_like_books_path, class: "nav-link #{"active" if controller.controller_name == 'like_books' && controller.action_name == 'show'}" do
+                  | いいねしている本
+              li.nav-item
+                = link_to edit_mypage_account_path, class: "nav-link #{"active" if controller.controller_name == 'accounts' && controller.action_name == 'edit'}" do
+                  | プロフィール編集
