@@ -27,7 +27,7 @@ http://bookoutput.work/
 
 ## ER図
 
-![bookoutput (1)](https://user-images.githubusercontent.com/55213482/76920941-18853e00-6910-11ea-8d9d-be8276037a41.png)
+![bookoutput](https://user-images.githubusercontent.com/55213482/77245830-f881b180-6c64-11ea-8511-130f8b641da4.png)
 
 クイズアプリにおけるデータベース設計について、以下Qiita記事を書きました。
 https://qiita.com/kumackey/items/7ccbc949458bd0af22bd
