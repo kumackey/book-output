@@ -20,13 +20,11 @@ http://bookoutput.work/
 このサービスは、私が作りたかったサービスです。
 
 詳細な機能の企画に関しては、以下企画書をご参照ください。
-
 https://github.com/kumackey/book-output/wiki/Proposal
 
 ## 要件定義
 
 issueを用いて実装したい機能の管理を行っております。
-
 https://github.com/kumackey/book-output/issues
 
 今後追加したい機能に関しては【機能要件】として表示しております。
@@ -48,11 +46,13 @@ https://qiita.com/kumackey/items/7ccbc949458bd0af22bd
 
 #### コード関連
 
-Google Books APIを用いた本リソースの検索/取得に関して、以下Qiita記事を書きました。
+技術的な核心となっている箇所については、以下のように記事を書きました。
+
+Google Books APIを用いた本リソースの検索/取得
 https://qiita.com/kumackey/items/bd369a23360c94452d33
 
-- ActiveModelのmoduleをincludeしたフォームオブジェクトによる複数リソース登録
-- namespaceによるマイページ機能/ルーティング
+- フォームオブジェクトによる複数リソース登録
+(準備中)
 
 #### gem関連
 
@@ -61,11 +61,15 @@ https://qiita.com/kumackey/items/bd369a23360c94452d33
 - Carrierwave, fogを用いたS3への画像アップロード
 - pry, binding_of_callerを用いたデバッグ
 
-#### その他周辺
+#### インフラ
 
-- チーム開発を想定したissue管理、pull request
-- GitHub Actionsを用いたCI(ビルド、テスト、lintチェック)
-- 基本的なAWSマネージドサービスを用いたインフラ構成
+素早くリリースが行え、継続的な改善・保守がしやすいクラウドでインフラを構築しました。
+クラウドインフラとして現在のデファクトスタンダードであるAWSを選択しました。
+
+AWS: VPC / EC2 / RDS / S3 / ElastiCache / Route53 / IAM
+
+ファイアウォールやsshのポート番号など、セキリュティには力を入れたつもりです。
+(https化がまだなことについては、急ぎ対応します)
 
 #### 開発の流れ
 
@@ -94,14 +98,3 @@ $ docker-compose up
 
 $ docker-compose run web rails db:create db:migrate db:seed
 
-
-## その他情報
-
-- Ruby 2.6.5
-- Ruby on Rails 5.2.4
-- MySQL 5.7 
-- Redis 3.0.5
-
-AWS: VPC / EC2 / RDS / S3 / ElastiCache / Route53 / IAM
-
-その他: Nginx / puma 
