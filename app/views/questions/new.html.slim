@@ -1,7 +1,29 @@
 - provide :title, "#{@book.title}のクイズ作成"
-.container
-  .row.flex-row-reverse
-    .col-md-7.mb-3
-      = render 'questions/form_new', register_output_form: @register_output_form
-    .col-md-5
-      = render 'books/detail', book: @book
+.card
+  h5.card-header.bg-success.text-white.text-center
+    strong クイズ作成
+  .card-body.bg-white
+    = form_with model: @register_output_form, url: book_questions_path, local: true do |f|
+      = render 'shared/error_messages', object: @register_output_form
+      .form-group
+        = f.label :question_content
+        = f.text_field :question_content, class: 'form-control', placeholder: "問題文を入力してください"
+      .mt-4.pb-2
+        label 選択肢
+      .form-group.row
+        = f.label :correct_choice, class: 'col-3 text-center text-success p-2'
+        = f.text_field :correct_choice, class: 'form-control col-8', placeholder: "例: ○"
+      .form-group.row
+        = f.label :incorrect_choice_1, class: 'col-3 text-center text-danger p-2'
+        = f.text_field :incorrect_choice_1, class: 'form-control col-8', placeholder: "例: ×"
+      .form-group.row
+        = f.label :incorrect_choice_2, class: 'col-3 text-center text-danger p-2'
+        = f.text_field :incorrect_choice_2, class: 'form-control col-8'
+      .form-group.row
+        = f.label :incorrect_choice_3, class: 'col-3 text-center text-danger p-2'
+        = f.text_field :incorrect_choice_3, class: 'form-control col-8'
+      .form-group.mt-5
+        = f.label :commentary
+        = f.text_field :commentary, class: 'form-control', placeholder: "解説文を入れられます(任意)"
+      .text-center
+        = f.submit '登録する', class: 'btn btn-raised btn-success'

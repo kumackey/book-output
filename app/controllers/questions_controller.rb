@@ -13,6 +13,7 @@ class QuestionsController < ApplicationController
   def new
     @book = Book.find(params[:book_id])
     @register_output_form = RegisterOutputForm.new
+    render layout: 'book_detail'
   end
 
   def create
