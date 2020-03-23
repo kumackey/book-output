@@ -25,7 +25,7 @@ class QuestionsController < ApplicationController
       redirect_to @book, success: '問題を作成しました'
     else
       flash.now[:danger] = '問題の作成に失敗しました'
-      render :new
+      render layout: 'book_detail', action: :new
     end
   end
 
