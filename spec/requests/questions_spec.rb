@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "Questions", type: :request do
+  it 'クイズ一覧画面の表示に成功すること' do
+    get "/questions"
+    expect(response).to have_http_status(200)
+  end
 
   it 'クイズの作成に成功すること' do
     login
@@ -19,11 +23,6 @@ RSpec.describe "Questions", type: :request do
     expect(response).to redirect_to book
     follow_redirect!
     expect(response.body).to include('学校補助金の増額案に')
-  end
-
-  it 'クイズ一覧画面の表示に成功すること' do
-    get "/questions"
-    expect(response).to have_http_status(200)
   end
 
   it 'クイズ作成画面の表示に成功すること' do
