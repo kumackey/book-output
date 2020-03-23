@@ -20,11 +20,13 @@ http://bookoutput.work/
 このサービスは、私が作りたかったサービスです。
 
 詳細な機能の企画に関しては、以下企画書をご参照ください。
+
 https://github.com/kumackey/book-output/wiki/Proposal
 
 ## 要件定義
 
 issueを用いて実装したい機能の管理を行っております。
+
 https://github.com/kumackey/book-output/issues
 
 今後追加したい機能に関しては【機能要件】として表示しております。
@@ -40,6 +42,7 @@ https://github.com/kumackey/book-output/issues
 ![bookoutput](https://user-images.githubusercontent.com/55213482/77245830-f881b180-6c64-11ea-8511-130f8b641da4.png)
 
 クイズアプリにおけるデータベース設計について、以下Qiita記事を書きました。
+
 https://qiita.com/kumackey/items/7ccbc949458bd0af22bd
 
 ## 技術アピールポイント
@@ -49,9 +52,10 @@ https://qiita.com/kumackey/items/7ccbc949458bd0af22bd
 技術的な核心となっている箇所については、以下のように記事を書きました。
 
 Google Books APIを用いた本リソースの検索/取得
+
 https://qiita.com/kumackey/items/bd369a23360c94452d33
 
-- フォームオブジェクトによる複数リソース登録
+フォームオブジェクトによる複数リソース登録
 (準備中)
 
 #### gem関連
