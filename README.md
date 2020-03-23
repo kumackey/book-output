@@ -9,7 +9,7 @@ http://bookoutput.work/
 使い方紹介: [gif](https://twitter.com/kumackey_/status/1241634940216729600)
 ※ 2分半ほどの長さです。
 
-## 動機
+### 動機
 
 このアプリ作成者(私)は、読書をするのが好きです。
 
@@ -19,63 +19,51 @@ http://bookoutput.work/
 
 このサービスは、私が作りたかったサービスです。
 
-詳細な機能の企画に関しては、以下企画書をご参照ください。
+詳細な機能の企画に関しては、企画書をご参照ください。
 
-https://github.com/kumackey/book-output/wiki/Proposal
+[企画書](https://github.com/kumackey/book-output/wiki/Proposal)
 
-## 要件定義
+### 要件定義
 
 issueを用いて実装したい機能の管理を行っております。
-
 https://github.com/kumackey/book-output/issues
 
 今後追加したい機能に関しては【機能要件】として表示しております。
 
-## 現在の主要機能
+### 現在の主要機能
 
 - 本に紐づいたクイズの作成・出題機能
 - 本のお気に入り機能と、それに基づくフィード機能
 - 作ったクイズのCSV出力機能
 
-## ER図
+### ER図
 
 ![bookoutput](https://user-images.githubusercontent.com/55213482/77245830-f881b180-6c64-11ea-8511-130f8b641da4.png)
 
-クイズアプリにおけるデータベース設計について、以下Qiita記事を書きました。
-
+クイズアプリにおけるデータベース設計について、Qiita記事を書きました。
 https://qiita.com/kumackey/items/7ccbc949458bd0af22bd
 
-## 技術アピールポイント
-
-#### コード関連
+### コードのアピールポイント
 
 技術的な核心となっている箇所については、以下のように記事を書きました。
 
-Google Books APIを用いた本リソースの検索/取得
-
+- Google Books APIを用いた本リソースの検索/取得
 https://qiita.com/kumackey/items/bd369a23360c94452d33
 
-フォームオブジェクトによる複数リソース登録
+- フォームオブジェクトによる複数リソース登録
 (準備中)
 
-#### gem関連
-
-- Rubocopの静的コード解析の利用
-- RSpecでのテスト(特にrequest spec)を充実
-- Carrierwave, fogを用いたS3への画像アップロード
-- pry, binding_of_callerを用いたデバッグ
-
-#### インフラ
+### インフラ
 
 素早くリリースが行え、継続的な改善・保守がしやすいクラウドでインフラを構築しました。
 クラウドインフラとして現在のデファクトスタンダードであるAWSを選択しました。
 
 AWS: VPC / EC2 / RDS / S3 / ElastiCache / Route53 / IAM
 
-ファイアウォールやsshのポート番号など、セキリュティには力を入れたつもりです。
-(https化がまだなことについては、急ぎ対応します)
+ファイアウォールやsshのポート番号をデフォルトからずらすなど、セキリュティには注意しました。
+(https化がまだなことについては、急ぎ対応します笑)
 
-#### 開発の流れ
+### 開発の流れ
 
 基本的な開発の流れとしては以下の通りで、チーム開発を想定した流れを意識しました。
 
