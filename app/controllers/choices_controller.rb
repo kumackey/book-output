@@ -1,8 +1,8 @@
 class ChoicesController < ApplicationController
-  before_action :require_login, only: %i[show]
-
   def show
     @choice = Choice.find(params[:id])
+    @book = @choice.question.book
     @choices = @choice.question.choices.includes(:question).order(:created_at)
+    render layout: 'book_detail'
   end
 end

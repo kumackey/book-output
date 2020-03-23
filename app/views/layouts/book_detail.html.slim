@@ -8,6 +8,10 @@ html
     = render 'shared/header'
     = render 'shared/flash_messages'
     main
-      = yield
+      .container
+        .row.flex-row-reverse
+          .col-md-7.mb-3
+            = yield
+          .col-md-5
+            = render 'books/detail', book: @book
     = render 'shared/footer'
-    = render 'shared/modal'

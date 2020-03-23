@@ -13,6 +13,7 @@ class QuestionsController < ApplicationController
   def new
     @book = Book.find(params[:book_id])
     @register_output_form = RegisterOutputForm.new
+    render layout: 'book_detail'
   end
 
   def create
@@ -24,13 +25,15 @@ class QuestionsController < ApplicationController
       redirect_to @book, success: '問題を作成しました'
     else
       flash.now[:danger] = '問題の作成に失敗しました'
-      render :new
+      render layout: 'book_detail', action: :new
     end
   end
 
   def show
     @question = Question.find(params[:id])
+    @book = @question.book
     @choices = @question.choices.includes([:question, question: %i[book user]]).shuffle
+    render layout: 'book_detail'
   end
 
   def destroy

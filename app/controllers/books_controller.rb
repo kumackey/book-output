@@ -10,7 +10,7 @@ class BooksController < ApplicationController
     @book = google_book.build_book_by_user(current_user)
     if @book.save
       current_user.like(@book)
-      redirect_back_or_to books_path, success: '本を登録しました'
+      redirect_to books_path, success: '本を登録しました'
     else
       flash.now[:danger] = '本の登録に失敗しました'
       render :search_books_path
@@ -25,6 +25,7 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @questions = @book.questions.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
+    render layout: 'book_detail'
   end
 
   def search
