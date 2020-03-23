@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "Questions", type: :request do
+  it 'ランダムにクイズが表示できること' do
+    create(:question)
+    get "/questions/random"
+    expect(response).to have_http_status(302)
+    follow_redirect!
+    expect(response.body).to include("作者")
+  end
+
   it 'クイズ一覧画面の表示に成功すること' do
     get "/questions"
     expect(response).to have_http_status(200)
