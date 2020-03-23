@@ -1,7 +1,17 @@
 - provide :title, "解答・解説"
-.container
-  .row.flex-row-reverse
-    .col-md-7.mb-3
-      = render 'choices/result_and_commentary', choice: @choice, choices: @choices
-    .col-md-5
-      = render 'books/detail', book: @choice.question.book
+.card
+  h5.card-header.bg-success.text-white.text-center
+    strong 結果・解説
+  .card-body.bg-white
+    - if @choice.is_answer
+      = render 'choices/correct'
+    - else
+      = render 'choices/incorrect'
+    .mt-4
+      = render partial: 'choices/choice_in_result', collection: @choices, locals: { choice: @choice }
+    = render 'users/writer', user: @choice.question.user
+    = render 'choices/commentary', question: @choice.question
+    .mt-4.text-center
+      = link_to @choice.question.book do
+        button.btn.btn-raised.btn-success
+          | クイズ一覧へ戻る
