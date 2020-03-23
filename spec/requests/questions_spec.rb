@@ -49,8 +49,7 @@ RSpec.describe "Questions", type: :request do
   end
 
   it 'クイズの削除に成功すること' do
-    login
-    user = User.find_by(email: 'guest@guest.jp')
+    user = login
     question = create(:question, user_id: user.id)
     expect { delete "/questions/#{question.id}", xhr: true }.to change{ Question.count }.by(-1)
   end
