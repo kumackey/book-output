@@ -21,7 +21,9 @@ class RegisterOutputForm
   validates :user_id, presence: true
   validates :book_id, presence: true
 
-  def save_question_and_choices
+  def save
+    return false unless valid?
+
     user = User.find(user_id)
     question = user.questions.build(content: question_content, commentary: commentary, book_id: book_id)
     question.save # 問題文と解説文の保存
