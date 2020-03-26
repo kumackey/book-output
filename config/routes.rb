@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   namespace :mypage do
     resource :account, only: %i[edit update]
-    resource :like_books, only: %i[show]
-    resource :make_questions, only: %i[show]
+    resources :like_books, only: %i[index]
+    resources :questions, only: %i[index]
   end
 end
