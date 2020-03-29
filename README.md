@@ -2,7 +2,7 @@
 
 ![スクリーンショット 2020-03-12 5 46 05](https://user-images.githubusercontent.com/55213482/76595212-71cf2500-653e-11ea-8c42-c2e49e40cc54.png)
 
-http://bookoutput.work/
+https://bookoutput.work/
 
 本に関するクイズを作り、みんなで共有するWEBサービスです。
 
