@@ -58,10 +58,9 @@ https://qiita.com/kumackey/items/b469143f1a0c4902cf4e
 素早くリリースが行え、継続的な改善・保守がしやすいクラウドでインフラを構築しました。
 クラウドインフラとして現在のデファクトスタンダードであるAWSを選択しました。
 
-AWS: VPC / EC2 / RDS / S3 / ElastiCache / Route53 / IAM
+AWS: VPC / EC2 / RDS / S3 / ElastiCache / Route53 / IAM / ACM
 
 ファイアウォールやsshのポート番号をデフォルトからずらすなど、セキリュティには注意しました。
-(https化がまだなことについては、急ぎ対応します笑)
 
 ## 開発の流れ
 
