@@ -20,8 +20,7 @@ class QuestionsController < ApplicationController
     @book = Book.find(params[:book_id])
     @register_output_form = RegisterOutputForm.new(create_question_params
       .merge(user_id: current_user.id, book_id: @book.id))
-    if @register_output_form.valid?
-      @register_output_form.save_question_and_choices
+    if @register_output_form.save
       redirect_to @book, success: '問題を作成しました'
     else
       flash.now[:danger] = '問題の作成に失敗しました'

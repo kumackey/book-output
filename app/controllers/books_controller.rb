@@ -30,12 +30,8 @@ class BooksController < ApplicationController
 
   def search
     @search_form = SearchBooksForm.new(search_books_params)
-    if params[:q].present?
-      books = GoogleBook.search(search_books_params[:keyword])
-      @books = Kaminari.paginate_array(books).page(params[:page])
-    else
-      @books = Kaminari.paginate_array([]).page(params[:page])
-    end
+    books = GoogleBook.search(@search_form.keyword)
+    @books = Kaminari.paginate_array(books).page(params[:page])
   end
 
   private

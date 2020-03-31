@@ -3,6 +3,6 @@ h5.text-center.pt-3.pb-3
   strong #{@user.username}さんが作成したクイズ
 .container-fluid
   .text-center
-    = link_to mypage_make_questions_path(format: :csv), data: {confirm: '出力しますか？'}, class: "btn btn-info btn-raised mb-3" do
+    = link_to mypage_questions_path(format: :csv), data: {confirm: '出力しますか？'}, class: "btn btn-info btn-raised mb-3" do
       | CSV出力
   = render 'questions/questions', questions: @questions
