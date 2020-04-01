@@ -32,6 +32,9 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'actionview', '>= 5.2.4.2'
+gem 'nokogiri', '~>1.10.8'
+
 gem 'annotate'
 gem 'slim-rails'
 gem 'html2slim'
@@ -41,7 +44,6 @@ gem 'sorcery'
 gem 'font-awesome-sass', '~> 5.4.1'
 gem 'carrierwave', '~>1.1.0'
 gem 'mini_magick'
-gem 'nokogiri', '~>1.10.8'
 gem 'faker'
 gem 'kaminari'
 gem 'addressable'
