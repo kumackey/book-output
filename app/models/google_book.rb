@@ -59,6 +59,14 @@ class GoogleBook
     book
   end
 
+  def likes
+    Like.where(book_id: @googlebooksapi_id)
+  end
+
+  def questions
+    Question.where(book_id: @googlebooksapi_id)
+  end
+
   private
 
   def image_url
