@@ -21,9 +21,13 @@
 
 class Question < ApplicationRecord
   belongs_to :user
-  belongs_to :book
+  belongs_to :book, optional: true
   has_many :choices, dependent: :destroy
 
   validates :content, presence: true, length: { maximum: 140 }
   validates :commentary, length: { maximum: 140 }
+
+  def google_book
+    GoogleBook.new_from_id(book_id)
+  end
 end

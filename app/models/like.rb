@@ -19,7 +19,11 @@
 #
 
 class Like < ApplicationRecord
-  belongs_to :book
+  belongs_to :book, optional: true
   belongs_to :user
   validates :user_id, uniqueness: { scope: :book_id }
+
+  def google_book
+    GoogleBook.new_from_id(book_id)
+  end
 end
