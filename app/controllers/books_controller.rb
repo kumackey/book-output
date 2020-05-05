@@ -23,8 +23,8 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
-    @questions = @book.questions.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
+    @book = GoogleBook.new_from_id(params[:id])
+    # @questions = @book.questions.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
     render layout: 'book_detail'
   end
 

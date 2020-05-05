@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @book = Book.find(params[:book_id])
+    @book = GoogleBook.new_from_id(params[:book_id])
     @register_output_form = RegisterOutputForm.new
     render layout: 'book_detail'
   end

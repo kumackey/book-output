@@ -1,0 +1,25 @@
+.container.card.card-book
+  .row
+    .col-4.col-md-12
+      .mb-3
+        = image_tag book.image
+    .col-8.col-md-12            
+      .d-inline-block
+        h5 = book.title
+      .d-inline-block.ml-3
+        / = render 'books/like_area', book: book
+      p 著者: #{book.author}
+      p = truncate(strip_tags(book.description), length: 100)
+      .d-inline
+        | 出版日: #{book.published_at}
+      .d-inline.ml-3
+        - if book.buy_link.present?
+          = link_to book.buy_link do
+            | 購入する
+      .flex-box.mt-3
+        = link_to new_book_question_path(book.googlebooksapi_id) do
+          button.btn.btn-raised.btn-success[class="#{'active' if controller.controller_name == 'questions' && controller.action_name == 'new'}"]
+            | クイズ作成
+        = link_to book_path(book.googlebooksapi_id), class: 'ml-2' do
+          button.btn.btn-raised.btn-success[class="#{'active' if controller.controller_name == 'books' && controller.action_name == 'show'}"]
+            | クイズ一覧
