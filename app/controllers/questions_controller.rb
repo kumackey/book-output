@@ -17,11 +17,11 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @book = Book.find(params[:book_id])
+    @book = GoogleBook.new_from_id(params[:book_id])
     @register_output_form = RegisterOutputForm.new(create_question_params
-      .merge(user_id: current_user.id, book_id: @book.id))
+      .merge(user_id: current_user.id, book_id: @book.googlebooksapi_id))
     if @register_output_form.save
-      redirect_to @book, success: '問題を作成しました'
+      redirect_to book_path(@book.googlebooksapi_id), success: '問題を作成しました'
     else
       flash.now[:danger] = '問題の作成に失敗しました'
       render layout: 'book_detail', action: :new

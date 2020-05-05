@@ -10,7 +10,7 @@ class RegisterOutputForm
   attribute :incorrect_choice_2, :string
   attribute :incorrect_choice_3, :string
   attribute :user_id, :integer
-  attribute :book_id, :integer
+  attribute :book_id, :string
 
   validates :question_content, presence: true, length: { maximum: 140 }
   validates :commentary, length: { maximum: 140 }
