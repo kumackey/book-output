@@ -40,12 +40,10 @@ RSpec.describe "Books", type: :request do
   end
 
   it '本詳細画面の表示に成功すること' do
-    book = create(:book, title: "ファスト＆スロー(下)")
-    create(:other_book, title: "影響力の武器")
-    get "/books/#{book.id}" # ファスト＆スロー(下)のページにアクセス
+    book_title = "ファスト＆スロー(下)"
+    book = GoogleBook.search(book_title).first
+    get "/books/#{book.googlebooksapi_id}" # ファスト＆スロー(下)のページにアクセス
     expect(response).to have_http_status(200)
-    expect(response.body).to include("ファスト＆スロー(下)")
-    expect(response.body).not_to include("影響力の武器")
   end
 end
 
