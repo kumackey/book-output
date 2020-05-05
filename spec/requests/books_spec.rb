@@ -39,11 +39,6 @@ RSpec.describe "Books", type: :request do
     end
   end
 
-  it '本一覧画面の表示に成功すること' do
-    get '/books'
-    expect(response).to have_http_status(200)
-  end
-
   it '本の登録に成功すること' do
     login
     post '/books', params: { googlebooksapi_id: "xPbRxgEACAAJ" }

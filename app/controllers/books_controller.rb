@@ -1,10 +1,6 @@
 class BooksController < ApplicationController
   before_action :require_login, only: %i[create]
 
-  def index
-    @books = Book.all.page(params[:page]).per(10).order(created_at: :desc)
-  end
-
   def create
     google_book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
     @book = google_book.build_book_by_user(current_user)

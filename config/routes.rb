@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
   end
   resources :users, only: %i[show]
-  resources :books, only: %i[index create new show], shallow: true do
+  resources :books, only: %i[create new show], shallow: true do
     collection do
       get :search
     end

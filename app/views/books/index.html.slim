@@ -1,8 +1,0 @@
-- provide :title, "本一覧"
-.container
-  .mb-3
-    h6.text-center.mb-3
-      | 本一覧
-  .row
-    = render partial: 'books/book', collection: @books, as: :book
-  = paginate @books
