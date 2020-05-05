@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_action :require_login, only: %i[new create destroy]
 
   def index
-    @questions = Question.all.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
+    @questions = Question.all.includes(:user).page(params[:page]).per(10).order(created_at: :desc)
   end
 
   def random

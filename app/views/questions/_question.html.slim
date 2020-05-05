@@ -1,7 +1,7 @@
 .container.card.p-3 id="question-#{question.id}" 
   .row
-    = link_to book_path(question.book), class: 'col-2' do
-      = image_tag question.book.image.url, height: '70'
+    = link_to book_path(question.google_book.googlebooksapi_id), class: 'col-2' do
+      = image_tag question.google_book.image, height: '70'
     = link_to question, class: 'col-9 text-break' do
       h6 = question.content
     .col-1.text-right
