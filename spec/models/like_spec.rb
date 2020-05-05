@@ -26,7 +26,7 @@ RSpec.describe Like, type: :model do
     expect(like).to be_valid
   end
 
-  it "本の無いいいねは無効なこと" do
+  it '本の無いいいねは無効なこと' do
     like = build(:like, book_id: nil)
     expect(like).not_to be_valid
   end
