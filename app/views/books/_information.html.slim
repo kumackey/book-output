@@ -7,7 +7,7 @@
       .d-inline-block
         h5 = book.title
       .d-inline-block.ml-3
-        / = render 'books/like_area', book: book
+        = render 'books/like_area', book: book
       p 著者: #{book.author}
       p = truncate(strip_tags(book.description), length: 100)
       .d-inline

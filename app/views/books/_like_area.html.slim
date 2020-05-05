@@ -1,5 +1,5 @@
 - if logged_in?
-  div id="book-#{book.id}"
+  div id="book-#{book.googlebooksapi_id}"
     - if current_user.like?(book)
       = render 'books/unlike', book: book
     - else
