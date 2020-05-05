@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_063716) do
+ActiveRecord::Schema.define(version: 2020_05_05_075859) do
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "googlebooksapi_id", null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_063716) do
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "book_id"
+    t.string "book_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_063716) do
   create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content", null: false
     t.bigint "user_id"
-    t.bigint "book_id"
+    t.string "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "commentary"

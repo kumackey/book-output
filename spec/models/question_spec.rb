@@ -7,7 +7,7 @@
 #  content    :text(65535)      not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  book_id    :bigint
+#  book_id    :string(255)
 #  user_id    :bigint
 #
 # Indexes
