@@ -20,7 +20,7 @@ class BooksController < ApplicationController
 
   def show
     @book = GoogleBook.new_from_id(params[:id])
-    # @questions = @book.questions.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
+    @questions = @book.questions.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
     render layout: 'book_detail'
   end
 
