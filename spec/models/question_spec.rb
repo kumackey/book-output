@@ -28,6 +28,12 @@ RSpec.describe Question, type: :model do
     expect(question).to be_valid
   end
 
+  it "本の情報がないときに無効なこと" do
+    question = build(:question, book_id: nil)
+    question.valid?
+    expect(question.errors.messages[:book_id]).to include("を入力してください")
+  end
+
   it "問題文が空白であるときに無効なこと" do
     question.content = nil
     question.valid?
