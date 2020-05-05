@@ -70,12 +70,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  it "ユーザーが消去されたとき、登録されていた本も消えること" do
-    owner = create(:user)
-    create(:book, user_id: owner.id)
-    expect{ owner.destroy }.to change{ Book.count }.by(-1)
-  end 
-
   it "ユーザーが消去されたとき、関連するクイズも消えること" do
     user = create(:user)
     create(:question, user_id: user.id)
@@ -94,17 +88,24 @@ RSpec.describe User, type: :model do
 
   it "いいねができること" do
     user = create(:user)
-    book = create(:book)
-    expect { user.like(book) }.to change{ Like.count }.by(1)
-    expect(user.like?(book)).to be_truthy
+    google_book_api_id = "4j13KIu3Z60C"
+    google_book = GoogleBook.new_from_id(google_book_api_id)
+    expect(user.like_google_book?(google_book)).not_to be_truthy
+    expect { user.like_google_book(google_book) }.to change{ Like.count }.by(1)
+    expect(user.like_google_book?(google_book)).to be_truthy
   end
 
   it "いいねを外せること" do
-    like = create(:like)
-    user = like.user
-    book = like.book
-    expect { user.unlike(book) }.to change{ Like.count }.by(-1)
-    expect(user.like?(book)).not_to be_truthy
+    #　いいねをする
+    user = create(:user)
+    google_book_api_id = "4j13KIu3Z60C"
+    google_book = GoogleBook.new_from_id(google_book_api_id)
+    user.like_google_book(google_book)
+
+    # いいねを外す
+    expect(user.like_google_book?(google_book)).to be_truthy
+    expect { user.unlike_google_book(google_book) }.to change{ Like.count }.by(-1)
+    expect(user.like_google_book?(google_book)).not_to be_truthy
   end
 
   it "フィードにいいねした本の問題が載ること" do

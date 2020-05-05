@@ -39,6 +39,27 @@ class User < ApplicationRecord
     id == object.user_id
   end
 
+  def like_google_books
+    google_books_ids = likes.all.to_a.map{ |book| book.book_id }
+    google_books_ids.map{ |id| GoogleBook.new_from_id(id) }
+  end
+
+  def like_google_book(google_book)
+    #　後々likeメソッドに名前を置換したい
+    likes.create(book_id: google_book.googlebooksapi_id)
+  end
+
+  def unlike_google_book(google_book)
+    #　後々unlikeメソッドに名前を置換したい
+    like = self.likes.find_by(book_id: google_book.googlebooksapi_id)
+    like.destroy
+  end
+
+  def like_google_book?(google_book)
+    #　後々like?メソッドに名前を置換したい
+    likes.all.to_a.map{ |book| book.book_id }.include?(google_book.googlebooksapi_id)
+  end
+
   def like(book)
     like_books << book
   end
