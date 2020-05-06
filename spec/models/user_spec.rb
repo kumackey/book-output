@@ -70,12 +70,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  it "ユーザーが消去されたとき、登録されていた本も消えること" do
-    owner = create(:user)
-    create(:book, user_id: owner.id)
-    expect{ owner.destroy }.to change{ Book.count }.by(-1)
-  end 
-
   it "ユーザーが消去されたとき、関連するクイズも消えること" do
     user = create(:user)
     create(:question, user_id: user.id)
