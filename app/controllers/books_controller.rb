@@ -7,13 +7,13 @@ class BooksController < ApplicationController
 
   def create
     google_book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
-    @book = google_book.build_book_by_user(current_user)
+    @book = Book.find_by(googlebooksapi_id: google_book.googlebooksapi_id)
+    redirect_to @book if @book
+    @book = google_book.build_book
     if @book.save
-      current_user.like(@book)
-      redirect_to books_path, success: '本を登録しました'
+      redirect_to @book
     else
-      flash.now[:danger] = '本の登録に失敗しました'
-      render :search_books_path
+      redirect_to search_books_path, danger: 'ページの表示に失敗しました'
     end
   end
 
