@@ -45,7 +45,6 @@ RSpec.describe "Books", type: :request do
   end
 
   it '本の登録に成功すること' do
-    login
     expect {
       post '/books', params: { googlebooksapi_id: "xPbRxgEACAAJ" }
     }.to change{ Book.count }.by(1)
