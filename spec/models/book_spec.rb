@@ -12,17 +12,11 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  googlebooksapi_id :string(255)      not null
-#  user_id           :bigint
 #
 # Indexes
 #
 #  index_books_on_googlebooksapi_id                            (googlebooksapi_id) UNIQUE
-#  index_books_on_user_id                                      (user_id)
-#  index_books_on_user_id_and_created_at_and_author_and_title  (user_id,created_at,author,title)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (user_id => users.id)
+#  index_books_on_user_id_and_created_at_and_author_and_title  (created_at,author,title)
 #
 
 require 'rails_helper'
