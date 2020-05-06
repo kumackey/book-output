@@ -78,12 +78,10 @@ RSpec.describe User, type: :model do
 
   it "ユーザがオブジェクトを持っているかを確認する機能own?が有効なこと" do
     user = create(:user)
-    other_user = create(:user)
-    book = build(:book, user_id: other_user.id)
-    expect(user.own?(book)).not_to be_truthy
-
-    book = build(:book, user_id: user.id)
-    expect(user.own?(book)).to be_truthy
+    other_user = create(:other_user)
+    question_by_other_user = build(:question, user_id: other_user.id)
+    expect(user.own?(question_by_other_user)).not_to be_truthy
+    expect(other_user.own?(question_by_other_user)).to be_truthy
   end
 
   it "いいねができること" do

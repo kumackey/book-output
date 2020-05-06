@@ -14,11 +14,11 @@ RSpec.describe "Questions", type: :request do
     expect(response).to have_http_status(200)
   end
 
-  it 'クイズの作成に成功すること' do
+  it '適切なparamが渡っているときにクイズを作成できること' do
     login
     user = create(:user)
     book = create(:book)
-    post "/books/#{book.id}/questions", params: { register_output_form: { 
+    expect { post "/books/#{book.id}/questions", params: { register_output_form: { 
       question_content: "学校補助金の増額案に対する賛成票は、ある投票所では優位に多かった。どこか？",
       commentary: "プライミング効果によって、学校に対して有利な投票をしたくなるため",
       user_id: user.id,
@@ -27,10 +27,26 @@ RSpec.describe "Questions", type: :request do
       incorrect_choice_1: "市役所",
       incorrect_choice_2: "警察署",
       incorrect_choice_3: "美術館",
-    } }
+    } } }.to change{ Question.count }.by(1)
     expect(response).to redirect_to book
-    follow_redirect!
-    expect(response.body).to include('学校補助金の増額案に')
+  end
+
+  it '不適切なparamが渡っているときにクイズの作成に失敗すること' do
+    login
+    user = create(:user)
+    book = create(:book)
+    expect { post "/books/#{book.id}/questions", params: { register_output_form: { 
+      question_content: nil, #  question_contentがない
+      commentary: "プライミング効果によって、学校に対して有利な投票をしたくなるため",
+      user_id: user.id,
+      book_id: book.id,
+      correct_choice: "学校",
+      incorrect_choice_1: "市役所",
+      incorrect_choice_2: "警察署",
+      incorrect_choice_3: "美術館",
+    } } }.to change{ Question.count }.by(0)
+    expect(response).to have_http_status(200)
+    expect(response.body).to include("問題の作成に失敗しました")
   end
 
   it 'クイズ作成画面の表示に成功すること' do
