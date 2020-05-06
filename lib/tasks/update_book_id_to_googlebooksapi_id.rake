@@ -1,7 +1,6 @@
 namespace :update_book_id_to_googlebooksapi_id do
-  desc "likesテーブルのbook_idカラムをGoogle Books APIのIDに変更する"
+  desc 'likesテーブルのbook_idカラムをGoogle Books APIのIDに変更する'
   task update: :environment do
-
     # 冪等性は考えていないため、注意！
 
     Like.transaction do
