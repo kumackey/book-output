@@ -6,8 +6,8 @@
       - if @questions.empty?
         .text-center
           p 本をいいねすると、そのクイズが表示されます。
-          = link_to books_path do
-            p 本一覧を見ていいねする
+          = link_to search_books_path do
+            p 本を検索する
     .col-12.col-md-6
       h6.text-center.mb-3
         | 最近登録された本
