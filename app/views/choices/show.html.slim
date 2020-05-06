@@ -12,6 +12,6 @@
     = render 'users/writer', user: @choice.question.user
     = render 'choices/commentary', question: @choice.question
     .mt-4.text-center
-      = link_to @choice.question.book do
+      = link_to book_path(@choice.question.google_book) do
         button.btn.btn-raised.btn-success
           | クイズ一覧へ戻る
