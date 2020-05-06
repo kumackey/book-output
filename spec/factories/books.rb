@@ -32,7 +32,6 @@ FactoryBot.define do
     title { "ファスト＆スロー(下)" }
     googlebooksapi_id { "yHrxYFWkrfQC" }
     buy_link { "https://play.google.com/store/books/details?id=yHrxYFWkrfQC&rdid=book-yHrxYFWkrfQC&rdot=1&source=gbs_api" }
-    association :user
   end
 
   factory :other_book, class: Book do
@@ -47,6 +46,5 @@ FactoryBot.define do
     title { "影響力の武器" }
     googlebooksapi_id { "axicQgAACAAJ" }
     buy_link { "" }
-    association :user
   end
 end
