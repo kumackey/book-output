@@ -15,6 +15,9 @@ class GoogleBook
   attribute :web_reader_link, :string
   attribute :page_count, :integer
 
+  validates :googlebooksapi_id, presence: true
+  validates :title, presence: true
+
   class << self
     include GoogleBooksApi
 
