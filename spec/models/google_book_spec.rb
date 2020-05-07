@@ -27,4 +27,17 @@ RSpec.describe GoogleBook, type: :model do
     expect(google_book.authors).to eq %w[山下佳隆 村田知常 原知愛 近藤秀彦]
     expect(google_book.author).to eq '山下佳隆'
   end
+
+  it 'キーワードから複数の検索結果を返し、そのタイトルにキーワードが含まれていること' do
+    keyword = 'Ruby'
+    keyword_count = 0
+    google_books = GoogleBook.search(keyword)
+    expect(google_books.size).to be >= 5 #  検索結果を5個以上は返せる
+    google_books.each do |google_book|
+      if google_book.title.include?(keyword)
+        keyword_count += 1
+      end
+    end
+    expect(keyword_count).to be >= 5 #  キーワードのRubyを含むタイトルが5個以上は返せる
+  end
 end
