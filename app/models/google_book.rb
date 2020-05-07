@@ -72,7 +72,11 @@ class GoogleBook
   end
 
   def save
+    return false unless valid?
+
     book = build_book
+    return false unless book.valid?
+
     book.remote_image_url = image if image.present?
     book.save
     authors.each.with_index do |author, index|

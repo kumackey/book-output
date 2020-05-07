@@ -46,4 +46,29 @@ RSpec.describe GoogleBook, type: :model do
     google_books = GoogleBook.search(keyword)
     expect(google_books.size).to be 0
   end
+
+  it '適切な本情報を保存できること' do
+    google_book = build(:google_book, authors: [
+                          '太田 智彬',
+                          '寺下 翔太',
+                          '手塚 亮',
+                          '宗像 亜由美',
+                          '株式会社リクルートテクノロジーズ'
+                        ])
+    expect { google_book.save }.to change { Book.count }.by(1).and change { Author.count }.by(5)
+  end
+
+  it '適切な本情報を保存したときにtrueを返すこと' do
+    expect(google_book.save).to be_truthy
+  end
+
+  it '不適切な本情報の保存に失敗すること' do
+    google_book = build(:google_book, googlebooksapi_id: nil)
+    expect { google_book.save }.to change { Book.count }.by(0).and change { Author.count }.by(0)
+  end
+
+  it '不適切な本情報を保存しようとしたときにfalseを返すこと' do
+    google_book = build(:google_book, googlebooksapi_id: nil)
+    expect(google_book.save).not_to be_truthy
+  end
 end
