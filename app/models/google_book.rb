@@ -87,6 +87,14 @@ class GoogleBook
     true
   end
 
+  def find_book_or_save
+    if Book.find_by(googlebooksapi_id: googlebooksapi_id) || save
+      Book.find_by(googlebooksapi_id: googlebooksapi_id)
+    else
+      false
+    end
+  end
+
   private
 
   def build_book
