@@ -23,6 +23,7 @@ class Book < ApplicationRecord
   mount_uploader :image, ImageUploader
   has_many :questions, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :authors, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :googlebooksapi_id, presence: true,
