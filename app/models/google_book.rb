@@ -47,26 +47,8 @@ class GoogleBook
     @page_count = @volume_info['pageCount']
   end
 
-  def build_book
-    Book.new(
-      author: @author,
-      description: @description,
-      googlebooksapi_id: @googlebooksapi_id,
-      published_at: @published_at,
-      title: @title,
-      buy_link: @buy_link
-    )
-  end
-
   def save
-    book = Book.new(
-      author: @author,
-      description: @description,
-      googlebooksapi_id: @googlebooksapi_id,
-      published_at: @published_at,
-      title: @title,
-      buy_link: @buy_link
-    )
+    book = build_book
     book.remote_image_url = @image if @image.present?
     book.save
     @authors.each.with_index do |author, index|
@@ -82,6 +64,17 @@ class GoogleBook
   end
 
   private
+
+  def build_book
+    Book.new(
+      author: @author,
+      description: @description,
+      googlebooksapi_id: @googlebooksapi_id,
+      published_at: @published_at,
+      title: @title,
+      buy_link: @buy_link
+    )
+  end
 
   def image_url
     if @volume_info['imageLinks']
