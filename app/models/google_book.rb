@@ -53,11 +53,7 @@ class GoogleBook
     book.save
     @authors.each.with_index do |author, index|
       author = book.authors.build(name: author)
-      if index == 0 
-        author.is_representation = true
-      else
-        author.is_representation = false
-      end
+      author.is_representation = index.zero?
       author.save
     end
     true
