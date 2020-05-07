@@ -46,11 +46,10 @@ class GoogleBook
       url = url_of_searching_from_keyword(keyword)
       json = get_json_from_url(url)
       items = json['items']
-      books = []
-      items&.each do |item|
-        books << GoogleBook.new_form_item(item)
+      return [] unless items
+      items.map do |item|
+        GoogleBook.new_form_item(item)
       end
-      books
     end
 
     private
