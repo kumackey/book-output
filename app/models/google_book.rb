@@ -35,7 +35,8 @@ class GoogleBook
 
   def retrieve_attribute
     @googlebooksapi_id = @item['id']
-    @author = first_author
+    @author = @volume_info['authors']&.first
+    @authors = @volume_info['authors']
     @buy_link = @item['saleInfo']['buyLink']
     @description = @volume_info['description']
     @image = image_url
@@ -67,10 +68,6 @@ class GoogleBook
     else
       ''
     end
-  end
-
-  def first_author
-    @volume_info['authors']&.first
   end
 
   def reader_link_url
