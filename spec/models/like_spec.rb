@@ -23,20 +23,20 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  it "有効なファクトリを持つこと" do
+  it '有効なファクトリを持つこと' do
     like = build(:like)
     expect(like).to be_valid
   end
 
-  it "本の無いいいねは無効なこと" do
+  it '本の無いいいねは無効なこと' do
     like = build(:like, book_id: nil)
     expect(like).not_to be_valid
   end
 
-  it "重複したいいねは無効なこと" do
+  it '重複したいいねは無効なこと' do
     like1 = create(:like)
     like2 = build(:like, user_id: like1.user_id, book_id: like1.book_id)
     like2.valid?
-    expect(like2.errors[:user_id]).to include("はすでに存在します")
+    expect(like2.errors[:user_id]).to include('はすでに存在します')
   end
 end

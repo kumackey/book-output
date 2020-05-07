@@ -24,7 +24,7 @@
 
 FactoryBot.define do
   factory :choice do
-    content { "○" }
+    content { '○' }
     is_answer { true }
     association :question
   end
