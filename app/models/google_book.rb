@@ -53,6 +53,8 @@ class GoogleBook
       books
     end
 
+    private
+
     def image_url
       if @volume_info['imageLinks']
         @volume_info['imageLinks']['smallThumbnail']
