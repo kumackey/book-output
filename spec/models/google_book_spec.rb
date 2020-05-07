@@ -28,7 +28,7 @@ RSpec.describe GoogleBook, type: :model do
     expect(google_book.author).to eq '山下佳隆'
   end
 
-  it 'キーワードから複数の検索結果を返し、そのタイトルにキーワードが含まれていること' do
+  it '適切なキーワードから複数の検索結果を返し、そのタイトルにキーワードが含まれていること' do
     keyword = 'Ruby'
     keyword_count = 0
     google_books = GoogleBook.search(keyword)
@@ -39,5 +39,11 @@ RSpec.describe GoogleBook, type: :model do
       end
     end
     expect(keyword_count).to be >= 5 #  キーワードのRubyを含むタイトルが5個以上は返せる
+  end
+
+  it '不適切なキーワードからは検索結果を返さないこと' do
+    keyword = 'bbvjnaovnaov' #  適当
+    google_books = GoogleBook.search(keyword)
+    expect(google_books.size).to be 0
   end
 end
