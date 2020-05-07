@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2020_05_07_024313) do
   create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "book_id"
     t.string "name", null: false
-    t.boolean "is_representation"
+    t.boolean "is_representation", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_authors_on_book_id"

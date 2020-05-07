@@ -3,7 +3,7 @@
 # Table name: authors
 #
 #  id                :bigint           not null, primary key
-#  is_representation :boolean
+#  is_representation :boolean          not null
 #  name              :string(255)      not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
