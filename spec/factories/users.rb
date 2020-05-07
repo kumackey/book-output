@@ -29,6 +29,6 @@ FactoryBot.define do
     sequence(:email) { |n| "tester#{n}@example.com" }
     password { 'password' }
     password_confirmation { 'password' }
-    avatar { File.open("#{Rails.root}/spec/factories/images/boy.png") }
+    avatar { File.open(Rails.root.join('spec/factories/images/boy.png')) }
   end
 end
