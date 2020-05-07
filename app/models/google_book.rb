@@ -48,6 +48,17 @@ class GoogleBook
   end
 
   def build_book
+    Book.new(
+      author: @author,
+      description: @description,
+      googlebooksapi_id: @googlebooksapi_id,
+      published_at: @published_at,
+      title: @title,
+      buy_link: @buy_link
+    )
+  end
+
+  def save
     book = Book.new(
       author: @author,
       description: @description,
@@ -57,7 +68,17 @@ class GoogleBook
       buy_link: @buy_link
     )
     book.remote_image_url = @image if @image.present?
-    book
+    book.save
+    @authors.each.with_index do |author, index|
+      author = book.authors.build(name: author)
+      if index == 0 
+        author.is_representation = true
+      else
+        author.is_representation = false
+      end
+      author.save
+    end
+    true
   end
 
   private
