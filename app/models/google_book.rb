@@ -55,15 +55,11 @@ class GoogleBook
     private
 
     def image_url
-      if @volume_info['imageLinks']
-        @volume_info['imageLinks']['smallThumbnail']
-      else
-        ''
-      end
+      @volume_info['imageLinks']['smallThumbnail'] if @volume_info['imageLinks'].present?
     end
 
     def reader_link_url
-      @item['accessInfo']['webReaderLink'] if @item['accessInfo']
+      @item['accessInfo']['webReaderLink'] if @item['accessInfo'].present?
     end
   end
 
