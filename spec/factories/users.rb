@@ -18,17 +18,17 @@
 
 FactoryBot.define do
   factory :user do
-    username  { "ユーザー" }
+    username { 'ユーザー' }
     sequence(:email) { |n| "tester#{n}@example.com" }
-    password  { "password" }
-    password_confirmation { "password" }
+    password { 'password' }
+    password_confirmation { 'password' }
   end
 
   factory :other_user, class: User do
-    username  { "アザーユーザー" }
+    username { 'アザーユーザー' }
     sequence(:email) { |n| "tester#{n}@example.com" }
-    password  { "password" }
-    password_confirmation { "password" }
+    password { 'password' }
+    password_confirmation { 'password' }
     avatar { File.open("#{Rails.root}/spec/factories/images/boy.png") }
   end
 end
