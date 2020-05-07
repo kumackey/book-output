@@ -3,7 +3,8 @@ class CreateAuthors < ActiveRecord::Migration[5.2]
     create_table :authors do |t|
       t.references :book, foreign_key: true
       t.string :name, null: false
-      
+      t.boolean :is_representation
+
       t.timestamps
     end
   end
