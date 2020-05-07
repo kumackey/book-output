@@ -43,11 +43,20 @@ RSpec.describe 'Books', type: :request do
     expect(response).to have_http_status(200)
   end
 
-  it '本の登録に成功すること' do
+  it '適切なGoogle Books APIのIDである本が登録できること' do
     expect {
       post '/books', params: { googlebooksapi_id: 'xPbRxgEACAAJ' }
     }.to change { Book.count }.by(1)
     expect(response).to redirect_to book_path(Book.last.id)
+  end
+
+  it '既に登録されている本の登録に失敗し、その詳細画面に遷移すること' do
+    same_google_books_api_id = 'xPbRxgEACAAJ'
+    create(:book, googlebooksapi_id: same_google_books_api_id)
+    expect {
+      post '/books', params: { googlebooksapi_id: same_google_books_api_id }
+    }.to change { Book.count }.by(0)
+    expect(response).to redirect_to book_path(Book.find_by(googlebooksapi_id: same_google_books_api_id))
   end
 
   it '本詳細画面の表示に成功すること' do
