@@ -12,17 +12,11 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  googlebooksapi_id :string(255)      not null
-#  user_id           :bigint
 #
 # Indexes
 #
 #  index_books_on_googlebooksapi_id                            (googlebooksapi_id) UNIQUE
-#  index_books_on_user_id                                      (user_id)
-#  index_books_on_user_id_and_created_at_and_author_and_title  (user_id,created_at,author,title)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (user_id => users.id)
+#  index_books_on_user_id_and_created_at_and_author_and_title  (created_at,author,title)
 #
 
 FactoryBot.define do
@@ -38,7 +32,6 @@ FactoryBot.define do
     title { "ファスト＆スロー(下)" }
     googlebooksapi_id { "yHrxYFWkrfQC" }
     buy_link { "https://play.google.com/store/books/details?id=yHrxYFWkrfQC&rdid=book-yHrxYFWkrfQC&rdot=1&source=gbs_api" }
-    association :user
   end
 
   factory :other_book, class: Book do
@@ -53,6 +46,5 @@ FactoryBot.define do
     title { "影響力の武器" }
     googlebooksapi_id { "axicQgAACAAJ" }
     buy_link { "" }
-    association :user
   end
 end

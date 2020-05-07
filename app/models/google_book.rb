@@ -46,8 +46,8 @@ class GoogleBook
     @page_count = @volume_info['pageCount']
   end
 
-  def build_book_by_user(user)
-    book = user.books.build(
+  def build_book
+    book = Book.new(
       author: @author,
       description: @description,
       googlebooksapi_id: @googlebooksapi_id,

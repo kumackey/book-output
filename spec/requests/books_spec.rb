@@ -45,11 +45,10 @@ RSpec.describe "Books", type: :request do
   end
 
   it '本の登録に成功すること' do
-    login
-    post '/books', params: { googlebooksapi_id: "xPbRxgEACAAJ" }
-    expect(response).to redirect_to books_path
-    follow_redirect!
-    expect(response.body).to include('本を登録しました')
+    expect {
+      post '/books', params: { googlebooksapi_id: "xPbRxgEACAAJ" }
+    }.to change{ Book.count }.by(1)
+    expect(response).to redirect_to book_path(Book.last.id)
   end
 
   it '本詳細画面の表示に成功すること' do

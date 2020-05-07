@@ -70,12 +70,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  it "ユーザーが消去されたとき、登録されていた本も消えること" do
-    owner = create(:user)
-    create(:book, user_id: owner.id)
-    expect{ owner.destroy }.to change{ Book.count }.by(-1)
-  end 
-
   it "ユーザーが消去されたとき、関連するクイズも消えること" do
     user = create(:user)
     create(:question, user_id: user.id)
@@ -84,12 +78,10 @@ RSpec.describe User, type: :model do
 
   it "ユーザがオブジェクトを持っているかを確認する機能own?が有効なこと" do
     user = create(:user)
-    other_user = create(:user)
-    book = build(:book, user_id: other_user.id)
-    expect(user.own?(book)).not_to be_truthy
-
-    book = build(:book, user_id: user.id)
-    expect(user.own?(book)).to be_truthy
+    other_user = create(:other_user)
+    question_by_other_user = build(:question, user_id: other_user.id)
+    expect(user.own?(question_by_other_user)).not_to be_truthy
+    expect(other_user.own?(question_by_other_user)).to be_truthy
   end
 
   it "いいねができること" do
