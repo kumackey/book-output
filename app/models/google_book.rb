@@ -32,7 +32,7 @@ class GoogleBook
         title: @volume_info['title'],
         publisher: @volume_info['publisher'],
         web_reader_link: reader_link_url,
-        page_count: @volume_info['pageCount'],
+        page_count: @volume_info['pageCount']
       )
     end
 
@@ -47,6 +47,7 @@ class GoogleBook
       json = get_json_from_url(url)
       items = json['items']
       return [] unless items
+
       items.map do |item|
         GoogleBook.new_form_item(item)
       end
@@ -69,7 +70,7 @@ class GoogleBook
 
   def save
     book = build_book
-    book.remote_image_url = self.image if self.image.present?
+    book.remote_image_url = image if image.present?
     book.save
     authors.each.with_index do |author, index|
       author = book.authors.build(name: author)
