@@ -26,6 +26,7 @@ FactoryBot.define do
   factory :question do
     content { 'これは問題文です' }
     commentary { 'これは問題文の解説です。' }
+    answer_type { 0 }
     association :book
     association :user
   end
