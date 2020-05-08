@@ -35,7 +35,8 @@ class GoogleBook
 
   def retrieve_attribute
     @googlebooksapi_id = @item['id']
-    @author = first_author
+    @author = @volume_info['authors']&.first
+    @authors = @volume_info['authors']
     @buy_link = @item['saleInfo']['buyLink']
     @description = @volume_info['description']
     @image = image_url
@@ -46,8 +47,22 @@ class GoogleBook
     @page_count = @volume_info['pageCount']
   end
 
+  def save
+    book = build_book
+    book.remote_image_url = @image if @image.present?
+    book.save
+    @authors.each.with_index do |author, index|
+      author = book.authors.build(name: author)
+      author.is_representation = index.zero?
+      author.save
+    end
+    true
+  end
+
+  private
+
   def build_book
-    book = Book.new(
+    Book.new(
       author: @author,
       description: @description,
       googlebooksapi_id: @googlebooksapi_id,
@@ -55,11 +70,7 @@ class GoogleBook
       title: @title,
       buy_link: @buy_link
     )
-    book.remote_image_url = @image if @image.present?
-    book
   end
-
-  private
 
   def image_url
     if @volume_info['imageLinks']
@@ -67,10 +78,6 @@ class GoogleBook
     else
       ''
     end
-  end
-
-  def first_author
-    @volume_info['authors']&.first
   end
 
   def reader_link_url

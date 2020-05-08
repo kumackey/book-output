@@ -21,30 +21,30 @@
 
 FactoryBot.define do
   factory :book do
-    author  { "ダニエル・カーネマン" }
-    description { "我々の直感は間違ってばかり？" }
+    author { 'ダニエル・カーネマン' }
+    description { '我々の直感は間違ってばかり？' }
 
     after :create do |book|
-      book.update_column(:image, "images/fast_and_slow.jpeg")
+      book.update_column(:image, 'images/fast_and_slow.jpeg')
     end
 
-    published_at { "2013-05-24" }
-    title { "ファスト＆スロー(下)" }
-    googlebooksapi_id { "yHrxYFWkrfQC" }
-    buy_link { "https://play.google.com/store/books/details?id=yHrxYFWkrfQC&rdid=book-yHrxYFWkrfQC&rdot=1&source=gbs_api" }
+    published_at { '2013-05-24' }
+    title { 'ファスト＆スロー(下)' }
+    googlebooksapi_id { 'yHrxYFWkrfQC' }
+    buy_link { 'https://play.google.com/store/books/details?id=yHrxYFWkrfQC&rdid=book-yHrxYFWkrfQC&rdot=1&source=gbs_api' }
   end
 
   factory :other_book, class: Book do
-    author  { "ロバート・B. チャルディーニ" }
-    description { "著者は、セールスマン、募金勧誘者、広告主など承諾誘導のプロの世界に潜入。彼らのテクニックや方略から「承諾」についての人間心理のメカニズムを解明。情報の氾濫する現代生活で、だまされない賢い消費者になると共に、プロの手口から人を説得するやり方を学ぶ。" }
+    author { 'ロバート・B. チャルディーニ' }
+    description { '著者は、セールスマン、募金勧誘者、広告主など承諾誘導のプロの世界に潜入。彼らのテクニックや方略から「承諾」についての人間心理のメカニズムを解明。情報の氾濫する現代生活で、だまされない賢い消費者になると共に、プロの手口から人を説得するやり方を学ぶ。' }
 
     after :create do |book|
-      book.update_column(:image, "images/Influence.jpeg")
+      book.update_column(:image, 'images/Influence.jpeg')
     end
 
-    published_at { "2007-08" }
-    title { "影響力の武器" }
-    googlebooksapi_id { "axicQgAACAAJ" }
-    buy_link { "" }
+    published_at { '2007-08' }
+    title { '影響力の武器' }
+    googlebooksapi_id { 'axicQgAACAAJ' }
+    buy_link { '' }
   end
 end

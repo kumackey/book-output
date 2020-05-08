@@ -10,7 +10,6 @@ AllCops:
     - 'vendor/**/*'
     - 'db/**/*'
     - 'bin/**/*'
-    - 'spec/**/*'
     - 'node_modules/**/*'
   DisplayCopNames: true
 Rails:
@@ -38,7 +37,7 @@ Metrics/ClassLength:
 Metrics/CyclomaticComplexity:
   Max: 30
 
-Metrics/LineLength:
+Layout/LineLength:
   Enabled: false
 
 Metrics/MethodLength:
