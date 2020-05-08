@@ -30,9 +30,11 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    @book = @question.book
-    @choices = @question.choices.includes([:question, question: %i[book user]]).shuffle
-    render layout: 'book_detail'
+    if @question.answer_type == 'choices'
+      @book = @question.book
+      @choices = @question.choices.includes([:question, question: %i[book user]]).shuffle
+      render layout: 'book_detail'
+    end
   end
 
   def destroy
