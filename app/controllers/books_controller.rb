@@ -5,10 +5,7 @@ class BooksController < ApplicationController
 
   def create
     google_book = GoogleBook.new_from_id(create_book_params[:googlebooksapi_id])
-    @book = Book.find_by(googlebooksapi_id: google_book.googlebooksapi_id)
-    redirect_to @book if @book
-    if google_book.save
-      @book = Book.find_by(googlebooksapi_id: google_book.googlebooksapi_id)
+    if (@book = google_book.find_book_or_save)
       redirect_to @book
     else
       redirect_to search_books_path, danger: 'ページの表示に失敗しました'
