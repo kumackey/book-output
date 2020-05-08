@@ -27,7 +27,7 @@ RSpec.describe 'Sessions', type: :request do
   end
 
   it 'ゲストログインに成功すること' do
-    create(:user, email: 'guest@guest.jp')
+    create(:user, email: 'guest@guest.jp') unless User.find_by(email: 'guest@guest.jp')
     post '/guest_login'
     expect(response).to redirect_to home_path
     follow_redirect!
