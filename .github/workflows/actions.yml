@@ -55,8 +55,9 @@ jobs:
         run: cp -v config/database.ci.yml config/database.yml
       - name: db create
         run: bundle exec rails db:create db:schema:load --trace
+      - name: db seed
+        run: bundle exec rails db:seed
       - name: run rspec
         run: bundle exec rspec
-
       - name: Rubocop
         run: bundle exec rubocop --parallel

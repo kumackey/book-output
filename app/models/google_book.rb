@@ -21,7 +21,7 @@ class GoogleBook
   class << self
     include GoogleBooksApi
 
-    def new_form_item(item)
+    def new_from_item(item)
       @item = item
       @volume_info = @item['volumeInfo']
       new(
@@ -42,7 +42,7 @@ class GoogleBook
     def new_from_id(googlebooksapi_id)
       url = url_of_creating_from_id(googlebooksapi_id)
       item = get_json_from_url(url)
-      new_form_item(item)
+      new_from_item(item)
     end
 
     def search(keyword)
@@ -52,7 +52,7 @@ class GoogleBook
       return [] unless items
 
       items.map do |item|
-        GoogleBook.new_form_item(item)
+        GoogleBook.new_from_item(item)
       end
     end
 
@@ -77,14 +77,16 @@ class GoogleBook
     book = build_book
     return false unless book.valid?
 
-    book.remote_image_url = image if image.present?
-    book.save
-    authors.each.with_index do |author, index|
-      author = book.authors.build(name: author)
-      author.is_representation = index.zero?
-      author.save
+    ActiveRecord::Base.transaction do
+      book.remote_image_url = image if image.present?
+      book.save
+      authors.each.with_index do |author, index|
+        author = book.authors.build(name: author)
+        author.is_representation = index.zero?
+        author.save
+        true
+      end
     end
-    true
   end
 
   def find_book_or_save
