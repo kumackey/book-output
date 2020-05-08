@@ -16,6 +16,7 @@ guest_user = User.find_by(email: 'guest@guest.jp')
 googlebooksapi_ids.each do |id|
   google_book = GoogleBook.new_from_id(id)
   google_book.save
+  book = Book.find_by(googlebooksapi_id: id)
   puts "\"#{book.title}\" has created! book.id: #{book.id}."
   guest_user.like(book)
 end
