@@ -25,7 +25,7 @@ class RegisterOutputForm
     return false unless valid?
 
     user = User.find(user_id)
-    question = user.questions.build(content: question_content, commentary: commentary, book_id: book_id)
+    question = user.questions.build(content: question_content, commentary: commentary, book_id: book_id, type: 0)
     question.save # 問題文と解説文の保存
 
     choice = question.choices.build(content: correct_choice)

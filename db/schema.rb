@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2020_05_08_002923) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "commentary"
-    t.integer "type", null: false
+    t.integer "answer_type", null: false
     t.index ["book_id"], name: "index_questions_on_book_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
