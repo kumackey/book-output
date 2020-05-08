@@ -77,14 +77,16 @@ class GoogleBook
     book = build_book
     return false unless book.valid?
 
-    book.remote_image_url = image if image.present?
-    book.save
-    authors.each.with_index do |author, index|
-      author = book.authors.build(name: author)
-      author.is_representation = index.zero?
-      author.save
+    ActiveRecord::Base.transaction do
+      book.remote_image_url = image if image.present?
+      book.save
+      authors.each.with_index do |author, index|
+        author = book.authors.build(name: author)
+        author.is_representation = index.zero?
+        author.save
+        true
+      end
     end
-    true
   end
 
   def find_book_or_save
