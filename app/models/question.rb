@@ -5,6 +5,7 @@
 #  id         :bigint           not null, primary key
 #  commentary :text(65535)
 #  content    :text(65535)      not null
+#  type       :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  book_id    :bigint

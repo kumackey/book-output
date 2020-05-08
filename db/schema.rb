@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_07_024313) do
+ActiveRecord::Schema.define(version: 2020_05_08_002923) do
 
   create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "book_id"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2020_05_07_024313) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "commentary"
+    t.integer "type", null: false
     t.index ["book_id"], name: "index_questions_on_book_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
