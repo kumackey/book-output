@@ -34,13 +34,11 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'actionview', '>= 5.2.4.2'
 gem 'nokogiri', '~>1.10.8'
-
 gem 'annotate'
 gem 'slim-rails'
-gem 'html2slim'
 gem 'rails-i18n', '~> 5.1'
 gem 'redis-rails'
-gem 'sorcery'
+gem 'sorcery', '~> 0.15.0'
 gem 'font-awesome-sass', '~> 5.4.1'
 gem 'carrierwave', '~>1.1.0'
 gem 'mini_magick'
@@ -71,7 +69,6 @@ group :development do
   gem 'rubocop'
   gem 'rubocop-rails'
   gem 'better_errors'
-  gem 'capistrano'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
