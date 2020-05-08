@@ -21,7 +21,7 @@ class GoogleBook
   class << self
     include GoogleBooksApi
 
-    def new_form_item(item)
+    def new_from_item(item)
       @item = item
       @volume_info = @item['volumeInfo']
       new(
@@ -42,7 +42,7 @@ class GoogleBook
     def new_from_id(googlebooksapi_id)
       url = url_of_creating_from_id(googlebooksapi_id)
       item = get_json_from_url(url)
-      new_form_item(item)
+      new_from_item(item)
     end
 
     def search(keyword)
@@ -52,7 +52,7 @@ class GoogleBook
       return [] unless items
 
       items.map do |item|
-        GoogleBook.new_form_item(item)
+        GoogleBook.new_from_item(item)
       end
     end
 
