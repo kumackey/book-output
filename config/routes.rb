@@ -18,6 +18,9 @@ Rails.application.routes.draw do
     collection do
       get :random
     end
+    member do
+      get :answer
+    end
   end
   resources :users, only: %i[show]
   resources :books, only: %i[index create show], shallow: true do

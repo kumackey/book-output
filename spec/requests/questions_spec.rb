@@ -14,6 +14,16 @@ RSpec.describe 'Questions', type: :request do
     expect(response).to have_http_status(200)
   end
 
+  it 'only_answer型のクイズの解答画面を取得できること' do
+    ANSWER_CONTENT = 'これが答えです'.freeze
+    build(:only_answer_quiz_form, answer_content: ANSWER_CONTENT).save
+    choice = Choice.find_by(content: ANSWER_CONTENT)
+    question = choice.question
+    get "/questions/#{question.id}/answer"
+    expect(response).to have_http_status(200)
+    expect(response.body).to include(ANSWER_CONTENT)
+  end
+
   it '適切なparamが渡っているときにクイズを作成できること' do
     login
     user = create(:user)

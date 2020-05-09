@@ -10,6 +10,17 @@ class QuestionsController < ApplicationController
     redirect_to @question
   end
 
+  def answer
+    @question = Question.find(params[:id])
+    if @question.answer_type == 'only_answer'
+      @choice = @question.choices.find_by(is_answer: true)
+      @book = @question.book
+      render layout: 'book_detail'
+    elsif @question.answer_type == 'choices'
+      redirect_to @question
+    end
+  end
+
   def new
     @book = Book.find(params[:book_id])
     @register_output_form = RegisterOutputForm.new

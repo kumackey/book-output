@@ -1,0 +1,17 @@
+- provide :title, "解答・解説"
+.card
+  .text-center.m-3
+    strong 
+      h4 #{@question.content}
+  .card-body.px-lg-5.pt-0
+    .text-center
+      .alert-success.lead.mb-3.p-2
+        h5 解答
+        = @choice.content
+      = render 'choices/commentary', question: @choice.question
+      = render 'users/writer', user: @choice.question.user
+      = link_to @choice.question.book do
+        button.btn.btn-raised.btn-success
+          | クイズ一覧へ戻る
+
+
