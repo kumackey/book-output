@@ -27,4 +27,8 @@ module ApplicationHelper
       }
     }
   end
+
+  def is_in_controllers_action?(controller_name, action_name)
+    (controller.controller_name == controller_name && controller.action_name == action_name) ? true : false
+  end
 end

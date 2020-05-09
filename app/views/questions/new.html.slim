@@ -3,13 +3,7 @@
   h5.card-header.bg-success.text-white.text-center
     strong クイズ作成
   .card-body.bg-white
-    ul.nav.nav-tabs.mb-3
-      li.nav-item
-        = link_to new_book_only_answer_quiz_path(@book), class: "nav-link #{"active" if controller.controller_name == 'only_answer_quizs' && controller.action_name == 'new'}" do
-          | 問題-解答
-      li.nav-item
-        = link_to new_book_question_path(@book), class: "nav-link #{"active" if controller.controller_name == 'questions' && controller.action_name == 'new'}" do
-          | 4択
+    = render 'questions/type_tab', book: @book
     = form_with model: @register_output_form, url: book_questions_path, local: true do |f|
       = render 'shared/error_messages', object: @register_output_form
       .form-group

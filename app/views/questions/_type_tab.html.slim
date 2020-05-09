@@ -1,0 +1,7 @@
+ul.nav.nav-tabs.mb-3
+  li.nav-item
+    = link_to new_book_only_answer_quiz_path(book), class: "nav-link #{"active" if is_in_controllers_action?('only_answer_quizs', 'new')}" do
+      | 問題-解答
+  li.nav-item
+    = link_to new_book_question_path(book), class: "nav-link #{"active" if is_in_controllers_action?('questions', 'new')}" do
+      | 4択
