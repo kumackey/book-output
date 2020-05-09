@@ -100,7 +100,7 @@ RSpec.describe OnlyAnswerQuizForm, type: :model do
     context '適切な情報を持っているときに' do
       let(:only_answer_quiz_form) { build(:only_answer_quiz_form) }
       it '保存できること' do
-        expect { only_answer_quiz_form.save }.to change { Question.count }.by(1).and change { Choice.count }.by(2)
+        expect { only_answer_quiz_form.save }.to change { Question.count }.by(1).and change { Answer.count }.by(1)
       end
 
       it 'trueを返すこと' do
@@ -110,7 +110,7 @@ RSpec.describe OnlyAnswerQuizForm, type: :model do
     context '不適切な情報しか持っていないときに' do
       let(:only_answer_quiz_form) { build(:only_answer_quiz_form, answer_content: nil) }
       it '保存に失敗すること' do
-        expect { only_answer_quiz_form.save }.to change { Question.count }.by(0).and change { Choice.count }.by(0)
+        expect { only_answer_quiz_form.save }.to change { Question.count }.by(0).and change { Answer.count }.by(0)
       end
 
       it 'falseを返すこと' do

@@ -30,12 +30,9 @@ class OnlyAnswerQuizForm
     return false unless question.valid?
 
     ActiveRecord::Base.transaction do
-      question.save # 問題文と解説文の保存
-
-      choice = question.choices.build(content: answer_content, is_answer: true)
-      choice.save
-      choice = question.choices.build(content: 'WRONG ANSWER', is_answer: false)
-      choice.save
+      question.save! # 問題文と解説文の保存
+      answer = question.build_answer(content: answer_content)
+      answer.save!
       true
     end
   end
