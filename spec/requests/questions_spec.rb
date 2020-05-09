@@ -17,8 +17,8 @@ RSpec.describe 'Questions', type: :request do
   it 'only_answer型のクイズの解答画面を取得できること' do
     ANSWER_CONTENT = 'これが答えです'.freeze
     build(:only_answer_quiz_form, answer_content: ANSWER_CONTENT).save
-    choice = Choice.find_by(content: ANSWER_CONTENT)
-    question = choice.question
+    answer = Answer.find_by(content: ANSWER_CONTENT)
+    question = answer.question
     get "/questions/#{question.id}/answer"
     expect(response).to have_http_status(200)
     expect(response.body).to include(ANSWER_CONTENT)
@@ -38,7 +38,7 @@ RSpec.describe 'Questions', type: :request do
       incorrect_choice_2: '警察署',
       incorrect_choice_3: '美術館'
     } }
-    } .to change { Question.count }.by(1)
+    } .to change { Question.count }.by(1).and change { Choice.count }.by(4)
     expect(response).to redirect_to book
   end
 
@@ -56,7 +56,7 @@ RSpec.describe 'Questions', type: :request do
       incorrect_choice_2: '警察署',
       incorrect_choice_3: '美術館'
     } }
-    } .to change { Question.count }.by(0)
+    } .to change { Question.count }.by(0).and change { Choice.count }.by(0)
     expect(response).to have_http_status(200)
     expect(response.body).to include('問題の作成に失敗しました')
   end

@@ -13,7 +13,7 @@ RSpec.describe 'Only_answer_quizs', type: :request do
       book_id: book.id,
       answer_content: '学校'
     } }
-    } .to change { Question.count }.by(1)
+    } .to change { Question.count }.by(1).and change { Answer.count }.by(1)
     expect(response).to redirect_to book
     follow_redirect!
     expect(response.body).to include(QUESTION_CONTENT)
@@ -30,7 +30,7 @@ RSpec.describe 'Only_answer_quizs', type: :request do
       book_id: book.id,
       answer_content: '学校'
     } }
-    } .to change { Question.count }.by(0)
+    } .to change { Question.count }.by(0).and change { Answer.count }.by(0)
     expect(response).to have_http_status(200)
     expect(response.body).to include('問題の作成に失敗しました')
   end
