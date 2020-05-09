@@ -3,7 +3,7 @@
 # Table name: answers
 #
 #  id          :bigint           not null, primary key
-#  content     :string(255)      not null
+#  content     :text(65535)      not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  question_id :bigint
