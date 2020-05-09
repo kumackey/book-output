@@ -1,5 +1,5 @@
 class OnlyAnswerQuizForm
-  #  問題と解答だけのフォームを作成
+  #  問題と解答だけのフォーム
 
   include ActiveModel::Model
   include ActiveModel::Attributes
@@ -16,4 +16,27 @@ class OnlyAnswerQuizForm
   validates :answer_content, presence: true, length: { maximum: 40 }
   validates :user_id, presence: true
   validates :book_id, presence: true
+
+  def save
+    return false unless valid?
+
+    user = User.find(user_id)
+    question = user.questions.build(
+      content: question_content,
+      commentary: commentary,
+      book_id: book_id,
+      answer_type: 1
+    )
+    return false unless question.valid?
+
+    ActiveRecord::Base.transaction do
+      question.save # 問題文と解説文の保存
+
+      choice = question.choices.build(content: answer_content, is_answer: true)
+      choice.save
+      choice = question.choices.build(content: 'WRONG ANSWER', is_answer: false)
+      choice.save
+      true
+    end
+  end
 end
