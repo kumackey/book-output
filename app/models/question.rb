@@ -33,5 +33,5 @@ class Question < ApplicationRecord
   }
 
   validates :content, presence: true, length: { maximum: 140 }
-  validates :commentary, length: { maximum: 140 }
+  validates :commentary, length: { maximum: 255 }
 end

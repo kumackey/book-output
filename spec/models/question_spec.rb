@@ -59,17 +59,18 @@ RSpec.describe Question, type: :model do
   end
 
   describe '解説文の文字数が' do
-    context '140文字のときに' do
-      let(:question) { build(:question, commentary: 'a' * 140) }
+    COMMENTARY_MAX_WORD_COUNT = 255
+    context "#{COMMENTARY_MAX_WORD_COUNT}文字のときに" do
+      let(:question) { build(:question, commentary: 'a' * COMMENTARY_MAX_WORD_COUNT) }
       it '有効なこと' do
         expect(question).to be_valid
       end
     end
-    context '141文字のときに' do
-      let(:question) { build(:question, commentary: 'a' * 141) }
+    context "#{COMMENTARY_MAX_WORD_COUNT + 1}文字のときに" do
+      let(:question) { build(:question, commentary: 'a' * (COMMENTARY_MAX_WORD_COUNT + 1)) }
       it '無効なこと' do
         question.valid?
-        expect(question.errors[:commentary]).to include('は140文字以内で入力してください')
+        expect(question.errors[:commentary]).to include("は#{COMMENTARY_MAX_WORD_COUNT}文字以内で入力してください")
       end
     end
   end
