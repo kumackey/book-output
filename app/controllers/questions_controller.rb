@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
   def answer
     @question = Question.find(params[:id])
     if @question.answer_type == 'only_answer'
-      @choice = @question.choices.find_by(is_answer: true)
+      @answer = @question.answer
       @book = @question.book
       render layout: 'book_detail'
     elsif @question.answer_type == 'choices'
