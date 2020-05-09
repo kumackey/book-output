@@ -30,4 +30,12 @@ FactoryBot.define do
     association :book
     association :user
   end
+
+  factory :only_answer_quiz, class: Question do
+    content { 'これは問題文です' }
+    commentary { 'これは問題文の解説です。' }
+    answer_type { 1 }
+    association :book
+    association :user
+  end
 end

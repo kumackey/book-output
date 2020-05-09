@@ -59,11 +59,18 @@ RSpec.describe 'Questions', type: :request do
     expect(response.body).to include('ファスト＆スロー(下)')
   end
 
-  it 'クイズ表示画面の表示に成功すること' do
+  it 'クイズ出題画面の表示に成功すること' do
     question = create(:question, content: '質問しています。')
     get "/questions/#{question.id}"
     expect(response).to have_http_status(200)
     expect(response.body).to include('質問しています。')
+  end
+
+  it 'only_answer型のクイズ出題画面の表示に成功すること' do
+    question = create(:only_answer_quiz)
+    get "/questions/#{question.id}"
+    expect(response).to have_http_status(200)
+    expect(response.body).to include('解答を見る')
   end
 
   it 'クイズの削除に成功すること' do

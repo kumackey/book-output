@@ -30,10 +30,12 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+    @book = @question.book
     if @question.answer_type == 'choices'
-      @book = @question.book
       @choices = @question.choices.includes([:question, question: %i[book user]]).shuffle
       render layout: 'book_detail'
+    elsif @question.answer_type == 'only_answer'
+      render layout: 'book_detail', template: 'questions/only_answer_quiz'
     end
   end
 
