@@ -21,9 +21,9 @@
             | 購入する
       .flex-box.mt-3
         = link_to new_book_only_answer_quiz_path(book) do
-          button.btn.btn-raised.btn-success[class="#{'active' if is_in_controllers_action?('only_answer_quizs', 'new') || is_in_controllers_action?('questions', 'new')}"]
+          button.btn.btn-raised.btn-success[class="#{'active' if in_controllers_action?('only_answer_quizs', 'new') || in_controllers_action?('questions', 'new')}"]
             | クイズ作成
         = link_to book, class: 'ml-2' do
-          button.btn.btn-raised.btn-success[class="#{'active' if is_in_controllers_action?('books', 'show')}"]
+          button.btn.btn-raised.btn-success[class="#{'active' if in_controllers_action?('books', 'show')}"]
             | クイズ一覧
       
