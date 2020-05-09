@@ -19,6 +19,7 @@
 
 FactoryBot.define do
   factory :answer do
-    
+    content { 'これが答えです' }
+    association :question
   end
 end
