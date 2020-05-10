@@ -32,9 +32,10 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @book = @question.book
-    if @question.choice?
+    case @question.answer_type.to_sym
+    when :choice
       @choices = @question.choices.includes([:question, question: %i[book user]]).shuffle
-    elsif @question.description?
+    when :description
       @answer_description = @question.answer_description
       render template: 'questions/quiz_description'
     end
