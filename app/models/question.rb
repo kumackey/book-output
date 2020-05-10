@@ -35,4 +35,5 @@ class Question < ApplicationRecord
 
   validates :content, presence: true, length: { maximum: 140 }
   validates :commentary, length: { maximum: 255 }
+  validates :answer_type, presence: true
 end

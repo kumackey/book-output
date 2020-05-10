@@ -74,4 +74,10 @@ RSpec.describe Question, type: :model do
       end
     end
   end
+
+  it 'クイズの型が存在しないときに無効なこと' do
+    question = build(:question, answer_type: nil)
+    question.valid?
+    expect(question.errors.messages[:answer_type]).to include('を入力してください')
+  end
 end
