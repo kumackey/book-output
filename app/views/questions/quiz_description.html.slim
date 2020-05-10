@@ -6,6 +6,6 @@
       h4 #{@question.content}
   .card-body.px-lg-5.pt-0
     .text-center
-      = link_to answer_description_path(@question.answer_description), class:'btn btn-raised btn-success' do
+      = link_to answer_description_path(@answer_description), class:'btn btn-raised btn-success' do
         | 解答を見る
   = render 'users/writer', user: @question.user

@@ -1,10 +1,10 @@
 class QuizDescriptionsController < ApplicationController
   before_action :require_login, only: %i[new]
+  layout 'book_detail'
 
   def new
     @book = Book.find(params[:book_id])
     @create_quiz_description_form = CreateQuizDescriptionForm.new
-    render layout: 'book_detail'
   end
 
   def create
@@ -14,7 +14,7 @@ class QuizDescriptionsController < ApplicationController
       redirect_to @book, success: '問題を作成しました'
     else
       flash.now[:danger] = '問題の作成に失敗しました'
-      render layout: 'book_detail', action: :new
+      render :new
     end
   end
 

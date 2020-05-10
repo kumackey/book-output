@@ -1,8 +1,10 @@
 class QuestionsController < ApplicationController
   before_action :require_login, only: %i[new create destroy]
+  layout 'book_detail'
 
   def index
     @questions = Question.all.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
+    render layout: 'application'
   end
 
   def random
@@ -13,7 +15,6 @@ class QuestionsController < ApplicationController
   def new
     @book = Book.find(params[:book_id])
     @register_output_form = RegisterOutputForm.new
-    render layout: 'book_detail'
   end
 
   def create
@@ -24,7 +25,7 @@ class QuestionsController < ApplicationController
       redirect_to @book, success: '問題を作成しました'
     else
       flash.now[:danger] = '問題の作成に失敗しました'
-      render layout: 'book_detail', action: :new
+      render :new
     end
   end
 
@@ -33,9 +34,9 @@ class QuestionsController < ApplicationController
     @book = @question.book
     if @question.choice?
       @choices = @question.choices.includes([:question, question: %i[book user]]).shuffle
-      render layout: 'book_detail'
     elsif @question.description?
-      render layout: 'book_detail', template: 'questions/quiz_description'
+      @answer_description = @question.answer_description
+      render template: 'questions/quiz_description'
     end
   end
 
