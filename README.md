@@ -38,20 +38,21 @@ https://github.com/kumackey/book-output/issues
 
 ## ER図
 
-![bookoutput](https://user-images.githubusercontent.com/55213482/77245830-f881b180-6c64-11ea-8511-130f8b641da4.png)
+![er_bookoutput (3)](https://user-images.githubusercontent.com/55213482/81491646-ae639680-92cb-11ea-98a3-fb8576b34483.png)
 
-クイズアプリにおけるデータベース設計について、記事を書きました。
-https://qiita.com/kumackey/items/7ccbc949458bd0af22bd
+データベース設計については以下のように記事を書きました。
+
+[クイズアプリにおけるデータベース設計のアンチパターン](https://qiita.com/kumackey/items/7ccbc949458bd0af22bd)
+
+[GoogleBooksAPIだけで本リソースの取得をする設計を行い、失敗した話](https://qiita.com/kumackey/items/3be24f6bc5f6f66515a0)
 
 ## コードのアピールポイント
 
 技術的な核心となっている箇所については、記事を書きました。
 
-- Google Books APIを用いた本リソースの検索/取得
-https://qiita.com/kumackey/items/bd369a23360c94452d33
+[【Ruby on Rails】Google Books APIを叩く際の5つのTips](https://qiita.com/kumackey/items/bd369a23360c94452d33)
 
-- フォームオブジェクトによる複数リソース登録
-https://qiita.com/kumackey/items/b469143f1a0c4902cf4e
+[accepts_nested_attributes_forを使わずに複数リソースを同時登録する(クイズアプリを例に)](https://qiita.com/kumackey/items/b469143f1a0c4902cf4e)
 
 ## インフラ
 
