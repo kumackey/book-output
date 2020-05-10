@@ -10,17 +10,6 @@ class QuestionsController < ApplicationController
     redirect_to @question
   end
 
-  def answer
-    @question = Question.find(params[:id])
-    if @question.description?
-      @answer = @question.answer_description
-      @book = @question.book
-      render layout: 'book_detail'
-    elsif @question.choice?
-      redirect_to @question
-    end
-  end
-
   def new
     @book = Book.find(params[:book_id])
     @register_output_form = RegisterOutputForm.new

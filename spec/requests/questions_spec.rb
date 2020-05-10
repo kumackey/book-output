@@ -14,16 +14,6 @@ RSpec.describe 'Questions', type: :request do
     expect(response).to have_http_status(200)
   end
 
-  it '記述式のクイズの解答画面を取得できること' do
-    ANSWER_CONTENT = 'これが答えです'.freeze
-    build(:create_quiz_description_form, answer_content: ANSWER_CONTENT).save
-    answer_description = AnswerDescription.find_by(content: ANSWER_CONTENT)
-    question = answer_description.question
-    get "/questions/#{question.id}/answer"
-    expect(response).to have_http_status(200)
-    expect(response.body).to include(ANSWER_CONTENT)
-  end
-
   it '適切なparamが渡っているときにクイズを作成できること' do
     login
     user = create(:user)
@@ -77,10 +67,13 @@ RSpec.describe 'Questions', type: :request do
   end
 
   it '記述式のクイズ出題画面の表示に成功すること' do
-    question = create(:question_description)
+    QUESTION_CONTENT = 'hogehoge'.freeze
+    build(:create_quiz_description_form, question_content: QUESTION_CONTENT).save
+    question = Question.find_by(content: QUESTION_CONTENT)
     get "/questions/#{question.id}"
     expect(response).to have_http_status(200)
     expect(response.body).to include('解答を見る')
+    expect(response.body).to include(QUESTION_CONTENT)
   end
 
   it 'クイズの削除に成功すること' do

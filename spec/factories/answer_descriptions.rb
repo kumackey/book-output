@@ -20,6 +20,6 @@
 FactoryBot.define do
   factory :answer_description do
     content { 'これが答えです' }
-    association :question
+    question_id { create(:question_description).id }
   end
 end

@@ -18,9 +18,6 @@ Rails.application.routes.draw do
     collection do
       get :random
     end
-    member do
-      get :answer
-    end
   end
   resources :users, only: %i[show]
   resources :books, only: %i[index create show], shallow: true do
@@ -32,6 +29,7 @@ Rails.application.routes.draw do
   end
   resources :likes, only: %i[create destroy]
   resources :choices, only: %i[show]
+  resources :answer_descriptions, only: %i[show]
 
   namespace :mypage do
     resource :account, only: %i[edit update]

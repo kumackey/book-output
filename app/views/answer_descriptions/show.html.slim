@@ -7,7 +7,7 @@
     .text-center
       .alert-success.lead.mb-3.p-2
         h5 解答
-        = @answer.content
+        = @answer_description.content
       = render 'choices/commentary', question: @question
       = render 'users/writer', user: @question.user
       = link_to @question.book do
