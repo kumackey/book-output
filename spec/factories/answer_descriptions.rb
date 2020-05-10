@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: answers
+# Table name: answer_descriptions
 #
 #  id          :bigint           not null, primary key
 #  content     :text(65535)      not null
@@ -10,7 +10,7 @@
 #
 # Indexes
 #
-#  index_answers_on_question_id  (question_id)
+#  index_answer_descriptions_on_question_id  (question_id)
 #
 # Foreign Keys
 #
@@ -18,7 +18,7 @@
 #
 
 FactoryBot.define do
-  factory :answer do
+  factory :answer_description do
     content { 'これが答えです' }
     association :question
   end

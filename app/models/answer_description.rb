@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: answers
+# Table name: answer_descriptions
 #
 #  id          :bigint           not null, primary key
 #  content     :text(65535)      not null
@@ -10,14 +10,14 @@
 #
 # Indexes
 #
-#  index_answers_on_question_id  (question_id)
+#  index_answer_descriptions_on_question_id  (question_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (question_id => questions.id)
 #
 
-class Answer < ApplicationRecord
+class AnswerDescription < ApplicationRecord
   belongs_to :question
 
   validates :content, presence: true, length: { maximum: 40 }
