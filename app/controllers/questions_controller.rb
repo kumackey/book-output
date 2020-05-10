@@ -1,8 +1,10 @@
 class QuestionsController < ApplicationController
   before_action :require_login, only: %i[new create destroy]
+  layout 'book_detail'
 
   def index
     @questions = Question.all.includes(%i[user book]).page(params[:page]).per(10).order(created_at: :desc)
+    render layout: 'application'
   end
 
   def random
@@ -13,27 +15,30 @@ class QuestionsController < ApplicationController
   def new
     @book = Book.find(params[:book_id])
     @register_output_form = RegisterOutputForm.new
-    render layout: 'book_detail'
   end
 
   def create
     @book = Book.find(params[:book_id])
     @register_output_form = RegisterOutputForm.new(create_question_params
       .merge(user_id: current_user.id, book_id: @book.id))
-    if @register_output_form.valid?
-      @register_output_form.save_question_and_choices
+    if @register_output_form.save
       redirect_to @book, success: '問題を作成しました'
     else
       flash.now[:danger] = '問題の作成に失敗しました'
-      render layout: 'book_detail', action: :new
+      render :new
     end
   end
 
   def show
     @question = Question.find(params[:id])
     @book = @question.book
-    @choices = @question.choices.includes([:question, question: %i[book user]]).shuffle
-    render layout: 'book_detail'
+    case @question.answer_type.to_sym
+    when :choice
+      @choices = @question.choices.includes([:question, question: %i[book user]]).shuffle
+    when :description
+      @answer_description = @question.answer_description
+      render template: 'questions/quiz_description'
+    end
   end
 
   def destroy

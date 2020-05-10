@@ -32,21 +32,22 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'actionview', '>= 5.2.4.2'
+gem 'nokogiri', '~>1.10.8'
 gem 'annotate'
 gem 'slim-rails'
-gem 'html2slim'
 gem 'rails-i18n', '~> 5.1'
 gem 'redis-rails'
-gem 'sorcery'
+gem 'sorcery', '~> 0.15.0'
 gem 'font-awesome-sass', '~> 5.4.1'
 gem 'carrierwave', '~>1.1.0'
 gem 'mini_magick'
-gem 'nokogiri', '~>1.10.8'
 gem 'faker'
 gem 'kaminari'
 gem 'addressable'
 gem 'fog-aws'
 gem 'meta-tags'
+gem 'activeadmin'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -69,7 +70,6 @@ group :development do
   gem 'rubocop'
   gem 'rubocop-rails'
   gem 'better_errors'
-  gem 'capistrano'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

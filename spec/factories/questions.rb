@@ -2,13 +2,14 @@
 #
 # Table name: questions
 #
-#  id         :bigint           not null, primary key
-#  commentary :text(65535)
-#  content    :text(65535)      not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  book_id    :bigint
-#  user_id    :bigint
+#  id          :bigint           not null, primary key
+#  answer_type :integer          not null
+#  commentary  :text(65535)
+#  content     :text(65535)      not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  book_id     :bigint
+#  user_id     :bigint
 #
 # Indexes
 #
@@ -23,8 +24,17 @@
 
 FactoryBot.define do
   factory :question do
-    content { "これは問題文です" }
-    commentary { "これは問題文の解説です。" }
+    content { 'これは問題文です' }
+    commentary { 'これは問題文の解説です。' }
+    answer_type { :choice }
+    association :book
+    association :user
+  end
+
+  factory :question_description, class: Question do
+    content { 'これは問題文です' }
+    commentary { 'これは問題文の解説です。' }
+    answer_type { :description }
     association :book
     association :user
   end

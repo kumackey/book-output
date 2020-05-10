@@ -1,5 +1,5 @@
-class Mypage::MakeQuestionsController < Mypage::BaseController
-  def show
+class Mypage::QuestionsController < Mypage::BaseController
+  def index
     @user = User.find(current_user.id)
     respond_to do |format|
       format.html do

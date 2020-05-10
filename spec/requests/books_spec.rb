@@ -1,38 +1,37 @@
 require 'rails_helper'
 
-RSpec.describe "Books", type: :request do
-
-  describe "本検索ワードが" do
-    context "Railsのときに" do
+RSpec.describe 'Books', type: :request do
+  describe '本検索ワードが' do
+    context 'Railsのときに' do
       keyword = 'Rails'
-      it "本検索画面の表示に成功すること" do
+      it '本検索画面の表示に成功すること' do
         get "/books/search?q%5Bkeyword%5D=#{keyword}"
         expect(response).to have_http_status(200)
-        expect(response.body).to include("Ruby") # Railsで調べればRubyが出てくるはず
+        expect(response.body).to include('Ruby') # Railsで調べればRubyが出てくるはず
       end
     end
 
-    context "SREのときに" do
+    context 'SREのときに' do
       keyword = 'SRE'
-      it "本検索画面の表示に成功すること" do
+      it '本検索画面の表示に成功すること' do
         get "/books/search?q%5Bkeyword%5D=#{keyword}"
         expect(response).to have_http_status(200)
-        expect(response.body).to include("Betsy Beyer") # SREの本を出した人が表示されるはず
+        expect(response.body).to include('Betsy Beyer') # SREの本を出した人が表示されるはず
       end
     end
 
-    context "Macのときに" do
+    context 'Macのときに' do
       keyword = 'Mac'
-      it "本検索画面の表示に成功すること" do
+      it '本検索画面の表示に成功すること' do
         get "/books/search?q%5Bkeyword%5D=#{keyword}"
         expect(response).to have_http_status(200)
-        expect(response.body).to include("Mac OS")
+        expect(response.body).to include('Mac OS')
       end
     end
 
-    context "検索結果を返すワードでないとき" do
+    context '検索結果を返すワードでないとき' do
       keyword = 'p6GwxNed' # 適当
-      it "本検索画面の表示に成功すること" do
+      it '本検索画面の表示に成功すること' do
         get "/books/search?q%5Bkeyword%5D=#{keyword}"
         expect(response).to have_http_status(200)
       end
@@ -44,21 +43,28 @@ RSpec.describe "Books", type: :request do
     expect(response).to have_http_status(200)
   end
 
-  it '本の登録に成功すること' do
-    login
-    post '/books', params: { googlebooksapi_id: "xPbRxgEACAAJ" }
-    expect(response).to redirect_to books_path
-    follow_redirect!
-    expect(response.body).to include('本を登録しました')
+  it '適切なGoogle Books APIのIDである本が登録できること' do
+    expect {
+      post '/books', params: { googlebooksapi_id: 'xPbRxgEACAAJ' }
+    }.to change { Book.count }.by(1)
+    expect(response).to redirect_to book_path(Book.last.id)
+  end
+
+  it '既に登録されている本の登録に失敗し、その詳細画面に遷移すること' do
+    same_google_books_api_id = 'xPbRxgEACAAJ'
+    create(:book, googlebooksapi_id: same_google_books_api_id)
+    expect {
+      post '/books', params: { googlebooksapi_id: same_google_books_api_id }
+    }.to change { Book.count }.by(0)
+    expect(response).to redirect_to book_path(Book.find_by(googlebooksapi_id: same_google_books_api_id))
   end
 
   it '本詳細画面の表示に成功すること' do
-    book = create(:book, title: "ファスト＆スロー(下)")
-    create(:other_book, title: "影響力の武器")
+    book = create(:book, title: 'ファスト＆スロー(下)')
+    create(:other_book, title: '影響力の武器')
     get "/books/#{book.id}" # ファスト＆スロー(下)のページにアクセス
     expect(response).to have_http_status(200)
-    expect(response.body).to include("ファスト＆スロー(下)")
-    expect(response.body).not_to include("影響力の武器")
+    expect(response.body).to include('ファスト＆スロー(下)')
+    expect(response.body).not_to include('影響力の武器')
   end
 end
-

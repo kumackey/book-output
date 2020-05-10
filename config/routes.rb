@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   root to: 'static_pages#top'
   get 'home', to: 'static_pages#home'
   get 'contact', to: 'static_pages#contact'
@@ -20,18 +21,20 @@ Rails.application.routes.draw do
     end
   end
   resources :users, only: %i[show]
-  resources :books, only: %i[index create new show], shallow: true do
+  resources :books, only: %i[index create show], shallow: true do
     collection do
       get :search
     end
     resources :questions, only: %i[create new show destroy]
+    resources :quiz_descriptions, only: %i[new create]
   end
   resources :likes, only: %i[create destroy]
   resources :choices, only: %i[show]
+  resources :answer_descriptions, only: %i[show]
 
   namespace :mypage do
     resource :account, only: %i[edit update]
-    resource :like_books, only: %i[show]
-    resource :make_questions, only: %i[show]
+    resources :like_books, only: %i[index]
+    resources :questions, only: %i[index]
   end
 end

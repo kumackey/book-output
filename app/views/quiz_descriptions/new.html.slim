@@ -1,0 +1,19 @@
+- provide :title, "#{@book.title}のクイズ作成"
+.card
+  h5.card-header.bg-success.text-white.text-center
+    strong クイズ作成
+  .card-body.bg-white
+    = render 'questions/type_tab', book: @book
+    = form_with model: @create_quiz_description_form, url: book_quiz_descriptions_path, local: true do |f|
+      = render 'shared/error_messages', object: @create_quiz_description_form
+      .form-group
+        = f.label :question_content
+        = f.text_field :question_content, class: 'form-control', placeholder: "問題文を入力してください"
+      .form-group
+        = f.label :answer_content
+        = f.text_field :answer_content, class: 'form-control', placeholder: "解答を入力してください"
+      .form-group.mt-5
+        = f.label :commentary
+        = f.text_field :commentary, class: 'form-control', placeholder: "解説文を入れられます(任意)"
+      .text-center
+        = f.submit '登録する', class: 'btn btn-raised btn-success'

@@ -10,7 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_18_032923) do
+ActiveRecord::Schema.define(version: 2020_05_10_124449) do
+
+  create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "answer_descriptions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "question_id"
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_answer_descriptions_on_question_id"
+  end
+
+  create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "book_id"
+    t.string "name", null: false
+    t.boolean "is_representation", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_authors_on_book_id"
+  end
 
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "googlebooksapi_id", null: false
@@ -19,13 +50,11 @@ ActiveRecord::Schema.define(version: 2020_03_18_032923) do
     t.string "image"
     t.text "description"
     t.string "buy_link"
-    t.bigint "user_id"
     t.date "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_at", "author", "title"], name: "index_books_on_user_id_and_created_at_and_author_and_title"
     t.index ["googlebooksapi_id"], name: "index_books_on_googlebooksapi_id", unique: true
-    t.index ["user_id", "created_at", "author", "title"], name: "index_books_on_user_id_and_created_at_and_author_and_title"
-    t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "choices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -58,6 +87,7 @@ ActiveRecord::Schema.define(version: 2020_03_18_032923) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "commentary"
+    t.integer "answer_type", null: false
     t.index ["book_id"], name: "index_questions_on_book_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
@@ -70,10 +100,12 @@ ActiveRecord::Schema.define(version: 2020_03_18_032923) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
+    t.integer "role", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "books", "users"
+  add_foreign_key "answer_descriptions", "questions"
+  add_foreign_key "authors", "books"
   add_foreign_key "choices", "questions", column: "output_id"
   add_foreign_key "likes", "books"
   add_foreign_key "likes", "users"

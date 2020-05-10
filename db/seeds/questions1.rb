@@ -15,7 +15,7 @@ register_output_form = RegisterOutputForm.new(
   user_id: user.id,
   book_id: book.id
 )
-register_output_form.save_question_and_choices
+register_output_form.save
 puts "#{register_output_form.question_content} has created!"
 
 register_output_form = RegisterOutputForm.new(
@@ -25,7 +25,7 @@ register_output_form = RegisterOutputForm.new(
   user_id: user.id,
   book_id: book.id
 )
-register_output_form.save_question_and_choices
+register_output_form.save
 puts "#{register_output_form.question_content} has created!"
 
 register_output_form = RegisterOutputForm.new(
@@ -37,7 +37,7 @@ register_output_form = RegisterOutputForm.new(
   user_id: guest_user.id,
   book_id: book.id
 )
-register_output_form.save_question_and_choices
+register_output_form.save
 puts "#{register_output_form.question_content} has created!"
 
 register_output_form = RegisterOutputForm.new(
@@ -49,5 +49,5 @@ register_output_form = RegisterOutputForm.new(
   user_id: guest_user.id,
   book_id: book.id
 )
-register_output_form.save_question_and_choices
+register_output_form.save
 puts "#{register_output_form.question_content} has created!"

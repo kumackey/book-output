@@ -6,6 +6,7 @@
 #  avatar           :string(255)
 #  crypted_password :string(255)
 #  email            :string(255)      not null
+#  role             :integer          default(0), not null
 #  salt             :string(255)
 #  username         :string(255)      not null
 #  created_at       :datetime         not null
@@ -20,10 +21,11 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
   mount_uploader :avatar, AvatarUploader
 
-  has_many :books, dependent: :destroy
   has_many :questions, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :like_books, through: :likes, source: :book
+
+  enum role: { user: 0, admin: 1 }
 
   validates :password, length: { minimum: 8 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }

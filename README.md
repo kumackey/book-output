@@ -2,7 +2,7 @@
 
 ![スクリーンショット 2020-03-12 5 46 05](https://user-images.githubusercontent.com/55213482/76595212-71cf2500-653e-11ea-8c42-c2e49e40cc54.png)
 
-http://bookoutput.work/
+https://bookoutput.work/
 
 本に関するクイズを作り、みんなで共有するWEBサービスです。
 
@@ -19,14 +19,13 @@ http://bookoutput.work/
 
 このサービスは、私が作りたかったサービスです。
 
-詳細な機能の企画に関しては、以下企画書をご参照ください。
+詳細な機能の企画に関しては、企画書をご参照ください。
 
-https://github.com/kumackey/book-output/wiki/Proposal
+[企画書](https://github.com/kumackey/book-output/wiki/Proposal)
 
 ## 要件定義
 
 issueを用いて実装したい機能の管理を行っております。
-
 https://github.com/kumackey/book-output/issues
 
 今後追加したい機能に関しては【機能要件】として表示しております。
@@ -39,43 +38,32 @@ https://github.com/kumackey/book-output/issues
 
 ## ER図
 
-![bookoutput](https://user-images.githubusercontent.com/55213482/77245830-f881b180-6c64-11ea-8511-130f8b641da4.png)
+![er_bookoutput (3)](https://user-images.githubusercontent.com/55213482/81491646-ae639680-92cb-11ea-98a3-fb8576b34483.png)
 
-クイズアプリにおけるデータベース設計について、以下Qiita記事を書きました。
+データベース設計については以下のように記事を書きました。
 
-https://qiita.com/kumackey/items/7ccbc949458bd0af22bd
+[クイズアプリにおけるデータベース設計のアンチパターン](https://qiita.com/kumackey/items/7ccbc949458bd0af22bd)
 
-## 技術アピールポイント
+[GoogleBooksAPIだけで本リソースの取得をする設計を行い、失敗した話](https://qiita.com/kumackey/items/3be24f6bc5f6f66515a0)
 
-#### コード関連
+## コードのアピールポイント
 
-技術的な核心となっている箇所については、以下のように記事を書きました。
+技術的な核心となっている箇所については、記事を書きました。
 
-Google Books APIを用いた本リソースの検索/取得
+[【Ruby on Rails】Google Books APIを叩く際の5つのTips](https://qiita.com/kumackey/items/bd369a23360c94452d33)
 
-https://qiita.com/kumackey/items/bd369a23360c94452d33
+[accepts_nested_attributes_forを使わずに複数リソースを同時登録する(クイズアプリを例に)](https://qiita.com/kumackey/items/b469143f1a0c4902cf4e)
 
-フォームオブジェクトによる複数リソース登録
-(準備中)
-
-#### gem関連
-
-- Rubocopの静的コード解析の利用
-- RSpecでのテスト(特にrequest spec)を充実
-- Carrierwave, fogを用いたS3への画像アップロード
-- pry, binding_of_callerを用いたデバッグ
-
-#### インフラ
+## インフラ
 
 素早くリリースが行え、継続的な改善・保守がしやすいクラウドでインフラを構築しました。
 クラウドインフラとして現在のデファクトスタンダードであるAWSを選択しました。
 
-AWS: VPC / EC2 / RDS / S3 / ElastiCache / Route53 / IAM
+AWS: VPC / EC2 / RDS / S3 / ElastiCache / Route53 / IAM / ACM
 
-ファイアウォールやsshのポート番号など、セキリュティには力を入れたつもりです。
-(https化がまだなことについては、急ぎ対応します)
+ファイアウォールやsshのポート番号をデフォルトからずらすなど、セキリュティには注意しました。
 
-#### 開発の流れ
+## 開発の流れ
 
 基本的な開発の流れとしては以下の通りで、チーム開発を想定した流れを意識しました。
 
@@ -86,7 +74,7 @@ AWS: VPC / EC2 / RDS / S3 / ElastiCache / Route53 / IAM
 
 [デプロイ手順書](https://github.com/kumackey/book-output/wiki/How-to-deploy)
 
-#### 開発環境
+## 開発環境
 
 チーム開発での開発環境構築を想定し、Docker,docker-composeを使用いたしました。
 
@@ -98,7 +86,7 @@ $ git clone git@github.com:kumackey/book-output.git
 
 $ docker-compose build
 
-$ docker-compose up
-
 $ docker-compose run web rails db:create db:migrate db:seed
+
+$ docker-compose up -d
 
