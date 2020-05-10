@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   add_flash_types :success, :info, :warning, :danger
 
-  rescue_from SecurityError do |exception|
+  rescue_from SecurityError do |_exception|
     redirect_to root_path, danger: '管理者画面へのアクセス権限がありません'
   end
 
