@@ -1,4 +1,6 @@
 class RegisterOutputForm
+  #  4択クイズを作るときのフォーム
+
   include ActiveModel::Model
   include ActiveModel::Attributes
   include ActiveModel::Validations
@@ -25,7 +27,12 @@ class RegisterOutputForm
     return false unless valid?
 
     user = User.find(user_id)
-    question = user.questions.build(content: question_content, commentary: commentary, book_id: book_id)
+    question = user.questions.build(
+      content: question_content,
+      commentary: commentary,
+      book_id: book_id,
+      answer_type: :choice
+    )
     question.save # 問題文と解説文の保存
 
     choice = question.choices.build(content: correct_choice)

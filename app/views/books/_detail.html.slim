@@ -20,10 +20,10 @@
           = link_to book.buy_link do
             | 購入する
       .flex-box.mt-3
-        = link_to new_book_question_path(book) do
-          button.btn.btn-raised.btn-success[class="#{'active' if controller.controller_name == 'questions' && controller.action_name == 'new'}"]
+        = link_to new_book_quiz_description_path(book) do
+          button.btn.btn-raised.btn-success[class="#{'active' if in_controllers_action?('quiz_descriptions', 'new') || in_controllers_action?('questions', 'new')}"]
             | クイズ作成
         = link_to book, class: 'ml-2' do
-          button.btn.btn-raised.btn-success[class="#{'active' if controller.controller_name == 'books' && controller.action_name == 'show'}"]
+          button.btn.btn-raised.btn-success[class="#{'active' if in_controllers_action?('books', 'show')}"]
             | クイズ一覧
       

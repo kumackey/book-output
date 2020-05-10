@@ -28,7 +28,7 @@ RSpec.describe 'Questions', type: :request do
       incorrect_choice_2: '警察署',
       incorrect_choice_3: '美術館'
     } }
-    } .to change { Question.count }.by(1)
+    } .to change { Question.count }.by(1).and change { Choice.count }.by(4)
     expect(response).to redirect_to book
   end
 
@@ -46,7 +46,7 @@ RSpec.describe 'Questions', type: :request do
       incorrect_choice_2: '警察署',
       incorrect_choice_3: '美術館'
     } }
-    } .to change { Question.count }.by(0)
+    } .to change { Question.count }.by(0).and change { Choice.count }.by(0)
     expect(response).to have_http_status(200)
     expect(response.body).to include('問題の作成に失敗しました')
   end
@@ -59,11 +59,21 @@ RSpec.describe 'Questions', type: :request do
     expect(response.body).to include('ファスト＆スロー(下)')
   end
 
-  it 'クイズ表示画面の表示に成功すること' do
+  it 'クイズ出題画面の表示に成功すること' do
     question = create(:question, content: '質問しています。')
     get "/questions/#{question.id}"
     expect(response).to have_http_status(200)
     expect(response.body).to include('質問しています。')
+  end
+
+  it '記述式のクイズ出題画面の表示に成功すること' do
+    QUESTION_CONTENT = 'hogehoge'.freeze
+    build(:create_quiz_description_form, question_content: QUESTION_CONTENT).save
+    question = Question.find_by(content: QUESTION_CONTENT)
+    get "/questions/#{question.id}"
+    expect(response).to have_http_status(200)
+    expect(response.body).to include('解答を見る')
+    expect(response.body).to include(QUESTION_CONTENT)
   end
 
   it 'クイズの削除に成功すること' do

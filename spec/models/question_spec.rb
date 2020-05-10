@@ -2,13 +2,14 @@
 #
 # Table name: questions
 #
-#  id         :bigint           not null, primary key
-#  commentary :text(65535)
-#  content    :text(65535)      not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  book_id    :bigint
-#  user_id    :bigint
+#  id          :bigint           not null, primary key
+#  answer_type :integer          not null
+#  commentary  :text(65535)
+#  content     :text(65535)      not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  book_id     :bigint
+#  user_id     :bigint
 #
 # Indexes
 #
@@ -58,18 +59,25 @@ RSpec.describe Question, type: :model do
   end
 
   describe '解説文の文字数が' do
-    context '140文字のときに' do
-      let(:question) { build(:question, commentary: 'a' * 140) }
+    COMMENTARY_MAX_WORD_COUNT = 255
+    context "#{COMMENTARY_MAX_WORD_COUNT}文字のときに" do
+      let(:question) { build(:question, commentary: 'a' * COMMENTARY_MAX_WORD_COUNT) }
       it '有効なこと' do
         expect(question).to be_valid
       end
     end
-    context '141文字のときに' do
-      let(:question) { build(:question, commentary: 'a' * 141) }
+    context "#{COMMENTARY_MAX_WORD_COUNT + 1}文字のときに" do
+      let(:question) { build(:question, commentary: 'a' * (COMMENTARY_MAX_WORD_COUNT + 1)) }
       it '無効なこと' do
         question.valid?
-        expect(question.errors[:commentary]).to include('は140文字以内で入力してください')
+        expect(question.errors[:commentary]).to include("は#{COMMENTARY_MAX_WORD_COUNT}文字以内で入力してください")
       end
     end
+  end
+
+  it 'クイズの型が存在しないときに無効なこと' do
+    question = build(:question, answer_type: nil)
+    question.valid?
+    expect(question.errors.messages[:answer_type]).to include('を入力してください')
   end
 end
