@@ -29,8 +29,8 @@ class Question < ApplicationRecord
   has_one :answer, dependent: :destroy
 
   enum answer_type: {
-    choices: 0, #  2〜4択クイズ
-    only_answer: 1 #  問題と解答だけのクイズで、「答えられた」「答えられなかった」を回答
+    choice: 0, #  選択式
+    description: 1 #  記述式
   }
 
   validates :content, presence: true, length: { maximum: 140 }

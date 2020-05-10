@@ -31,7 +31,7 @@ class RegisterOutputForm
       content: question_content,
       commentary: commentary,
       book_id: book_id,
-      answer_type: 0
+      answer_type: :choice
     )
     question.save # 問題文と解説文の保存
 

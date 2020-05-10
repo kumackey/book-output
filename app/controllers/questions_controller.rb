@@ -12,11 +12,11 @@ class QuestionsController < ApplicationController
 
   def answer
     @question = Question.find(params[:id])
-    if @question.answer_type == 'only_answer'
+    if @question.description?
       @answer = @question.answer
       @book = @question.book
       render layout: 'book_detail'
-    elsif @question.answer_type == 'choices'
+    elsif @question.choice?
       redirect_to @question
     end
   end
@@ -42,10 +42,10 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @book = @question.book
-    if @question.answer_type == 'choices'
+    if @question.choice?
       @choices = @question.choices.includes([:question, question: %i[book user]]).shuffle
       render layout: 'book_detail'
-    elsif @question.answer_type == 'only_answer'
+    elsif @question.description?
       render layout: 'book_detail', template: 'questions/only_answer_quiz'
     end
   end

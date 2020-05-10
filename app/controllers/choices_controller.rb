@@ -1,7 +1,7 @@
 class ChoicesController < ApplicationController
   def show
     @choice = Choice.find(params[:id])
-    return unless @choice.question.answer_type == 'choices'
+    return unless @choice.question.choice?
 
     @book = @choice.question.book
     @choices = @choice.question.choices.includes(:question).order(:created_at)

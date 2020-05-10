@@ -25,7 +25,7 @@ class OnlyAnswerQuizForm
       content: question_content,
       commentary: commentary,
       book_id: book_id,
-      answer_type: 1
+      answer_type: :description
     )
     return false unless question.valid?
 

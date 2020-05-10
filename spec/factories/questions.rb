@@ -26,7 +26,7 @@ FactoryBot.define do
   factory :question do
     content { 'これは問題文です' }
     commentary { 'これは問題文の解説です。' }
-    answer_type { 0 }
+    answer_type { :choice }
     association :book
     association :user
   end
@@ -34,7 +34,7 @@ FactoryBot.define do
   factory :only_answer_quiz, class: Question do
     content { 'これは問題文です' }
     commentary { 'これは問題文の解説です。' }
-    answer_type { 1 }
+    answer_type { :description }
     association :book
     association :user
   end
