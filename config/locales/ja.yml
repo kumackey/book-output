@@ -39,7 +39,7 @@ ja:
         incorrect_choice_3: '誤答3'
         user_id: '投稿者'
         book_id: '本'
-      only_answer_quiz_form:
+      create_quiz_description_form:
         question_content: '問題文'
         commentary: '解説'
         answer_content: '解答'

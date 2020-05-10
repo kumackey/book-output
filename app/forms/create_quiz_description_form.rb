@@ -1,4 +1,4 @@
-class OnlyAnswerQuizForm
+class CreateQuizDescriptionForm
   #  問題と解答だけのフォーム
 
   include ActiveModel::Model
@@ -31,8 +31,8 @@ class OnlyAnswerQuizForm
 
     ActiveRecord::Base.transaction do
       question.save! # 問題文と解説文の保存
-      answer = question.build_answer(content: answer_content)
-      answer.save!
+      answer_description = question.build_answer_description(content: answer_content)
+      answer_description.save!
       true
     end
   end

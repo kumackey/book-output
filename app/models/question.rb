@@ -26,7 +26,7 @@ class Question < ApplicationRecord
   belongs_to :user
   belongs_to :book
   has_many :choices, dependent: :destroy
-  has_one :answer, dependent: :destroy
+  has_one :answer_description, dependent: :destroy
 
   enum answer_type: {
     choice: 0, #  選択式

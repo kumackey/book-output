@@ -28,7 +28,7 @@ Rails.application.routes.draw do
       get :search
     end
     resources :questions, only: %i[create new show destroy]
-    resources :only_answer_quizs, only: %i[new create]
+    resources :quiz_descriptions, only: %i[new create]
   end
   resources :likes, only: %i[create destroy]
   resources :choices, only: %i[show]
