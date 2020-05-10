@@ -84,9 +84,9 @@ class GoogleBook
         author = book.authors.build(name: author)
         author.is_representation = index.zero?
         author.save
-        true
       end
     end
+    true
   end
 
   def find_book_or_save
