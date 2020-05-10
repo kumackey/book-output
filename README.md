@@ -86,7 +86,7 @@ $ git clone git@github.com:kumackey/book-output.git
 
 $ docker-compose build
 
-$ docker-compose up
-
 $ docker-compose run web rails db:create db:migrate db:seed
+
+$ docker-compose up -d
 
