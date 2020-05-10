@@ -6,6 +6,7 @@
 #  avatar           :string(255)
 #  crypted_password :string(255)
 #  email            :string(255)      not null
+#  role             :integer          default(0), not null
 #  salt             :string(255)
 #  username         :string(255)      not null
 #  created_at       :datetime         not null
