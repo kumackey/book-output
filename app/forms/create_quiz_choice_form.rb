@@ -33,14 +33,15 @@ class CreateQuizChoiceForm
       book_id: book_id,
       answer_type: :choice
     )
-    question.save # 問題文と解説文の保存
+    return false unless question.valid?
 
-    choice = question.choices.build(content: correct_choice)
-    choice.is_answer = true
-    choice.save # 正解選択肢の保存
-
-    question.choices.create(content: incorrect_choice_1)
-    question.choices.create(content: incorrect_choice_2)
-    question.choices.create(content: incorrect_choice_3)
+    ActiveRecord::Base.transaction do
+      question.save!
+      question.choices.create!(content: correct_choice, is_answer: true)
+      question.choices.create!(content: incorrect_choice_1)
+      question.choices.create!(content: incorrect_choice_2) if incorrect_choice_2.present?
+      question.choices.create!(content: incorrect_choice_3) if incorrect_choice_3.present?
+    end
+    true
   end
 end

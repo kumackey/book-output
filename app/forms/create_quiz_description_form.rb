@@ -33,7 +33,7 @@ class CreateQuizDescriptionForm
       question.save! # 問題文と解説文の保存
       answer_description = question.build_answer_description(content: answer_content)
       answer_description.save!
-      true
     end
+    true
   end
 end
