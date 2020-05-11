@@ -82,4 +82,32 @@ RSpec.describe CreateQuizChoiceForm, type: :model do
       end
     end
   end
+
+  describe '保存時に' do
+    context '適切な情報を持っているときに' do
+      let(:create_quiz_choice_form) { build(:create_quiz_choice_form,
+                                            correct_choice: '学校',
+                                            incorrect_choice_1: '市役所',
+                                            incorrect_choice_2: '警察署',
+                                            incorrect_choice_3: '美術館')
+      } #  4つの選択肢
+      it '保存できること' do
+        expect { create_quiz_choice_form.save }.to change { Question.count }.by(1).and change { Choice.count }.by(4)
+      end
+
+      it 'trueを返すこと' do
+        expect(create_quiz_choice_form.save).to be_truthy
+      end
+    end
+    context '不適切な情報しか持っていないときに' do
+      let(:create_quiz_choice_form) { build(:create_quiz_choice_form, correct_choice: nil) }
+      it '保存に失敗すること' do
+        expect { create_quiz_choice_form.save }.to change { Question.count }.by(0).and change { Choice.count }.by(0)
+      end
+
+      it 'falseを返すこと' do
+        expect(create_quiz_choice_form.save).not_to be_truthy
+      end
+    end
+  end
 end
