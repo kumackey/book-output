@@ -4,8 +4,8 @@
     strong クイズ作成
   .card-body.bg-white
     = render 'questions/type_tab', book: @book
-    = form_with model: @register_output_form, url: book_questions_path, local: true do |f|
-      = render 'shared/error_messages', object: @register_output_form
+    = form_with model: @create_quiz_choice_form, url: book_questions_path, local: true do |f|
+      = render 'shared/error_messages', object: @create_quiz_choice_form
       .form-group
         = f.label :question_content
         = f.text_field :question_content, class: 'form-control', placeholder: "問題文を入力してください"

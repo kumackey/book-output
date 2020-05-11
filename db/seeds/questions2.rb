@@ -5,7 +5,7 @@ puts "Start inserting seed #{book.title} ..."
 user = User.find(2)
 guest_user = User.find_by(email: 'guest@guest.jp')
 
-register_output_form = RegisterOutputForm.new(
+create_quiz_choice_form = CreateQuizChoiceForm.new(
   question_content: "タスクボードに関する記述として、合っているものはどれか？",
   correct_choice: 'TODOは溢れやすいので、Parking Lotという別の場所にためておく',
   incorrect_choice_1: 'DOINGには2つ程度のタスクを置く',
@@ -14,10 +14,10 @@ register_output_form = RegisterOutputForm.new(
   user_id: user.id,
   book_id: book.id
 )
-register_output_form.save
-puts "#{register_output_form.question_content} has created!"
+create_quiz_choice_form.save
+puts "#{create_quiz_choice_form.question_content} has created!"
 
-register_output_form = RegisterOutputForm.new(
+create_quiz_choice_form = CreateQuizChoiceForm.new(
   question_content: "グッドサイクルにするためには、どの質に注目することからスタートすべきか？",
   commentary: '関係の質→思考の質→行動の質→結果の質となっているため',
   correct_choice: '関係の質',
@@ -27,10 +27,10 @@ register_output_form = RegisterOutputForm.new(
   user_id: user.id,
   book_id: book.id
 )
-register_output_form.save
-puts "#{register_output_form.question_content} has created!"
+create_quiz_choice_form.save
+puts "#{create_quiz_choice_form.question_content} has created!"
 
-register_output_form = RegisterOutputForm.new(
+create_quiz_choice_form = CreateQuizChoiceForm.new(
   question_content: "パーキンソンの法則を説明したものはどれか？",
   correct_choice: '一度期間が設定されてしまうと、その中で対処するように考えてしまう',
   incorrect_choice_1: 'バッファを設けて計画を行うと、計画通りにリリースが行われやすい',
@@ -38,15 +38,15 @@ register_output_form = RegisterOutputForm.new(
   user_id: guest_user.id,
   book_id: book.id
 )
-register_output_form.save
-puts "#{register_output_form.question_content} has created!"
+create_quiz_choice_form.save
+puts "#{create_quiz_choice_form.question_content} has created!"
 
-register_output_form = RegisterOutputForm.new(
+create_quiz_choice_form = CreateQuizChoiceForm.new(
   question_content: "ジョブ理論では、顧客の問題を解決する「手段」に注目している",
   correct_choice: '×',
   incorrect_choice_1: '○',
   user_id: guest_user.id,
   book_id: book.id
 )
-register_output_form.save
-puts "#{register_output_form.question_content} has created!"
+create_quiz_choice_form.save
+puts "#{create_quiz_choice_form.question_content} has created!"

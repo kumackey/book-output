@@ -14,14 +14,14 @@ class QuestionsController < ApplicationController
 
   def new
     @book = Book.find(params[:book_id])
-    @register_output_form = RegisterOutputForm.new
+    @create_quiz_choice_form = CreateQuizChoiceForm.new
   end
 
   def create
     @book = Book.find(params[:book_id])
-    @register_output_form = RegisterOutputForm.new(create_question_params
+    @create_quiz_choice_form = CreateQuizChoiceForm.new(create_question_params
       .merge(user_id: current_user.id, book_id: @book.id))
-    if @register_output_form.save
+    if @create_quiz_choice_form.save
       redirect_to @book, success: '問題を作成しました'
     else
       flash.now[:danger] = '問題の作成に失敗しました'
@@ -49,7 +49,7 @@ class QuestionsController < ApplicationController
   private
 
   def create_question_params
-    params.require(:register_output_form)
+    params.require(:create_quiz_choice_form)
           .permit(:question_content, :correct_choice, :incorrect_choice_1, :incorrect_choice_2, :incorrect_choice_3, :commentary)
   end
 end

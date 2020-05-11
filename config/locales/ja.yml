@@ -30,7 +30,7 @@ ja:
 
   activemodel:
     attributes:
-      register_output_form:
+      create_quiz_choice_form:
         question_content: '問題文'
         commentary: '解説'
         correct_choice: '正答'

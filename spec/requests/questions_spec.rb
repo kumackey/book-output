@@ -18,7 +18,7 @@ RSpec.describe 'Questions', type: :request do
     login
     user = create(:user)
     book = create(:book)
-    expect { post "/books/#{book.id}/questions", params: { register_output_form: {
+    expect { post "/books/#{book.id}/questions", params: { create_quiz_choice_form: {
       question_content: '学校補助金の増額案に対する賛成票は、ある投票所では優位に多かった。どこか？',
       commentary: 'プライミング効果によって、学校に対して有利な投票をしたくなるため',
       user_id: user.id,
@@ -36,7 +36,7 @@ RSpec.describe 'Questions', type: :request do
     login
     user = create(:user)
     book = create(:book)
-    expect { post "/books/#{book.id}/questions", params: { register_output_form: {
+    expect { post "/books/#{book.id}/questions", params: { create_quiz_choice_form: {
       question_content: nil, #  question_contentがない
       commentary: 'プライミング効果によって、学校に対して有利な投票をしたくなるため',
       user_id: user.id,

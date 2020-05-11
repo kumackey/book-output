@@ -5,7 +5,7 @@ puts "Start inserting seed #{book.title} ..."
 user = User.find(3)
 guest_user = User.find_by(email: 'guest@guest.jp')
 
-register_output_form = RegisterOutputForm.new(
+create_quiz_choice_form = CreateQuizChoiceForm.new(
   question_content: "脳に良い食事MINDで推奨されている食事は？",
   correct_choice: 'ナッツ類',
   incorrect_choice_1: 'チーズ',
@@ -14,10 +14,10 @@ register_output_form = RegisterOutputForm.new(
   user_id: user.id,
   book_id: book.id
 )
-register_output_form.save
-puts "#{register_output_form.question_content} has created!"
+create_quiz_choice_form.save
+puts "#{create_quiz_choice_form.question_content} has created!"
 
-register_output_form = RegisterOutputForm.new(
+create_quiz_choice_form = CreateQuizChoiceForm.new(
   question_content: "意志力に関する次の記述のうち、集中力をあげるものはどれか？",
   correct_choice: 'やるべきタスクの種類によって、作業エリアを分ける',
   incorrect_choice_1: 'スマホが気になるくらいなら、一度見てしまう',
@@ -26,10 +26,10 @@ register_output_form = RegisterOutputForm.new(
   user_id: user.id,
   book_id: book.id
 )
-register_output_form.save
-puts "#{register_output_form.question_content} has created!"
+create_quiz_choice_form.save
+puts "#{create_quiz_choice_form.question_content} has created!"
 
-register_output_form = RegisterOutputForm.new(
+create_quiz_choice_form = CreateQuizChoiceForm.new(
   question_content: "報酬の予感として役に立たないものはどれか？",
   correct_choice: 'タスク達成の難易度を難しくする',
   incorrect_choice_1: '与えられる報酬を小刻みにし、何度も与えられるようにする',
@@ -37,10 +37,10 @@ register_output_form = RegisterOutputForm.new(
   user_id: guest_user.id,
   book_id: book.id
 )
-register_output_form.save
-puts "#{register_output_form.question_content} has created!"
+create_quiz_choice_form.save
+puts "#{create_quiz_choice_form.question_content} has created!"
 
-register_output_form = RegisterOutputForm.new(
+create_quiz_choice_form = CreateQuizChoiceForm.new(
   question_content: "「獣」の特性として誤っているものはどれか？",
   correct_choice: 'エネルギー消費量が多い',
   incorrect_choice_1: 'パワーが強くコントロールが難しい',
@@ -49,5 +49,5 @@ register_output_form = RegisterOutputForm.new(
   user_id: guest_user.id,
   book_id: book.id
 )
-register_output_form.save
-puts "#{register_output_form.question_content} has created!"
+create_quiz_choice_form.save
+puts "#{create_quiz_choice_form.question_content} has created!"

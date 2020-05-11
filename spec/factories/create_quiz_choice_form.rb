@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :register_output_form do
+  factory :create_quiz_choice_form do
     question_content { '学校補助金の増額案に対する賛成票は、ある投票所では優位に多かった。どこか？' }
     commentary { 'プライミング効果によって、学校に対して有利な投票をしたくなるため' }
     user_id { 1 }

@@ -1,4 +1,4 @@
-class RegisterOutputForm
+class CreateQuizChoiceForm
   #  4択クイズを作るときのフォーム
 
   include ActiveModel::Model
