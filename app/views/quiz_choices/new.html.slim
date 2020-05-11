@@ -4,7 +4,7 @@
     strong クイズ作成
   .card-body.bg-white
     = render 'questions/type_tab', book: @book
-    = form_with model: @create_quiz_choice_form, url: book_questions_path, local: true do |f|
+    = form_with model: @create_quiz_choice_form, url: book_quiz_choices_path, local: true do |f|
       = render 'shared/error_messages', object: @create_quiz_choice_form
       .form-group
         = f.label :question_content

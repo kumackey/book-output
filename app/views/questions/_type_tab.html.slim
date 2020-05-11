@@ -3,5 +3,5 @@ ul.nav.nav-tabs.mb-3
     = link_to new_book_quiz_description_path(book), class: "nav-link #{"active" if in_controllers_action?('quiz_descriptions', 'new')}" do
       | 問題-解答
   li.nav-item
-    = link_to new_book_question_path(book), class: "nav-link #{"active" if in_controllers_action?('questions', 'new')}" do
+    = link_to new_book_quiz_choice_path(book), class: "nav-link #{"active" if in_controllers_action?('quiz_choices', 'new')}" do
       | 4択
