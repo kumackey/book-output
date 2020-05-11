@@ -18,6 +18,7 @@ class QuestionsController < ApplicationController
     case @question.answer_type.to_sym
     when :choice
       @choices = @question.choices.includes([:question, question: %i[book user]]).shuffle
+      render template: 'questions/quiz_choice'
     when :description
       @answer_description = @question.answer_description
       render template: 'questions/quiz_description'
