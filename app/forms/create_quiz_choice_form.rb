@@ -39,8 +39,8 @@ class CreateQuizChoiceForm
       question.save!
       question.choices.create!(content: correct_choice, is_answer: true)
       question.choices.create!(content: incorrect_choice_1)
-      question.choices.create!(content: incorrect_choice_2) if incorrect_choice_2.present?
-      question.choices.create!(content: incorrect_choice_3) if incorrect_choice_3.present?
+      question.choices.create(content: incorrect_choice_2) #  2,3は必須ではないのでエラーにしない
+      question.choices.create(content: incorrect_choice_3)
     end
     true
   end
