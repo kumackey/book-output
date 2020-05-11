@@ -47,33 +47,42 @@ RSpec.describe GoogleBook, type: :model do
     expect(google_books.size).to be 0
   end
 
-  it '適切な本情報を保存できること' do
-    google_book = build(:google_book, authors: [
-                          '太田 智彬',
-                          '寺下 翔太',
-                          '手塚 亮',
-                          '宗像 亜由美',
-                          '株式会社リクルートテクノロジーズ'
-                        ])
-    expect { google_book.save }.to change { Book.count }.by(1).and change { Author.count }.by(5)
-  end
+  describe '保存時に' do
+    context '不適切な情報しか持たないときは' do
+      let(:google_book) { build(:google_book, googlebooksapi_id: nil) }
+      it '保存に失敗すること' do
+        expect { google_book.save }.to change { Book.count }.by(0).and change { Author.count }.by(0)
+      end
+      it 'falseを返すこと' do
+        expect(google_book.save).not_to be_truthy
+      end
+    end
 
-  it '著者が存在しなくとも保存できること' do
-    google_book = build(:google_book, authors: nil)
-    expect { google_book.save }.to change { Book.count }.by(1).and change { Author.count }.by(0)
-  end
+    context '適切な情報を持っているときは' do
+      let(:google_book) { build(:google_book, authors: [
+                                  '太田 智彬',
+                                  '寺下 翔太',
+                                  '手塚 亮',
+                                  '宗像 亜由美',
+                                  '株式会社リクルートテクノロジーズ'
+                                ])
+      }
+      it '保存できること' do
+        expect { google_book.save }.to change { Book.count }.by(1).and change { Author.count }.by(5)
+      end
+      it 'trueを返すこと' do
+        expect(google_book.save).to be_truthy
+      end
+    end
 
-  it '適切な本情報を保存したときにtrueを返すこと' do
-    expect(google_book.save).to be_truthy
-  end
-
-  it '不適切な本情報の保存に失敗すること' do
-    google_book = build(:google_book, googlebooksapi_id: nil)
-    expect { google_book.save }.to change { Book.count }.by(0).and change { Author.count }.by(0)
-  end
-
-  it '不適切な本情報を保存しようとしたときにfalseを返すこと' do
-    google_book = build(:google_book, googlebooksapi_id: nil)
-    expect(google_book.save).not_to be_truthy
+    context '著者の情報だけを持っていないときには' do
+      let(:google_book) { build(:google_book, authors: nil) }
+      it '保存できること' do
+        expect { google_book.save }.to change { Book.count }.by(1).and change { Author.count }.by(0)
+      end
+      it 'trueを返すこと' do
+        expect(google_book.save).to be_truthy
+      end
+    end
   end
 end
