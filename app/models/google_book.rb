@@ -80,10 +80,12 @@ class GoogleBook
     ActiveRecord::Base.transaction do
       book.remote_image_url = image if image.present?
       book.save
-      authors.each.with_index do |author, index|
-        author = book.authors.build(name: author)
-        author.is_representation = index.zero?
-        author.save
+      if authors.present?
+        authors.each.with_index do |author, index|
+          author = book.authors.build(name: author)
+          author.is_representation = index.zero?
+          author.save
+        end
       end
     end
     true
