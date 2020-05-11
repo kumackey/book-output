@@ -58,6 +58,11 @@ RSpec.describe GoogleBook, type: :model do
     expect { google_book.save }.to change { Book.count }.by(1).and change { Author.count }.by(5)
   end
 
+  it '著者が存在しなくとも保存できること' do
+    google_book = build(:google_book, authors: nil)
+    expect { google_book.save }.to change { Book.count }.by(1).and change { Author.count }.by(0)
+  end
+
   it '適切な本情報を保存したときにtrueを返すこと' do
     expect(google_book.save).to be_truthy
   end
