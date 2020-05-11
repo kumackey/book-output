@@ -29,16 +29,18 @@ RSpec.describe CreateQuizChoiceForm, type: :model do
         expect(create_quiz_choice_form).to be_valid
       end
     end
-    context '140文字のときに' do
-      let(:create_quiz_choice_form) { build(:create_quiz_choice_form, commentary: 'a' * 140) }
+    COMMENTARY_MAX_WORD_COUNT = 255
+    context "#{COMMENTARY_MAX_WORD_COUNT}文字のときに" do
+      let(:create_quiz_choice_form) { build(:create_quiz_choice_form, commentary: 'a' * COMMENTARY_MAX_WORD_COUNT) }
       it '有効なこと' do
         expect(create_quiz_choice_form).to be_valid
       end
     end
-    context '141文字のときに' do
-      let(:create_quiz_choice_form) { build(:create_quiz_choice_form, commentary: 'a' * 141) }
+    context "#{COMMENTARY_MAX_WORD_COUNT + 1}文字のときに" do
+      let(:create_quiz_choice_form) { build(:create_quiz_choice_form, commentary: 'a' * (COMMENTARY_MAX_WORD_COUNT + 1)) }
       it '無効なこと' do
-        expect(create_quiz_choice_form).not_to be_valid
+        create_quiz_choice_form.valid?
+        expect(create_quiz_choice_form.errors.messages[:commentary]).to include("は#{COMMENTARY_MAX_WORD_COUNT}文字以内で入力してください")
       end
     end
   end

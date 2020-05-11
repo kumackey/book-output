@@ -15,7 +15,7 @@ class CreateQuizChoiceForm
   attribute :book_id, :integer
 
   validates :question_content, presence: true, length: { maximum: 140 }
-  validates :commentary, length: { maximum: 140 }
+  validates :commentary, length: { maximum: 255 }
   validates :correct_choice, presence: true, length: { maximum: 40 }
   validates :incorrect_choice_1, presence: true, length: { maximum: 40 }
   validates :incorrect_choice_2, length: { maximum: 40 }
