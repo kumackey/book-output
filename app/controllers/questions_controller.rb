@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :require_login, only: %i[new create destroy]
+  before_action :require_login, only: %i[destroy]
   layout 'book_detail'
 
   def index

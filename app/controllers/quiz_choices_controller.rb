@@ -1,5 +1,5 @@
 class QuizChoicesController < ApplicationController
-  before_action :require_login, only: %i[new]
+  before_action :require_login, only: %i[new create]
   layout 'book_detail'
 
   def new
@@ -17,7 +17,7 @@ class QuizChoicesController < ApplicationController
       render :new
     end
   end
-  
+
   private
 
   def create_question_params
